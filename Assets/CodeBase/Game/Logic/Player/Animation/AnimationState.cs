@@ -1,13 +1,12 @@
-
 namespace Game.Logic.Player.Animation
 {
     public abstract class AnimationState
     {
 
         protected readonly AnimationFsm Fsm;
-        protected readonly SPUM_Prefabs Animation;
+        protected readonly UnitAnimationExtension Animation;
 
-        public AnimationState(AnimationFsm fsm, SPUM_Prefabs animation)
+        public AnimationState(AnimationFsm fsm, UnitAnimationExtension animation)
         {
             Fsm = fsm;
             Animation = animation;

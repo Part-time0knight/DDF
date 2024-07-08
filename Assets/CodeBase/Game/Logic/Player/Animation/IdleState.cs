@@ -5,7 +5,7 @@ namespace Game.Logic.Player.Animation
 {
     public class IdleState : AnimationState
     {
-        public IdleState(AnimationFsm fsm, SPUM_Prefabs animation) : base(fsm, animation)
+        public IdleState(AnimationFsm fsm, UnitAnimationExtension animation) : base(fsm, animation)
         {
 
         }
@@ -23,10 +23,7 @@ namespace Game.Logic.Player.Animation
 
         public override void Update()
         {
-            Debug.Log("Update Idle state");
-            if (Input.GetButtonDown("Vertical")
-                || Input.GetButtonDown("Horizontal"))
-                Fsm.SetState<RunState>();
+            //Debug.Log("Update Idle state");
         }
     }
 }

@@ -6,12 +6,12 @@ using UnityEngine.Events;
 
 public class SPUM_Prefabs : MonoBehaviour
 {
-    public float _version;
-    public SPUM_SpriteList _spriteOBj;
-    public bool EditChk;
-    public string _code;
+    [SerializeField] protected float _version;
+    [SerializeField] protected SPUM_SpriteList _spriteOBj;
+    [SerializeField] protected bool EditChk;
+    [SerializeField] protected string _code;
     public Animator _anim;
-    public bool _horse;
+    [SerializeField] protected bool _horse;
     public bool isRideHorse{
         get => _horse;
         set {
@@ -19,13 +19,14 @@ public class SPUM_Prefabs : MonoBehaviour
             UnitTypeChanged?.Invoke();
         }
     }
-    public string _horseString;
+    [SerializeField] protected string _horseString;
 
-    public UnityEvent UnitTypeChanged = new UnityEvent();
-    private AnimationClip[] _animationClips;
+    [SerializeField] protected UnityEvent UnitTypeChanged = new UnityEvent();
+
+    protected AnimationClip[] _animationClips;
     public AnimationClip[] AnimationClips => _animationClips;
-    private Dictionary<string, int> _nameToHashPair = new Dictionary<string, int>();
-    private void InitAnimPair(){
+    protected Dictionary<string, int> _nameToHashPair = new Dictionary<string, int>();
+    protected virtual void InitAnimPair(){
         _nameToHashPair.Clear();
         _animationClips = _anim.runtimeAnimatorController.animationClips;
         foreach (var clip in _animationClips)
@@ -34,14 +35,14 @@ public class SPUM_Prefabs : MonoBehaviour
             _nameToHashPair.Add(clip.name, hash);
         }
     }
-    private void Awake() {
+    protected virtual void Awake() {
         InitAnimPair();
     }
-    private void Start() {
+    protected virtual void Start() {
         UnitTypeChanged.AddListener(InitAnimPair);
     }
     // 이름으로 애니메이션 실행
-    public void PlayAnimation(string name){
+    public virtual void PlayAnimation(string name){
         foreach (var animationName in _nameToHashPair)
         {
             if(animationName.Key.ToLower().Contains(name.ToLower()) ){

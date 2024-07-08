@@ -5,7 +5,7 @@ namespace Game.Logic.Player.Animation
 {
     public class RunState : AnimationState
     {
-        public RunState(AnimationFsm fsm, SPUM_Prefabs animation) : base(fsm, animation)
+        public RunState(AnimationFsm fsm, UnitAnimationExtension animation) : base(fsm, animation)
         {
         }
 
@@ -22,9 +22,6 @@ namespace Game.Logic.Player.Animation
 
         public override void Update()
         {
-            if (Input.GetButtonUp("Vertical")
-                || Input.GetButtonUp("Horizontal"))
-                Fsm.SetState<IdleState>();
         }
     }
 }
