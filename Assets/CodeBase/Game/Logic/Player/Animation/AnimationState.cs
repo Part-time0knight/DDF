@@ -1,3 +1,5 @@
+using System;
+
 namespace Game.Logic.Player.Animation
 {
     public abstract class AnimationState
@@ -12,7 +14,7 @@ namespace Game.Logic.Player.Animation
             Animation = animation;
         }
 
-        public abstract void Enter();
+        public abstract void Enter(Action callback);
 
         public abstract void Exit();
 

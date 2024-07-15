@@ -122,38 +122,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &163911771 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4338974225806356195, guid: ae99480c4e89448f58587702306cfe38, type: 3}
-  m_PrefabInstance: {fileID: 750686359}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &163911772 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 7499333421190203975, guid: ae99480c4e89448f58587702306cfe38, type: 3}
-  m_PrefabInstance: {fileID: 750686359}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &163911775
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 163911771}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c17feccb1185124a8351ffe46f3eccb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _version: 156
-  _spriteOBj: {fileID: 366248662}
-  EditChk: 0
-  _code: Unit009
-  _anim: {fileID: 163911772}
-  _horse: 0
-  _horseString: 
-  UnitTypeChanged:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &173048520
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,17 +190,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 705419615}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &366248662 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3012949203391015020, guid: ae99480c4e89448f58587702306cfe38, type: 3}
-  m_PrefabInstance: {fileID: 750686359}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: baea2e9758e554909b2367e396d9c5a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &705419614
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,10 +234,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Unit009
       objectReference: {fileID: 0}
-    - target: {fileID: 7364952704426365669, guid: ae99480c4e89448f58587702306cfe38, type: 3}
-      propertyPath: _animation
-      value: 
-      objectReference: {fileID: 163911775}
     - target: {fileID: 7554857363548381501, guid: ae99480c4e89448f58587702306cfe38, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -361,14 +314,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4817560471399494730, guid: ae99480c4e89448f58587702306cfe38, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4338974225806356195, guid: ae99480c4e89448f58587702306cfe38, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 163911775}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae99480c4e89448f58587702306cfe38, type: 3}
 --- !u!1 &1458590073
 GameObject:

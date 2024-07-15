@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Game.Logic.Player
 {
-    public class PlayerInput : ITickable
+    public class PlayerInput : ITickable, IFixedTickable
     {
         public event Action InvokeMoveButtonsDown;
 
@@ -17,13 +17,20 @@ namespace Game.Logic.Player
         public event Action InvokeAttackButton;
         public event Action InvokeSpellButton;
 
+        public bool IsMoveButtonPress 
+        { 
+            get => Input.GetButton("Vertical")
+                || Input.GetButton("Horizontal");
+        }
+
         private bool OnMoveButtonDown()
             => Input.GetButtonDown("Vertical")
-                    || Input.GetButtonDown("Horizontal");
+                || Input.GetButtonDown("Horizontal");
 
         private bool OnMoveButtonUp()
-            => Input.GetButtonUp("Vertical")
-                    || Input.GetButtonUp("Horizontal");
+            => (Input.GetButtonUp("Vertical")
+                || Input.GetButtonUp("Horizontal"))
+                && !IsMoveButtonPress;
 
         private float OnMoveVertical()
             => Input.GetAxis("Vertical");
@@ -44,13 +51,16 @@ namespace Game.Logic.Player
             if (OnMoveButtonUp())
                 InvokeMoveButtonsUp?.Invoke();
 
-            InvokeMoveHorizontal?.Invoke(OnMoveHorizontal());
-            InvokeMoveVertical?.Invoke(OnMoveVertical());
-
             if (OnAttackButton())
                 InvokeAttackButton?.Invoke();
             if (OnSpellButton())
                 InvokeSpellButton?.Invoke();
+        }
+
+        public void FixedTick()
+        {
+            InvokeMoveHorizontal?.Invoke(OnMoveHorizontal());
+            InvokeMoveVertical?.Invoke(OnMoveVertical());
         }
     }
 }

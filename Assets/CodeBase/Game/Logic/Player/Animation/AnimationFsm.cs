@@ -17,17 +17,16 @@ namespace Game.Logic.Player.Animation
             _states.Add(state.GetType(), state);
         }
 
-        public void SetState<T>() where T : AnimationState
+        public void SetState<T>(Action callback = null) where T : AnimationState
         {
             Type type = typeof(T);
 
             if (!_states.ContainsKey(type) ||
                 _states[type] == _currentState)
                 return;
-
             _currentState?.Exit();
             _currentState = _states[type];
-            _currentState.Enter();
+            _currentState.Enter(callback);
         }
 
         public void Tick()

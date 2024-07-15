@@ -1347,7 +1347,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7554857363548381501}
   - component: {fileID: 7364952704426365669}
-  - component: {fileID: 4817560471399494730}
   m_Layer: 5
   m_Name: Unit009
   m_TagString: Untagged
@@ -1387,29 +1386,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f92c981a9b2447549979e4c4aa00404b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animation: {fileID: 0}
---- !u!114 &4817560471399494730
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3825136270639264266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c17feccb1185124a8351ffe46f3eccb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _version: 156
-  _spriteOBj: {fileID: 3012949203391015020}
-  EditChk: 0
-  _code: Unit009
-  _anim: {fileID: 7499333421190203975}
-  _horse: 0
-  _horseString: 
-  UnitTypeChanged:
-    m_PersistentCalls:
-      m_Calls: []
+  _animation: {fileID: 6902799877598739262}
+  _transform: {fileID: 7554857363548381501}
 --- !u!1 &3878071713189901341
 GameObject:
   m_ObjectHideFlags: 0
@@ -1486,6 +1464,7 @@ GameObject:
   - component: {fileID: 902665049710018232}
   - component: {fileID: 180887151136170274}
   - component: {fileID: 7499333421190203975}
+  - component: {fileID: 6902799877598739262}
   m_Layer: 0
   m_Name: UnitRoot
   m_TagString: Untagged
@@ -1543,6 +1522,28 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6902799877598739262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4338974225806356195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c17feccb1185124a8351ffe46f3eccb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _version: 156
+  _spriteOBj: {fileID: 3012949203391015020}
+  EditChk: 0
+  _code: Unit009
+  _anim: {fileID: 7499333421190203975}
+  _horse: 0
+  _horseString: 
+  UnitTypeChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4460016102397703242
 GameObject:
   m_ObjectHideFlags: 0

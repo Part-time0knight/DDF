@@ -1,4 +1,5 @@
 using Game.Logic.StaticData;
+using System;
 using UnityEngine;
 
 namespace Game.Logic.Player.Animation
@@ -10,9 +11,10 @@ namespace Game.Logic.Player.Animation
 
         }
 
-        public override void Enter()
+        public override void Enter(Action callback)
         {
-            Animation.PlayAnimation(AnimationNames.IDLE);
+
+            Animation.PlayAnimation(AnimationNames.IDLE, callback);
             Debug.Log("Enter Idle state");
         }
 
@@ -23,7 +25,6 @@ namespace Game.Logic.Player.Animation
 
         public override void Update()
         {
-            //Debug.Log("Update Idle state");
         }
     }
 }

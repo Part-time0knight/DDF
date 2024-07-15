@@ -8,9 +8,11 @@ namespace Game.Test
     public class TestPlayerMove : MonoBehaviour
     {
         [SerializeField] private UnitAnimationExtension _animation;
+        [SerializeField] private Transform _transform;
 
         private AnimationFsm _animationFsm;
         private PlayerInput _playerInput;
+        private PlayerMove _playerMove;
 
         private Vector3 _standartScale;
 
@@ -24,9 +26,11 @@ namespace Game.Test
 
         private void Start()
         {
+            _playerMove = new(_transform);
             _playerInput.InvokeMoveButtonsDown += OnMoveBegin;
             _playerInput.InvokeMoveButtonsUp += OnMoveEnd;
             _playerInput.InvokeMoveHorizontal += OnMoveHorizontal;
+            _playerInput.InvokeMoveVertical += OnMoveVertical;
             _playerInput.InvokeAttackButton += OnAttack;
             _animationFsm.AddState(new IdleState(_animationFsm, _animation));
             _animationFsm.AddState(new RunState(_animationFsm, _animation));
@@ -56,11 +60,25 @@ namespace Game.Test
                 _standartScale.x * Mathf.Sign(direction),
                 _standartScale.y, _standartScale.z);
             _animation._anim.transform.localScale = scale;
+            _playerMove.MoveHorizontal(direction);
+        }
+
+        private void OnMoveVertical(float direction)
+        {
+            _playerMove.MoveVertical(direction);
         }
 
         private void OnAttack()
         {
-            _animationFsm.SetState<AttackState>();
+            _playerMove.Stop = true;
+            _animationFsm.SetState<AttackState>(AttackEnd);
+        }
+
+        private void AttackEnd()
+        {
+            _playerMove.Stop = false;
+            if (_playerInput.IsMoveButtonPress)
+                OnMoveBegin();
         }
 
         private void OnDestroy()
@@ -68,6 +86,7 @@ namespace Game.Test
             _playerInput.InvokeMoveButtonsDown -= OnMoveBegin;
             _playerInput.InvokeMoveButtonsUp -= OnMoveEnd;
             _playerInput.InvokeMoveHorizontal -= OnMoveHorizontal;
+            _playerInput.InvokeMoveVertical -= OnMoveVertical;
             _playerInput.InvokeAttackButton -= OnAttack;
         }
     }

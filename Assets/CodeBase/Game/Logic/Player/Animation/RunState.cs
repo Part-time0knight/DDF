@@ -1,4 +1,5 @@
 using Game.Logic.StaticData;
+using System;
 using UnityEngine;
 
 namespace Game.Logic.Player.Animation
@@ -9,15 +10,13 @@ namespace Game.Logic.Player.Animation
         {
         }
 
-        public override void Enter()
+        public override void Enter(Action callback)
         {
-            Animation.PlayAnimation(AnimationNames.RUN);
-            Debug.Log("Enter Run state");
+            Animation.PlayAnimation(AnimationNames.RUN, callback);
         }
 
         public override void Exit()
         {
-            Debug.Log("Exit Run state");
         }
 
         public override void Update()
