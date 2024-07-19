@@ -1,32 +1,13 @@
+using Game.Logic.InteractiveObject;
 using UnityEngine;
 
-public class PlayerMove
+namespace Game.Logic.Player
 {
-
-    public bool Stop { get; set; }
-
-    private const float SPEED = 6;
-
-    private readonly Transform _transform;
-
-    public PlayerMove(Transform transform)
+    public class PlayerMove : ObjectMove
     {
-        _transform = transform;
-    }
-
-    public void MoveHorizontal(float speedMultiplier)
-    {
-        if (Stop)
-            return;
-        _transform.localPosition += new Vector3(
-            speedMultiplier * SPEED * Time.fixedDeltaTime, 0f);
-    }
-
-    public void MoveVertical(float speedMultiplier)
-    {
-        if (Stop)
-            return;
-        _transform.localPosition += new Vector3(0f,
-            speedMultiplier * SPEED * Time.fixedDeltaTime);
+        public PlayerMove(Rigidbody2D body) : base(body)
+        {
+            Speed = 6;
+        }
     }
 }

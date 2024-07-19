@@ -14,8 +14,18 @@ namespace Game.Logic.Player
 
         public event Action<float> InvokeMoveVertical;
 
+        public event Action<Vector2> InvokeMove;
+
         public event Action InvokeAttackButton;
         public event Action InvokeSpellButton;
+
+        private bool _isHorizontal;
+        private bool _isVertical;
+
+        public float Horizontal => OnMoveHorizontal();
+        public float Vertical => OnMoveVertical();
+
+         
 
         public bool IsMoveButtonPress 
         { 
@@ -59,8 +69,17 @@ namespace Game.Logic.Player
 
         public void FixedTick()
         {
-            InvokeMoveHorizontal?.Invoke(OnMoveHorizontal());
-            InvokeMoveVertical?.Invoke(OnMoveVertical());
+            _isHorizontal = OnMoveHorizontal() != 0;
+            _isVertical = OnMoveVertical() != 0;
+            if (_isHorizontal)
+                InvokeMoveHorizontal?.
+                    Invoke(OnMoveHorizontal());
+            if (_isVertical)
+                InvokeMoveVertical?.
+                    Invoke(OnMoveVertical());
+
+            //if (_isHorizontal || _isVertical)
+            InvokeMove?.Invoke(new(OnMoveHorizontal(), OnMoveVertical()));
         }
     }
 }

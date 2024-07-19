@@ -19,6 +19,7 @@ namespace Game.Logic.Player.Animation
 
         public override void Exit()
         {
+            _callback?.Invoke();
         }
 
         public override void Update()
@@ -27,8 +28,7 @@ namespace Game.Logic.Player.Animation
 
         private void AttackCallback()
         {
-            Fsm.SetState<IdleState>();
-            _callback?.Invoke();
+            Fsm.SetState<IdleState>(true);
         }
     }
 }

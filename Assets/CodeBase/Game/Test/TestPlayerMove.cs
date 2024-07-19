@@ -8,7 +8,7 @@ namespace Game.Test
     public class TestPlayerMove : MonoBehaviour
     {
         [SerializeField] private UnitAnimationExtension _animation;
-        [SerializeField] private Transform _transform;
+        [SerializeField] private Rigidbody2D _body;
 
         private AnimationFsm _animationFsm;
         private PlayerInput _playerInput;
@@ -26,59 +26,60 @@ namespace Game.Test
 
         private void Start()
         {
-            _playerMove = new(_transform);
+            _playerMove = new(_body);
+
             _playerInput.InvokeMoveButtonsDown += OnMoveBegin;
             _playerInput.InvokeMoveButtonsUp += OnMoveEnd;
             _playerInput.InvokeMoveHorizontal += OnMoveHorizontal;
-            _playerInput.InvokeMoveVertical += OnMoveVertical;
+            _playerInput.InvokeMove += OnMove;
             _playerInput.InvokeAttackButton += OnAttack;
+
             _animationFsm.AddState(new IdleState(_animationFsm, _animation));
             _animationFsm.AddState(new RunState(_animationFsm, _animation));
             _animationFsm.AddState(new AttackState(_animationFsm, _animation));
-            _animationFsm.SetState<IdleState>();
+            _animationFsm.SetState<IdleState>(true);
+
             _standartScale =new(
-                _animation._anim.transform.localScale.x,
-                _animation._anim.transform.localScale.y,
-                _animation._anim.transform.localScale.z);
+                transform.localScale.x,
+                transform.localScale.y,
+                transform.localScale.z);
         }
 
         private void OnMoveBegin()
         {
-            _animationFsm.SetState<RunState>();
+            _animationFsm.SetState<RunState>(true);
         }
 
         private void OnMoveEnd()
         {
-            _animationFsm.SetState<IdleState>();
+            _animationFsm.SetState<IdleState>(true);
         }
 
         private void OnMoveHorizontal(float direction)
         {
-            if (direction == 0f)
-                return;
             Vector3 scale = new(
                 _standartScale.x * Mathf.Sign(direction),
                 _standartScale.y, _standartScale.z);
-            _animation._anim.transform.localScale = scale;
-            _playerMove.MoveHorizontal(direction);
+            transform.localScale = scale;
         }
 
-        private void OnMoveVertical(float direction)
+        private void OnMove(Vector2 direction)
         {
-            _playerMove.MoveVertical(direction);
+            _playerMove.Move(direction);
         }
 
         private void OnAttack()
         {
-            _playerMove.Stop = true;
-            _animationFsm.SetState<AttackState>(AttackEnd);
+            _playerMove.BlockMove = true;
+            _animationFsm.SetState<AttackState>(true, AttackEnd);
         }
 
         private void AttackEnd()
         {
-            _playerMove.Stop = false;
+            _playerMove.BlockMove = false;
             if (_playerInput.IsMoveButtonPress)
-                OnMoveBegin();
+                _animationFsm.SetState<RunState>();
+
         }
 
         private void OnDestroy()
@@ -86,8 +87,8 @@ namespace Game.Test
             _playerInput.InvokeMoveButtonsDown -= OnMoveBegin;
             _playerInput.InvokeMoveButtonsUp -= OnMoveEnd;
             _playerInput.InvokeMoveHorizontal -= OnMoveHorizontal;
-            _playerInput.InvokeMoveVertical -= OnMoveVertical;
             _playerInput.InvokeAttackButton -= OnAttack;
+            _playerInput.InvokeMove -= OnMove;
         }
     }
 }

@@ -15,12 +15,11 @@ namespace Game.Logic.Player.Animation
         {
 
             Animation.PlayAnimation(AnimationNames.IDLE, callback);
-            Debug.Log("Enter Idle state");
         }
 
         public override void Exit()
         {
-            Debug.Log("Exit Idle state");
+            
         }
 
         public override void Update()
