@@ -3973,7 +3973,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!70 &9137219179897476931
 CapsuleCollider2D:
@@ -4024,6 +4024,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animation: {fileID: 1144103553565948289}
   _body: {fileID: 6297506539284539194}
+  _playerStats:
+    _hits: 4
+    _damage: 1
+    _speed: 6
+    _attackDelay: 0.2
 --- !u!1 &9186944815343007629
 GameObject:
   m_ObjectHideFlags: 0

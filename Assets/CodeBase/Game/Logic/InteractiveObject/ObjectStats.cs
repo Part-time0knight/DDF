@@ -12,6 +12,8 @@ namespace Game.Logic.InteractiveObject
 
         [SerializeField] protected float _speed;
 
+        [SerializeField] protected float _attackDelay;
+
         protected int _currentHits;
 
         public virtual int Hits 
@@ -36,6 +38,12 @@ namespace Game.Logic.InteractiveObject
         {
             get => _speed;
             protected set => _speed = value;
+        }
+
+        public virtual float AttackDelay
+        {
+            get => _attackDelay;
+            set => _attackDelay = value;
         }
 
         public ObjectStats()

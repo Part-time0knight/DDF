@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using Zenject;
 
@@ -41,6 +42,7 @@ namespace Game.Logic.InteractiveObject
             _body = body;
             _isStoped = false;
             _filter = new ContactFilter2D();
+            Stats = stats;
             _collisionOffset = 0.1f;
         }
 
