@@ -1,4 +1,5 @@
 using Game.Logic.InteractiveObject;
+using UnityEngine;
 
 namespace Game.Logic.Player
 {

@@ -1055,26 +1055,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2772481157500148225, guid: 26636cf884a4ff249af81ee7d9767056, type: 3}
-      propertyPath: _playerStats._hits
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2772481157500148225, guid: 26636cf884a4ff249af81ee7d9767056, type: 3}
-      propertyPath: _playerStats._speed
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2772481157500148225, guid: 26636cf884a4ff249af81ee7d9767056, type: 3}
-      propertyPath: _playerStats._damage
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6297506539284539194, guid: 26636cf884a4ff249af81ee7d9767056, type: 3}
-      propertyPath: m_BodyType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6297506539284539194, guid: 26636cf884a4ff249af81ee7d9767056, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7766512923665431578, guid: 26636cf884a4ff249af81ee7d9767056, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
