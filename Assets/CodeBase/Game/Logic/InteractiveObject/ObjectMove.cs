@@ -16,18 +16,27 @@ namespace Game.Logic.InteractiveObject
             }
         }
 
-        protected virtual float Speed { get; set; }
+        protected Vector2 Velocity 
+        {
+            get => _body.velocity;
+            set
+            {
+                _body.velocity = value;
+            }
+
+        }
+
+        protected ObjectStats Stats;
 
         protected readonly Rigidbody2D _body;
 
         private bool _isStoped;
-        private int _castCount;
         private ContactFilter2D _filter;
         private List<RaycastHit2D> _raycasts = new();
         private float _collisionOffset;
         private Vector2 _resultSpeed;
 
-        public ObjectMove(Rigidbody2D body)
+        public ObjectMove(Rigidbody2D body, ObjectStats stats)
         {
             _body = body;
             _isStoped = false;
@@ -35,14 +44,12 @@ namespace Game.Logic.InteractiveObject
             _collisionOffset = 0.1f;
         }
 
-        public void Move(Vector2 speedMultiplier)
+        public virtual void Move(Vector2 speedMultiplier)
         {
             if (_isStoped)
                 return;
 
-            
-
-            _castCount = _body.Cast(speedMultiplier, _filter, _raycasts, Speed * Time.fixedDeltaTime + _collisionOffset);
+            _body.Cast(speedMultiplier, _filter, _raycasts, Stats.Speed * Time.fixedDeltaTime + _collisionOffset);
 
             _resultSpeed = speedMultiplier;
 
@@ -50,15 +57,8 @@ namespace Game.Logic.InteractiveObject
             {
                 _resultSpeed.x = cast.normal.x != 0 ? 0 : _resultSpeed.x;
                 _resultSpeed.y = cast.normal.y != 0 ? 0 : _resultSpeed.y;
-                Debug.Log(cast);
             }
-
-            /*if (_castCount > 0)
-            {
-                Stop();
-                return;
-            }*/
-            _body.velocity = _resultSpeed * Speed;
+            Velocity = _resultSpeed * Stats.Speed;
         }
 
         public void Stop()

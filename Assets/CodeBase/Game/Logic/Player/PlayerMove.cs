@@ -5,9 +5,8 @@ namespace Game.Logic.Player
 {
     public class PlayerMove : ObjectMove
     {
-        public PlayerMove(Rigidbody2D body) : base(body)
+        public PlayerMove(Rigidbody2D body, ObjectStats stats) : base(body, stats)
         {
-            Speed = 6;
         }
     }
 }

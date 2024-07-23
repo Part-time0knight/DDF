@@ -1,20 +1,27 @@
-using Game.Logic.Player;
+using Game.Logic.InteractiveObject;
 using Game.Logic.Player.Animation;
 using UnityEngine;
 using Zenject;
 
-namespace Game.Test
+namespace Game.Logic.Player
 {
-    public class TestPlayerMove : MonoBehaviour
+    public class Player : MonoBehaviour
     {
         [SerializeField] private UnitAnimationExtension _animation;
         [SerializeField] private Rigidbody2D _body;
+        [SerializeField] private ObjectStats _playerStats = new();
 
         private AnimationFsm _animationFsm;
         private PlayerInput _playerInput;
         private PlayerMove _playerMove;
+        private DamageHandler _damageHandler;
 
         private Vector3 _standartScale;
+
+        public void TakeDamage(int damage)
+        {
+            _damageHandler.TakeDamage(damage);
+        }
 
         [Inject]
         private void Construct(AnimationFsm animationFsm, PlayerInput playerInput)
@@ -26,7 +33,7 @@ namespace Game.Test
 
         private void Start()
         {
-            _playerMove = new(_body);
+            _playerMove = new(_body, _playerStats);
 
             _playerInput.InvokeMoveButtonsDown += OnMoveBegin;
             _playerInput.InvokeMoveButtonsUp += OnMoveEnd;
@@ -39,10 +46,12 @@ namespace Game.Test
             _animationFsm.AddState(new AttackState(_animationFsm, _animation));
             _animationFsm.SetState<IdleState>(true);
 
-            _standartScale =new(
+            _standartScale = new(
                 transform.localScale.x,
                 transform.localScale.y,
                 transform.localScale.z);
+
+            _damageHandler = new(_playerStats);
         }
 
         private void OnMoveBegin()
