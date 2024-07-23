@@ -25,7 +25,11 @@ namespace Game.Logic.Player
         public float Horizontal => OnMoveHorizontal();
         public float Vertical => OnMoveVertical();
 
-         
+        public Vector2 MousePosition()
+            => Camera.main.ScreenToViewportPoint(
+                new(Input.mousePosition.x,
+                    Input.mousePosition.y,
+                    Camera.main.nearClipPlane));
 
         public bool IsMoveButtonPress 
         { 

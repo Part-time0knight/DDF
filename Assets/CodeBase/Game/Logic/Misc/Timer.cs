@@ -1,12 +1,12 @@
 using Cysharp.Threading.Tasks;
 using System;
 using System.Threading;
+using UnityEngine;
 
 public class Timer
 {
-    public event Action InvokeComplete;
+    private Action InvokeComplete;
 
-    private Random _random;
     private float _tick;
 
     private CancellationTokenSource _cts;
@@ -15,21 +15,20 @@ public class Timer
 
     public Timer()
     {
-        _random = new();
-
+        _cts = new();
     }
 
-    public Timer(float time) : this()
+    public void Initialize(float time, Action callback)
     {
         _time = time;
         _tick = _time;
-        _cts = new();
-        ExecuteAsync();
+        InvokeComplete = callback;
     }
 
     public void Play()
     {
-        if (_tick == 0)
+        if (_tick == 0 ||
+            _tick != _time)
             return;
         ExecuteAsync();
     }
@@ -61,4 +60,5 @@ public class Timer
         if (_tick == 0 && !_cts.IsCancellationRequested)
             InvokeComplete?.Invoke();
     }
+
 }

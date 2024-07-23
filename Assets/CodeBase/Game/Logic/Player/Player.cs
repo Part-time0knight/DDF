@@ -1,5 +1,6 @@
 using Game.Logic.InteractiveObject;
 using Game.Logic.Player.Animation;
+using Game.Logic.Weapon;
 using UnityEngine;
 using Zenject;
 
@@ -9,14 +10,16 @@ namespace Game.Logic.Player
     {
         [SerializeField] private UnitAnimationExtension _animation;
         [SerializeField] private Rigidbody2D _body;
-        [SerializeField] private ObjectStats _playerStats = new();
 
         private AnimationFsm _animationFsm;
         private PlayerInput _playerInput;
         private PlayerMove _playerMove;
         private DamageHandler _damageHandler;
+        private ShootHandler _weapon;
 
+        private ObjectStats _playerStats;
         private Vector3 _standartScale;
+        private bool _onAttck = false;
 
         public void TakeDamage(int damage)
         {
@@ -24,11 +27,14 @@ namespace Game.Logic.Player
         }
 
         [Inject]
-        private void Construct(AnimationFsm animationFsm, PlayerInput playerInput)
+        private void Construct(AnimationFsm animationFsm,
+            PlayerInput playerInput, ShootHandler weapon,
+            ObjectStats stats)
         {
             _animationFsm = animationFsm;
             _playerInput = playerInput;
-
+            _weapon = weapon;
+            _playerStats = stats;
         }
 
         private void Start()
@@ -52,6 +58,8 @@ namespace Game.Logic.Player
                 transform.localScale.z);
 
             _damageHandler = new(_playerStats);
+
+            _weapon.InvokeCanShoot += OnCanAttack;
         }
 
         private void OnMoveBegin()
@@ -79,16 +87,25 @@ namespace Game.Logic.Player
 
         private void OnAttack()
         {
+            if (_onAttck)
+                return;
             _playerMove.BlockMove = true;
-            _animationFsm.SetState<AttackState>(true, AttackEnd);
+            _onAttck = true;
+            _animationFsm.SetState<AttackState>(true, AttackAnimationEnd);
+            _weapon.Shoot(_playerInput.MousePosition());
         }
 
-        private void AttackEnd()
+        private void OnCanAttack()
+        {
+            _onAttck = false;
+        }
+
+        private void AttackAnimationEnd()
         {
             _playerMove.BlockMove = false;
+            
             if (_playerInput.IsMoveButtonPress)
                 _animationFsm.SetState<RunState>();
-
         }
 
         private void OnDestroy()
@@ -98,6 +115,8 @@ namespace Game.Logic.Player
             _playerInput.InvokeMoveHorizontal -= OnMoveHorizontal;
             _playerInput.InvokeAttackButton -= OnAttack;
             _playerInput.InvokeMove -= OnMove;
+
+            _weapon.InvokeCanShoot -= OnCanAttack;
         }
     }
 }

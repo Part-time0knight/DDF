@@ -1,13 +1,18 @@
 using Game.Logic.InteractiveObject;
 using Game.Logic.Misc;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
 
 namespace Game.Logic.Weapon
 {
     public class ShootHandler
     {
+        /// <summary>
+        /// Called when the cooldown timer ends. 
+        /// </summary>
+        public event Action InvokeCanShoot;
+
         protected readonly Bullet.Pool _bulletPool;
         protected readonly Transform _weapon;
 
@@ -16,8 +21,9 @@ namespace Game.Logic.Weapon
         protected ObjectStats _stats;
 
         protected bool _onLoad = false;
+        protected Bullet _currentBullet;
 
-        public ShootHandler(Bullet.Pool bulletPool, Transform weapon, ObjectStats stats)
+        public ShootHandler(Bullet.Pool bulletPool, ObjectStats stats, Transform weapon)
         {
             _bulletPool = bulletPool;
             _weapon = weapon;
@@ -31,10 +37,17 @@ namespace Game.Logic.Weapon
                 Debug.Log("Weapon on reload!");
                 return;
             }
+            _currentBullet = _bulletPool.Spawn(target);
+            _bullets.Add(_currentBullet);
+            _currentBullet.transform.SetParent(_weapon, false);
 
-            _bullets.Add(_bulletPool.Spawn(target));
             _onLoad = true;
-            _timer.Initialize(_stats.AttackDelay, () => _onLoad = false);
+            _timer.Initialize(_stats.AttackDelay, () => 
+            { 
+                _onLoad = false;
+                Debug.Log("end reload");
+                InvokeCanShoot?.Invoke();
+            });
             _timer.Play();
         }
     }

@@ -1,5 +1,4 @@
 using Game.Logic.InteractiveObject;
-using System;
 using UnityEngine;
 using Zenject;
 
@@ -7,9 +6,9 @@ namespace Game.Logic.Misc
 {
     public class Bullet : MonoBehaviour
     {
+        [SerializeField] protected Rigidbody2D _body;
         [SerializeField] protected ObjectStats _stats;
 
-        protected Rigidbody2D _body;
         protected Vector2 direction = Vector2.zero;
         protected BulletMove _bulletMove;
 
