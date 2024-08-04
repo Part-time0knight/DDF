@@ -1,6 +1,7 @@
 using Game.Logic.InteractiveObject;
 using System;
 using System.Collections.Generic;
+using UniRx.Triggers;
 using UnityEngine;
 
 namespace Game.Logic.Weapon
@@ -31,22 +32,25 @@ namespace Game.Logic.Weapon
 
         public void Shoot(Vector2 target)
         {
-            if (_onLoad)
-            {
-                Debug.Log("Weapon on reload!");
-                return;
-            }
             _currentBullet = _bulletPool.Spawn(_weapon.position, target);
             _bullets.Add(_currentBullet);
+
+            _currentBullet.InvokeHit += Hit;
 
             _onLoad = true;
             _timer.Initialize(_stats.AttackDelay, () => 
             { 
                 _onLoad = false;
-                Debug.Log("end reload");
                 InvokeCanShoot?.Invoke();
             });
             _timer.Play();
+        }
+
+        private void Hit(Bullet bullet, GameObject target)
+        {
+            bullet.InvokeHit -= Hit;
+            _bulletPool.Despawn(bullet);
+            _bullets.Remove(bullet);
         }
     }
 }

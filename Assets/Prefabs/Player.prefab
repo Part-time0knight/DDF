@@ -836,13 +836,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b6276742588e444e89eb4fa15b0f9e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletPrfab: {fileID: 934031776928171266, guid: 69f9db645d71f0141948e95f45bd3dca, type: 3}
   _weapon: {fileID: 6175339281961653993}
   _player:
     _hits: 4
     _damage: 1
     _speed: 6
-    _attackDelay: 1
+    _attackDelay: 0.5
 --- !u!1 &1951781275742792082
 GameObject:
   m_ObjectHideFlags: 0
@@ -3979,7 +3978,7 @@ GameObject:
   - component: {fileID: 2945388948673295653}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4038,7 +4037,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 9027092269198735959}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 7c0b8ceb4cc39cb458ae924a34ecfc9e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

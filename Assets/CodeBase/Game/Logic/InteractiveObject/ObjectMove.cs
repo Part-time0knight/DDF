@@ -1,13 +1,11 @@
 using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
-using Zenject;
 
 namespace Game.Logic.InteractiveObject
 {
     public class ObjectMove
     {
-        public bool BlockMove 
+        public virtual bool BlockMove 
         {
             get => _isStoped;
             set 
@@ -31,11 +29,11 @@ namespace Game.Logic.InteractiveObject
 
         protected readonly Rigidbody2D _body;
 
-        private bool _isStoped;
-        private ContactFilter2D _filter;
-        private List<RaycastHit2D> _raycasts = new();
-        private float _collisionOffset;
-        private Vector2 _resultSpeed;
+        protected bool _isStoped;
+        protected ContactFilter2D _filter;
+        protected List<RaycastHit2D> _raycasts = new();
+        protected float _collisionOffset;
+        protected Vector2 _resultSpeed;
 
         public ObjectMove(Rigidbody2D body, ObjectStats stats)
         {

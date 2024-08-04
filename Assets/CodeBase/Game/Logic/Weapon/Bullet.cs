@@ -1,5 +1,6 @@
 using Game.Logic.InteractiveObject;
 using Game.Logic.Misc;
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -7,6 +8,8 @@ namespace Game.Logic.Weapon
 {
     public class Bullet : MonoBehaviour
     {
+        public Action<Bullet, GameObject> InvokeHit;
+
         [SerializeField] protected Rigidbody2D _body;
         [SerializeField] protected ObjectStats _stats;
 
@@ -17,7 +20,7 @@ namespace Game.Logic.Weapon
         protected virtual void Awake()
         {
             _bulletMove = new(_body, _stats);
-            
+            _bulletMove.InvokeCollision += OnHit;
         }
 
         protected virtual void Initialize(Vector2 startPos, Vector2 targetPos)
@@ -27,9 +30,18 @@ namespace Game.Logic.Weapon
             _bulletMove.Move(direction);
         }
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void FixedUpdate()
         {
+            _bulletMove.CollisionCheck();
+        }
 
+        private void OnHit(GameObject objectHit)
+        {
+            if (objectHit.tag == "Player")
+                return;
+
+            Debug.Log(objectHit.name);
+            InvokeHit?.Invoke(this, objectHit);
         }
 
         public class Pool : MonoMemoryPool<Vector2, Vector2, Bullet>
@@ -45,8 +57,9 @@ namespace Game.Logic.Weapon
 
             protected override void OnCreated(Bullet item)
             {
-                base.OnCreated(item);
                 item.transform.SetParent(_buffer);
+                base.OnCreated(item);
+                
             }
 
             /// <param name="startPos">World space position</param>
