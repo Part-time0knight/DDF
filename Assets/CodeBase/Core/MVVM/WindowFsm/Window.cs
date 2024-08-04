@@ -1,9 +1,5 @@
-using Core.MVVM.View;
-using Core.MVVM.WindowFsm;
+using Core.MVVM.Windows;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class Window : IWindow
 {

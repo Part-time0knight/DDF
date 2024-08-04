@@ -3,7 +3,7 @@ using Core.MVVM.Windows;
 
 namespace Core.MVVM.ViewModel
 {
-    public abstract class BaseViewModel : IViewModel
+    public abstract class AbstractViewModel : IViewModel
     {
         public event Action InvokedOpen;
         public event Action InvokedClose;
@@ -12,7 +12,7 @@ namespace Core.MVVM.ViewModel
         
         protected virtual Type Window { get; }
 
-        public BaseViewModel(IWindowFsm windowFsm)
+        public AbstractViewModel(IWindowFsm windowFsm)
         {
             _windowFsm = windowFsm;
 

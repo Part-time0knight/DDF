@@ -5,13 +5,13 @@ using Core.Infrastructure.GameFsm.States;
 
 namespace Core.Infrastructure.GameFsm
 {
-    public abstract class BaseGameFsm : IGameFsm
+    public abstract class AbstractGameStateMachine : IGameStateMachine
     {
         protected readonly IStatesFactory _factory;
         protected readonly Dictionary<Type, IExitableState> _states;
-        private IExitableState _activeState;
+        private IExitableState _currentState;
         
-        public BaseGameFsm(IStatesFactory factory)
+        public AbstractGameStateMachine(IStatesFactory factory)
         {
             _factory = factory;
             _states = new Dictionary<Type, IExitableState>();
@@ -30,12 +30,24 @@ namespace Core.Infrastructure.GameFsm
             state?.OnEnter();
         }
 
+        public void Enter<TState, TPayload>(TPayload payload) where TState : class, IPayloadedState<TPayload>
+        {
+            IPayloadedState<TPayload> state = ChangeState<TState>();
+            state.OnEnter(payload);
+        }
+
+        public async void EnterAsync<TState>() where TState : class, IAsyncState
+        {
+            IAsyncState state = ChangeState<TState>();
+            await state?.OnEnterAsync()!;
+        }
+
         protected virtual TState ChangeState<TState>()
             where TState : class, IExitableState
         {
+            _currentState?.OnExit();
             TState state = GetState<TState>();
-            _activeState?.OnExit();
-            _activeState = state;
+            _currentState = state;
             return state;
         }
 
