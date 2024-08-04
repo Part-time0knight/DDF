@@ -1,8 +1,9 @@
 using Game.Logic.InteractiveObject;
+using Game.Logic.Misc;
 using UnityEngine;
 using Zenject;
 
-namespace Game.Logic.Misc
+namespace Game.Logic.Weapon
 {
     public class Bullet : MonoBehaviour
     {
@@ -12,30 +13,49 @@ namespace Game.Logic.Misc
         protected Vector2 direction = Vector2.zero;
         protected BulletMove _bulletMove;
 
+
         protected virtual void Awake()
         {
             _bulletMove = new(_body, _stats);
+            
         }
 
-        protected virtual void Initialize(Vector2 targetPos)
+        protected virtual void Initialize(Vector2 startPos, Vector2 targetPos)
         {
-            direction = targetPos.normalized;
+            transform.position = startPos;
+            direction = (targetPos - startPos).normalized;
             _bulletMove.Move(direction);
-        }
-
-        public class Pool : MonoMemoryPool<Vector2, Bullet>
-        {
-
-            protected override void Reinitialize(Vector2 targetPos, Bullet item)
-            {
-                base.Reinitialize(targetPos, item);
-                item.Initialize(targetPos);
-            }
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            
+
+        }
+
+        public class Pool : MonoMemoryPool<Vector2, Vector2, Bullet>
+        {
+
+            protected Transform _buffer;
+
+            [Inject]
+            private void Construct(BulletBuffer buffer)
+            {
+                _buffer = buffer.transform;
+            }
+
+            protected override void OnCreated(Bullet item)
+            {
+                base.OnCreated(item);
+                item.transform.SetParent(_buffer);
+            }
+
+            /// <param name="startPos">World space position</param>
+            /// <param name="targetPos">World space position</param>
+            protected override void Reinitialize(Vector2 startPos, Vector2 targetPos, Bullet item)
+            {
+                base.Reinitialize(startPos, targetPos, item);
+                item.Initialize(startPos, targetPos);
+            }
         }
     }
 }

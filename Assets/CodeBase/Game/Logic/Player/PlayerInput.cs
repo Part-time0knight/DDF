@@ -26,7 +26,7 @@ namespace Game.Logic.Player
         public float Vertical => OnMoveVertical();
 
         public Vector2 MousePosition()
-            => Camera.main.ScreenToViewportPoint(
+            => Camera.main.ScreenToWorldPoint(
                 new(Input.mousePosition.x,
                     Input.mousePosition.y,
                     Camera.main.nearClipPlane));

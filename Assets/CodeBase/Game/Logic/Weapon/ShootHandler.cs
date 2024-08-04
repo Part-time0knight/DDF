@@ -1,5 +1,4 @@
 using Game.Logic.InteractiveObject;
-using Game.Logic.Misc;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,9 +36,8 @@ namespace Game.Logic.Weapon
                 Debug.Log("Weapon on reload!");
                 return;
             }
-            _currentBullet = _bulletPool.Spawn(target);
+            _currentBullet = _bulletPool.Spawn(_weapon.position, target);
             _bullets.Add(_currentBullet);
-            _currentBullet.transform.SetParent(_weapon, false);
 
             _onLoad = true;
             _timer.Initialize(_stats.AttackDelay, () => 
