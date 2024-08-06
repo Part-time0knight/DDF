@@ -1,17 +1,21 @@
 using Cysharp.Threading.Tasks;
+using Game.Logic.InteractiveObject;
 using System;
 using System.Threading;
 using UnityEngine;
 
 public class Timer
 {
-    private Action InvokeComplete;
-
-    private float _tick;
+    private Action _invokeComplete;
+    private Action<float> _invokeTick;
 
     private CancellationTokenSource _cts;
 
     private float _time;
+
+    private float _tick;
+
+    private float _step;
 
     public Timer()
     {
@@ -20,9 +24,21 @@ public class Timer
 
     public void Initialize(float time, Action callback)
     {
+        Initialize(time, null, callback);
+    }
+
+    public void Initialize(float time, Action<float> callTick, Action callback)
+    {
+        Initialize(time, 0.5f, callTick, callback);
+    }
+
+    public void Initialize(float time, float step, Action<float> callTick,  Action callback)
+    {
         _time = time;
         _tick = _time;
-        InvokeComplete = callback;
+        _invokeComplete = callback;
+        _invokeTick = callTick;
+        _step = step;
     }
 
     public void Play()
@@ -39,6 +55,7 @@ public class Timer
     public void Stop()
     {
         _tick = 0;
+        _invokeTick?.Invoke(_tick);
         _cts.Cancel();
     }
 
@@ -47,18 +64,20 @@ public class Timer
         float second;
         do
         {
-            second = _tick > 0.5f ? 0.5f : _tick;
+            second = _tick > _step ? _step : _tick;
 
             await UniTask.Delay(TimeSpan.FromSeconds(second),
                 false, PlayerLoopTiming.FixedUpdate, _cts.Token);
 
             if (!_cts.IsCancellationRequested)
+            {
                 _tick -= second;
-
+                _invokeTick?.Invoke(_tick);
+            }
         } while (_tick > 0f && !_cts.IsCancellationRequested);
 
         if (_tick == 0 && !_cts.IsCancellationRequested)
-            InvokeComplete?.Invoke();
+            _invokeComplete?.Invoke();
     }
 
 }

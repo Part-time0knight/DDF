@@ -16,6 +16,8 @@ namespace Game.Logic.InteractiveObject
 
         protected int _currentHits;
 
+        protected float _currentAttackDelay;
+
         public virtual int Hits 
         { 
             get => _hits;
@@ -46,9 +48,16 @@ namespace Game.Logic.InteractiveObject
             set => _attackDelay = value;
         }
 
+        public virtual float CurrentAttackDelay
+        {
+            get => _currentAttackDelay;
+            set => _currentAttackDelay = value;
+        }
+
         public ObjectStats()
         {
             _currentHits = _hits;
+            _currentAttackDelay = 0;
         }
     }
 }

@@ -8,10 +8,16 @@ namespace Game.Logic.Weapon
 {
     public class ShootHandler
     {
+
         /// <summary>
         /// Called when the cooldown timer ends. 
         /// </summary>
         public event Action InvokeCanShoot;
+
+        /// <summary>
+        /// Called when the cooldown timer ticks. 
+        /// </summary>
+        public event Action InvokeReloadUpdate;
 
         protected readonly Bullet.Pool _bulletPool;
         protected readonly Transform _weapon;
@@ -38,7 +44,11 @@ namespace Game.Logic.Weapon
             _currentBullet.InvokeHit += Hit;
 
             _onLoad = true;
-            _timer.Initialize(_stats.AttackDelay, () => 
+
+            _timer.Initialize(_stats.AttackDelay, (tick) => 
+            {
+                _stats.CurrentAttackDelay = _stats.AttackDelay - tick;
+            }, () => 
             { 
                 _onLoad = false;
                 InvokeCanShoot?.Invoke();
