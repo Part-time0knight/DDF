@@ -21,20 +21,20 @@ namespace Core.Infrastructure.GameFsm
             where TState : class, IState
         {
             IState state = ChangeState<TState>();
-            state?.Enter();
+            state?.OnEnter();
         }
         
         public virtual void Enter(Type type) 
         {
             IState state = _states[type] as IState;
-            state?.Enter();
+            state?.OnEnter();
         }
 
         protected virtual TState ChangeState<TState>()
             where TState : class, IExitableState
         {
             TState state = GetState<TState>();
-            _activeState?.Exit();
+            _activeState?.OnExit();
             _activeState = state;
             return state;
         }

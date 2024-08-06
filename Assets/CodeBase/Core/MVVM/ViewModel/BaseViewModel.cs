@@ -1,5 +1,5 @@
 ﻿using System;
-using Core.MVVM.WindowFsm;
+using Core.MVVM.Windows;
 
 namespace Core.MVVM.ViewModel
 {

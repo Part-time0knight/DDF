@@ -1,7 +1,7 @@
-﻿namespace Core.Infrastructure.GameFsm
+﻿namespace Core.Infrastructure.GameFsm.States
 {
     public interface IExitableState
     {
-        void Exit();
+        void OnExit();
     }
 }
