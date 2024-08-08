@@ -18,6 +18,8 @@ namespace Game.Presentation.View
             base.Construct(viewModel);
             _viewModel.InvokeReloadActive += ReloadActive;
             _viewModel.InvokeHitsUpdate += HitsUpdate;
+            _reloadBarImage.fillAmount = 0;
+            _hitsBarImage.fillAmount = 1;
         }
 
         private void ReloadActive(float reloadTime)
