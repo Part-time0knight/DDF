@@ -60,7 +60,6 @@ namespace Game.Logic.Weapon
             {
                 item.transform.SetParent(_buffer);
                 base.OnCreated(item);
-                
             }
 
             /// <param name="startPos">World space position</param>

@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Game.Test
 {
-    public class TakeDamage : MonoBehaviour
+    public class HealDamage : MonoBehaviour
     {
         private PlayerHandler _player;
 
@@ -14,9 +14,9 @@ namespace Game.Test
             _player = player;
         }
 
-        public void MakeDamage()
+        public void Heal()
         {
-            _player.TakeDamage(1);
+            _player.TakeDamage(-1);
         }
     }
 }

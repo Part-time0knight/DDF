@@ -3,6 +3,7 @@ using Game.Logic.Player;
 using Zenject;
 using UnityEngine;
 using System;
+using Game.Domain.Factories.GameFsm;
 
 namespace Installers
 {
@@ -13,7 +14,16 @@ namespace Installers
 
         public override void InstallBindings()
         {
+            InstallFactory();
             InstallPlayerComponents();
+        }
+
+        private void InstallFactory()
+        {
+            Container
+                .BindInterfacesAndSelfTo<AnimationStatesFactory>()
+                .AsSingle()
+                .NonLazy();
         }
 
         private void InstallPlayerComponents()

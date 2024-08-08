@@ -1,14 +1,13 @@
-using Game.Logic.InteractiveObject;
-using Game.Logic.Player;
 using System;
 using System.Collections.Generic;
-using UniRx.Triggers;
 using UnityEngine;
 
 namespace Game.Logic.Weapon
 {
     public abstract class ShootHandler
     {
+        public bool Block;
+
         protected readonly Bullet.Pool _bulletPool;
         protected readonly Settings _settings;
 
@@ -25,11 +24,14 @@ namespace Game.Logic.Weapon
             _settings = settings;
             _settings.CurrentAttackDelay = _settings.AttackDelay;
             _settings.CurrentDamage = _settings.Damage;
+            Block = false;
             //_settings.TimeToAttack = 0;
         }
 
         public virtual void Shoot(Vector2 target)
         {
+            if (Block)
+                return;
             _currentBullet = _bulletPool.Spawn(WeapontPoint.position, target);
             _bullets.Add(_currentBullet);
             _settings.InvokeShoot?.Invoke();

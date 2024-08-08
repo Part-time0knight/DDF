@@ -6,18 +6,28 @@ namespace Game.Logic.Player.Animation
 {
     public class AnimationFsm : ITickable
     {
-        private AnimationState _currentState;
+        private readonly IAnimationStatesFactory _factory;
 
-        private Dictionary<Type, AnimationState> _states = new();
+
+
+        private Dictionary<Type, IAnimationState> _states = new();
 
         private Action _callback;
 
-        private AnimationState _nextState;
+        private IAnimationState _currentState;
 
-        public void AddState(AnimationState state)
+        private IAnimationState _nextState;
+
+        public AnimationFsm(IAnimationStatesFactory factory)
         {
-            if (_states.ContainsKey(state.GetType()))
+            _factory = factory;
+        }
+
+        public void AddState<TState>() where TState : class, IAnimationState
+        {
+            if (_states.ContainsKey(typeof(TState)))
                 return;
+            var state = _factory.Create<TState>();
             _states.Add(state.GetType(), state);
         }
 

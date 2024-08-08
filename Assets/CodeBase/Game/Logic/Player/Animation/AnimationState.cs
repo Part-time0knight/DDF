@@ -2,7 +2,7 @@ using System;
 
 namespace Game.Logic.Player.Animation
 {
-    public abstract class AnimationState
+    public abstract class AnimationState : IAnimationState
     {
 
         protected readonly AnimationFsm Fsm;

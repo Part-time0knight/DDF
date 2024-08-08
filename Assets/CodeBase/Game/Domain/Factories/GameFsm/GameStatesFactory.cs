@@ -2,13 +2,13 @@ using Core.Domain.Factories;
 using Core.Infrastructure.GameFsm.States;
 using Zenject;
 
-namespace Game.Domain.Factories
+namespace Game.Domain.Factories.GameFsm
 {
-    public class StatesFactory : IStatesFactory
+    public class GameStatesFactory : IStatesFactory
     {
         private readonly DiContainer _container;
 
-        public StatesFactory(DiContainer container) =>
+        public GameStatesFactory(DiContainer container) =>
             _container = container;
 
         public TState Create<TState>() where TState : class, IExitableState

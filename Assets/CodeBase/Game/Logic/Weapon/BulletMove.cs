@@ -6,7 +6,7 @@ namespace Game.Logic.Misc
 {
     public class BulletMove : ObjectMove
     {
-        public override bool BlockMove
+        public override bool Block
         {
             get => _isStoped;
             set

@@ -5,7 +5,7 @@ namespace Game.Logic.InteractiveObject
 {
     public class ObjectMove
     {
-        public virtual bool BlockMove 
+        public virtual bool Block 
         {
             get => _isStoped;
             set 
