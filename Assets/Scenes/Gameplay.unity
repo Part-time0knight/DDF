@@ -445,7 +445,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89715ad69b973a14899afa2c6730b30b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scriptableObjectInstallers: []
+  _scriptableObjectInstallers:
+  - {fileID: 11400000, guid: 6a94fe854bfd83a4f8513c36bb1cb65a, type: 2}
   _monoInstallers:
   - {fileID: 2092219147}
   _installerPrefabs: []
@@ -502,14 +503,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 26366718614993232, guid: 26636cf884a4ff249af81ee7d9767056, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 2034211002}
     - target: {fileID: 2945388948673295653, guid: 26636cf884a4ff249af81ee7d9767056, type: 3}
       propertyPath: _context
       value: 
       objectReference: {fileID: 2092219145}
+    - target: {fileID: 5464169615402210436, guid: 26636cf884a4ff249af81ee7d9767056, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 2034211002}
     - target: {fileID: 7766512923665431578, guid: 26636cf884a4ff249af81ee7d9767056, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -554,8 +555,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7490647738248563982, guid: 26636cf884a4ff249af81ee7d9767056, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

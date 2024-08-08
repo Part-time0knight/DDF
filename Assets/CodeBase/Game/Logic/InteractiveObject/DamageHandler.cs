@@ -1,16 +1,25 @@
 
+using UnityEngine;
+
 namespace Game.Logic.InteractiveObject
 {
-    public class DamageHandler
+    public abstract class DamageHandler
     {
-        private ObjectStats _stats;
+        private Settings _stats;
 
-        public DamageHandler(ObjectStats stats) 
+        public DamageHandler(Settings stats) 
         {
             _stats = stats;
+            _stats.CurrentHits = _stats.HitPoints;
         }
 
         public void TakeDamage(int damage)
             => _stats.CurrentHits -= damage;
+
+        public class Settings
+        {
+            [field: SerializeField] public int HitPoints { get; private set; }
+            public int CurrentHits { get; set; }
+        }
     }
 }
