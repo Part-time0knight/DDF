@@ -17,7 +17,7 @@ namespace Game.Logic.Misc
                     return;
 
                 _body.velocity = _isStoped == true ? 
-                    Vector2.zero : _speedMultiplier * Stats.Speed;
+                    Vector2.zero : _speedMultiplier * _stats.CurrentSpeed;
             }
         }
 
@@ -26,14 +26,15 @@ namespace Game.Logic.Misc
         private Vector2 _speedMultiplier = Vector2.zero;
 
 
-        public BulletMove(Rigidbody2D body, ObjectStats stats) : base(body, stats)
+        public BulletMove(Rigidbody2D body, BulletSettngs stats) : base(body, stats)
         {
+            _stats = stats;
         }
 
         public override void Move(Vector2 speedMultiplier)
         {
             _speedMultiplier = speedMultiplier;
-            Velocity = speedMultiplier * Stats.Speed;
+            Velocity = speedMultiplier * _stats.CurrentSpeed;
         }
 
         public void CollisionCheck()
@@ -41,10 +42,16 @@ namespace Game.Logic.Misc
             if (_isStoped)
                 return;
 
-            _body.Cast(_speedMultiplier, _filter, _raycasts, Stats.Speed * Time.fixedDeltaTime + _collisionOffset);
+            _body.Cast(_speedMultiplier, _filter, _raycasts, _stats.CurrentSpeed * Time.fixedDeltaTime + _collisionOffset);
 
             foreach (var hit in _raycasts)
                 InvokeCollision?.Invoke(hit.transform.gameObject);
+        }
+
+        [Serializable]
+        public class BulletSettngs : Settings
+        {
+
         }
     }
 }

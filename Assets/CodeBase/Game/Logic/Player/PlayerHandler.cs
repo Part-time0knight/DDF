@@ -6,18 +6,18 @@ using Zenject;
 
 namespace Game.Logic.Player
 {
-    public class Player : MonoBehaviour
+    public class PlayerHandler : MonoBehaviour
     {
-        [SerializeField] private UnitAnimationExtension _animation;
-        [SerializeField] private Rigidbody2D _body;
+        private UnitAnimationExtension _animation;
 
         private AnimationFsm _animationFsm;
         private PlayerInput _playerInput;
         private PlayerMove _playerMove;
-        private DamageHandler _damageHandler;
-        private ShootHandler _weapon;
+        private PlayerDamageHandler _damageHandler;
+        private PlayerShootHandler _weapon;
 
-        private ObjectStats _playerStats;
+        private PlayerShootHandler.PlayerSettings _playerSettings;
+
         private Vector3 _standartScale;
         private bool _onAttck = false;
 
@@ -28,19 +28,22 @@ namespace Game.Logic.Player
 
         [Inject]
         private void Construct(AnimationFsm animationFsm,
-            PlayerInput playerInput, ShootHandler weapon,
-            ObjectStats stats)
+            PlayerInput playerInput, PlayerShootHandler weapon,
+            PlayerMove playerMove, PlayerDamageHandler damageHandler,
+            UnitAnimationExtension animation, 
+            PlayerShootHandler.PlayerSettings playerSettings)
         {
             _animationFsm = animationFsm;
             _playerInput = playerInput;
             _weapon = weapon;
-            _playerStats = stats;
+            _playerMove = playerMove;
+            _damageHandler = damageHandler;
+            _animation = animation;
+            _playerSettings = playerSettings;
         }
 
         private void Start()
         {
-            _playerMove = new(_body, _playerStats);
-
             _playerInput.InvokeMoveButtonsDown += OnMoveBegin;
             _playerInput.InvokeMoveButtonsUp += OnMoveEnd;
             _playerInput.InvokeMoveHorizontal += OnMoveHorizontal;
@@ -57,9 +60,7 @@ namespace Game.Logic.Player
                 transform.localScale.y,
                 transform.localScale.z);
 
-            _damageHandler = new(_playerStats);
-
-            _weapon.InvokeCanShoot += OnCanAttack;
+            _playerSettings.InvokeCanShoot += OnCanAttack;
         }
 
         private void OnMoveBegin()
@@ -116,7 +117,7 @@ namespace Game.Logic.Player
             _playerInput.InvokeAttackButton -= OnAttack;
             _playerInput.InvokeMove -= OnMove;
 
-            _weapon.InvokeCanShoot -= OnCanAttack;
+            _playerSettings.InvokeCanShoot -= OnCanAttack;
         }
     }
 }

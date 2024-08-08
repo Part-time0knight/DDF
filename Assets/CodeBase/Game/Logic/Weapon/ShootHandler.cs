@@ -1,4 +1,5 @@
 using Game.Logic.InteractiveObject;
+using Game.Logic.Player;
 using System;
 using System.Collections.Generic;
 using UniRx.Triggers;
@@ -6,52 +7,44 @@ using UnityEngine;
 
 namespace Game.Logic.Weapon
 {
-    public class ShootHandler
+    public abstract class ShootHandler
     {
-
-        /// <summary>
-        /// Called when the cooldown timer ends. 
-        /// </summary>
-        public event Action InvokeCanShoot;
-
-        /// <summary>
-        /// Called when the cooldown timer ticks. 
-        /// </summary>
-        public event Action InvokeReloadUpdate;
-
         protected readonly Bullet.Pool _bulletPool;
-        protected readonly Transform _weapon;
+        protected readonly Settings _settings;
 
         protected List<Bullet> _bullets = new();
         protected Timer _timer = new();
-        protected ObjectStats _stats;
-
         protected bool _onLoad = false;
         protected Bullet _currentBullet;
 
-        public ShootHandler(Bullet.Pool bulletPool, ObjectStats stats, Transform weapon)
+        protected abstract Transform WeapontPoint { get; set; }
+
+        public ShootHandler(Bullet.Pool bulletPool, Settings settings)
         {
             _bulletPool = bulletPool;
-            _weapon = weapon;
-            _stats = stats;
+            _settings = settings;
+            _settings.CurrentAttackDelay = _settings.AttackDelay;
+            _settings.CurrentDamage = _settings.Damage;
+            _settings.TimeToAttack = 0;
         }
 
-        public void Shoot(Vector2 target)
+        public virtual void Shoot(Vector2 target)
         {
-            _currentBullet = _bulletPool.Spawn(_weapon.position, target);
+            _currentBullet = _bulletPool.Spawn(WeapontPoint.position, target);
             _bullets.Add(_currentBullet);
 
             _currentBullet.InvokeHit += Hit;
 
             _onLoad = true;
 
-            _timer.Initialize(_stats.AttackDelay, (tick) => 
+            _timer.Initialize(_settings.CurrentAttackDelay, (tick) => 
             {
-                _stats.CurrentAttackDelay = _stats.AttackDelay - tick;
+                _settings.TimeToAttack = _settings.CurrentAttackDelay - tick;
+                _settings.InvokeTimeUpdate?.Invoke();
             }, () => 
             { 
                 _onLoad = false;
-                InvokeCanShoot?.Invoke();
+                _settings.InvokeCanShoot?.Invoke();
             });
             _timer.Play();
         }
@@ -62,6 +55,27 @@ namespace Game.Logic.Weapon
             _bulletPool.Despawn(bullet);
             _bullets.Remove(bullet);
         }
+
+        [Serializable]
+        public class Settings
+        {
+            /// <summary>
+            /// Called when the cooldown timer ends. 
+            /// </summary>
+            public Action InvokeCanShoot;
+            /// <summary>
+            /// Called when the cooldown timer ticks. 
+            /// </summary>
+            public Action InvokeTimeUpdate;
+
+            [field: SerializeField] public float AttackDelay { get; private set; }
+            [field: SerializeField] public float Damage { get; private set; }
+
+            public float CurrentAttackDelay { get; set; }
+            public float CurrentDamage { get; set; }
+            public float TimeToAttack { get; set; }
+        }
+
     }
 }
 

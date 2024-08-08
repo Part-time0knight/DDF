@@ -10,16 +10,11 @@ namespace Game.Logic.Weapon
     {
         public Action<Bullet, GameObject> InvokeHit;
 
-        [SerializeField] protected Rigidbody2D _body;
-        [SerializeField] protected ObjectStats _stats;
-
         protected Vector2 direction = Vector2.zero;
         protected BulletMove _bulletMove;
 
-
         protected virtual void Awake()
         {
-            _bulletMove = new(_body, _stats);
             _bulletMove.InvokeCollision += OnHit;
         }
 
@@ -28,6 +23,12 @@ namespace Game.Logic.Weapon
             transform.position = startPos;
             direction = (targetPos - startPos).normalized;
             _bulletMove.Move(direction);
+        }
+
+        [Inject]
+        private void Construct(BulletMove bulletMove)
+        {
+            _bulletMove = bulletMove;
         }
 
         private void FixedUpdate()

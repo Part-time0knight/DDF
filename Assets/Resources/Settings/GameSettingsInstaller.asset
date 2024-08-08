@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d76b2a49c26df646ba48a787a075412, type: 3}
+  m_Name: GameSettingsInstaller
+  m_EditorClassIdentifier: 
+  <Player>k__BackingField:
+    PlayerWeapon:
+      <AttackDelay>k__BackingField: 1
+      <Damage>k__BackingField: 1
+    PlayerMove:
+      <Speed>k__BackingField: 6
+    PlayerHits:
+      <HitPoints>k__BackingField: 1
+  <Projectile>k__BackingField:
+    BulletMove:
+      <Speed>k__BackingField: 10
