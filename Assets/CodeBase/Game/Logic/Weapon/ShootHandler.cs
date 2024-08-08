@@ -25,23 +25,17 @@ namespace Game.Logic.Weapon
             _settings = settings;
             _settings.CurrentAttackDelay = _settings.AttackDelay;
             _settings.CurrentDamage = _settings.Damage;
-            _settings.TimeToAttack = 0;
+            //_settings.TimeToAttack = 0;
         }
 
         public virtual void Shoot(Vector2 target)
         {
             _currentBullet = _bulletPool.Spawn(WeapontPoint.position, target);
             _bullets.Add(_currentBullet);
-
+            _settings.InvokeShoot?.Invoke();
             _currentBullet.InvokeHit += Hit;
-
             _onLoad = true;
-
-            _timer.Initialize(_settings.CurrentAttackDelay, (tick) => 
-            {
-                _settings.TimeToAttack = _settings.CurrentAttackDelay - tick;
-                _settings.InvokeTimeUpdate?.Invoke();
-            }, () => 
+            _timer.Initialize(_settings.CurrentAttackDelay, 0.1f, () => 
             { 
                 _onLoad = false;
                 _settings.InvokeCanShoot?.Invoke();
@@ -66,7 +60,7 @@ namespace Game.Logic.Weapon
             /// <summary>
             /// Called when the cooldown timer ticks. 
             /// </summary>
-            public Action InvokeTimeUpdate;
+            public Action InvokeShoot;
 
             [field: SerializeField] public float AttackDelay { get; private set; }
             [field: SerializeField] public float Damage { get; private set; }

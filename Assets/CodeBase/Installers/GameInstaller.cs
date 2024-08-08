@@ -1,4 +1,5 @@
 using Core.MVVM.Windows;
+using Game.Domain.Factories;
 using Game.Logic.Player.PlayerFsm;
 using Game.Logic.Weapon;
 using Game.Presentation.ViewModel;
@@ -14,9 +15,19 @@ namespace Installers
 
         public override void InstallBindings()
         {
+            InstallFactory();
             InstallPools();
-            InstallViewModel();
             InstallService();
+            InstallViewModel();
+            
+        }
+
+        private void InstallFactory()
+        {
+            Container
+                .BindInterfacesAndSelfTo<StatesFactory>()
+                .AsSingle()
+                .NonLazy();
         }
 
         private void InstallPools()

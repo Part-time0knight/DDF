@@ -1,20 +1,14 @@
 using Game.Presentation.View;
 using Core.MVVM.ViewModel;
 using Core.MVVM.Windows;
-using Game.Logic.InteractiveObject;
 using System;
-using Game.Logic.Weapon;
-using Unity.VisualScripting;
 using Game.Logic.Player;
-
 
 namespace Game.Presentation.ViewModel
 {
     public class PlayerReloadViewModel : AbstractViewModel
     {
-        public Action<float> InvokeUpdate;
-
-        public Action<bool> InvokeActive;
+        public Action<float> InvokeActive;
 
         protected override Type Window => typeof(PlayerReloadView);
 
@@ -29,14 +23,13 @@ namespace Game.Presentation.ViewModel
         protected override void HandleOpenedWindow(Type uiWindow)
         {
             base.HandleOpenedWindow(uiWindow);
-            _playerSettings.InvokeTimeUpdate += ReloadUpdate;
-            ReloadUpdate();
+            _playerSettings.InvokeShoot += ReloadUpdate;
         }
 
         protected override void HandleClosedWindow(Type uiWindow)
         {
             base.HandleClosedWindow(uiWindow);
-            _playerSettings.InvokeTimeUpdate -= ReloadUpdate;
+            _playerSettings.InvokeShoot -= ReloadUpdate;
         }
 
         public override void InvokeClose()
@@ -53,8 +46,7 @@ namespace Game.Presentation.ViewModel
 
         private void ReloadUpdate()
         {
-            InvokeUpdate?.Invoke(_playerSettings.TimeToAttack / _playerSettings.CurrentAttackDelay);
-            InvokeActive?.Invoke(_playerSettings.TimeToAttack != 0f);
+            InvokeActive?.Invoke(_playerSettings.CurrentAttackDelay);
         }
     }
 }

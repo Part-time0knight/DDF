@@ -1,4 +1,5 @@
 using Core.MVVM.View;
+using DG.Tweening;
 using Game.Presentation.ViewModel;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,18 +15,20 @@ namespace Game.Presentation.View
         protected override void Construct(PlayerReloadViewModel viewModel)
         {
             base.Construct(viewModel);
-            _viewModel.InvokeUpdate += ValueUpdate;
             _viewModel.InvokeActive += ActiveUpdate;
         }
 
-        private void ActiveUpdate(bool active)
+        private void ActiveUpdate(float reloadTime)
         {
-            _imageBar.gameObject.SetActive(active);
-        }
-
-        private void ValueUpdate(float value)
-        {
-            _imageBar.fillAmount = value;
+            _imageBar.DOKill();
+            Debug.Log("reload view");
+            _imageBar.gameObject.SetActive(true);
+            _imageBar.DOFillAmount(1f, reloadTime).OnKill(
+                () => 
+                {
+                    _imageBar.fillAmount = 0;
+                    _imageBar.gameObject.SetActive(false);
+                });
         }
     }
 }

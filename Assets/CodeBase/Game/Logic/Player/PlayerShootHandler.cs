@@ -1,5 +1,4 @@
 using Game.Logic.Weapon;
-using Installers;
 using System;
 using UnityEngine;
 

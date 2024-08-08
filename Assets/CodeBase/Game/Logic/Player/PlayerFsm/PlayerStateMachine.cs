@@ -12,8 +12,8 @@ namespace Game.Logic.Player.PlayerFsm
 
         public void Initialize()
         {
-            //StateResolve();
-            //Enter<PlayerGameplayState>();
+            StateResolve();
+            Enter<PlayerGameplayState>();
         }
 
         private void StateResolve()

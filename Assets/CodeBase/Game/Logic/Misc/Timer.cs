@@ -1,8 +1,6 @@
 using Cysharp.Threading.Tasks;
-using Game.Logic.InteractiveObject;
 using System;
 using System.Threading;
-using UnityEngine;
 
 public class Timer
 {
@@ -24,7 +22,12 @@ public class Timer
 
     public void Initialize(float time, Action callback)
     {
-        Initialize(time, null, callback);
+        Initialize(time, 0.5f, null, callback);
+    }
+
+    public void Initialize(float time, float step, Action callback)
+    {
+        Initialize(time, step, null, callback);
     }
 
     public void Initialize(float time, Action<float> callTick, Action callback)

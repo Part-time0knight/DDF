@@ -1,4 +1,3 @@
-using Game.Domain.Factories;
 using Zenject;
 
 public class ProjectInstaller : MonoInstaller
@@ -10,9 +9,5 @@ public class ProjectInstaller : MonoInstaller
 
     private void InstallFactory()
     {
-        Container
-            .BindInterfacesAndSelfTo<StatesFactory>()
-            .AsSingle()
-            .NonLazy();
     }
 }
