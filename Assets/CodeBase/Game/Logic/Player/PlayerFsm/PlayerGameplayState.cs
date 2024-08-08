@@ -21,18 +21,18 @@ namespace Game.Logic.Player.PlayerFsm
         public void OnEnter()
         {
             WindowResolve();
-            _windowFsm.OpenWindow(typeof(PlayerReloadView), false);
+            _windowFsm.OpenWindow(typeof(PlayerView), false);
         }
 
         public void OnExit()
         {
-            _windowFsm.CloseWindow(typeof(PlayerReloadView));
+            _windowFsm.CloseWindow(typeof(PlayerView));
         }
 
         private void WindowResolve()
         {
             _windowResolve.CleanUp();
-            _windowResolve.Set<PlayerReloadView>();
+            _windowResolve.Set<PlayerView>();
         }
     }
 }

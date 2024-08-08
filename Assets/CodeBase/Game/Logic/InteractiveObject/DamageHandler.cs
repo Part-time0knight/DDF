@@ -1,4 +1,5 @@
 
+using System;
 using UnityEngine;
 
 namespace Game.Logic.InteractiveObject
@@ -14,12 +15,17 @@ namespace Game.Logic.InteractiveObject
         }
 
         public void TakeDamage(int damage)
-            => _stats.CurrentHits -= damage;
+        { 
+            _stats.CurrentHits -= damage;
+            _stats.InvokeHitPointsChange?.Invoke();
+        }
 
         public class Settings
         {
             [field: SerializeField] public int HitPoints { get; private set; }
             public int CurrentHits { get; set; }
+
+            public Action InvokeHitPointsChange;
         }
     }
 }

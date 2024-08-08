@@ -1,6 +1,4 @@
-using Game.Logic.InteractiveObject;
 using Game.Logic.Player.Animation;
-using Game.Logic.Weapon;
 using UnityEngine;
 using Zenject;
 

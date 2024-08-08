@@ -6,30 +6,35 @@ using Game.Logic.Player;
 
 namespace Game.Presentation.ViewModel
 {
-    public class PlayerReloadViewModel : AbstractViewModel
+    public class PlayerViewModel : AbstractViewModel
     {
-        public Action<float> InvokeActive;
+        public Action<float> InvokeReloadActive;
+        public Action<float> InvokeHitsUpdate;
 
-        protected override Type Window => typeof(PlayerReloadView);
+        protected override Type Window => typeof(PlayerView);
 
         private readonly PlayerShootHandler.PlayerSettings _playerSettings;
+        private readonly PlayerDamageHandler.PlayerSettings _hitsSettings;
 
-        public PlayerReloadViewModel(IWindowFsm windowFsm, PlayerShootHandler.PlayerSettings playerSettings) : base(windowFsm)
+        public PlayerViewModel(IWindowFsm windowFsm, PlayerDamageHandler.PlayerSettings hitsSettings,
+            PlayerShootHandler.PlayerSettings shootSettings) : base(windowFsm)
         {
-            _playerSettings = playerSettings;
-            
+            _playerSettings = shootSettings;
+            _hitsSettings = hitsSettings;
         }
 
         protected override void HandleOpenedWindow(Type uiWindow)
         {
             base.HandleOpenedWindow(uiWindow);
             _playerSettings.InvokeShoot += ReloadUpdate;
+            _hitsSettings.InvokeHitPointsChange += HitPointsUpdate;
         }
 
         protected override void HandleClosedWindow(Type uiWindow)
         {
             base.HandleClosedWindow(uiWindow);
             _playerSettings.InvokeShoot -= ReloadUpdate;
+            _hitsSettings.InvokeHitPointsChange -= HitPointsUpdate;
         }
 
         public override void InvokeClose()
@@ -39,14 +44,17 @@ namespace Game.Presentation.ViewModel
 
         public override void InvokeOpen()
         {
-            
             _windowFsm.OpenWindow(Window);
+        }
 
+        private void HitPointsUpdate()
+        {
+            InvokeHitsUpdate?.Invoke((float)_hitsSettings.CurrentHits/_hitsSettings.HitPoints);
         }
 
         private void ReloadUpdate()
         {
-            InvokeActive?.Invoke(_playerSettings.CurrentAttackDelay);
+            InvokeReloadActive?.Invoke(_playerSettings.CurrentAttackDelay);
         }
     }
 }

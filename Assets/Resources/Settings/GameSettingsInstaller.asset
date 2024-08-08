@@ -19,7 +19,7 @@ MonoBehaviour:
     PlayerMove:
       <Speed>k__BackingField: 6
     PlayerHits:
-      <HitPoints>k__BackingField: 1
+      <HitPoints>k__BackingField: 3
   <Projectile>k__BackingField:
     BulletMove:
       <Speed>k__BackingField: 10
