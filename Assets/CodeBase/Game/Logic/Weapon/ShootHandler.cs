@@ -25,6 +25,8 @@ namespace Game.Logic.Weapon
             _settings.CurrentAttackDelay = _settings.AttackDelay;
             _settings.CurrentDamage = _settings.Damage;
             Block = false;
+            _timer.Initialize(0.1f, null);
+            _timer.Play();
             //_settings.TimeToAttack = 0;
         }
 
@@ -37,7 +39,7 @@ namespace Game.Logic.Weapon
             _settings.InvokeShoot?.Invoke();
             _currentBullet.InvokeHit += Hit;
             _onLoad = true;
-            _timer.Initialize(_settings.CurrentAttackDelay, 0.1f, () => 
+            _timer.Initialize(_settings.CurrentAttackDelay, 0.05f, () => 
             { 
                 _onLoad = false;
                 _settings.InvokeCanShoot?.Invoke();

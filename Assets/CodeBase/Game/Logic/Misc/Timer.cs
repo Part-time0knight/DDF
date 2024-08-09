@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using System;
 using System.Threading;
+using UnityEngine;
 
 public class Timer
 {
@@ -18,6 +19,7 @@ public class Timer
     public Timer()
     {
         _cts = new();
+        
     }
 
     public void Initialize(float time, Action callback)
@@ -35,21 +37,22 @@ public class Timer
         Initialize(time, 0.5f, callTick, callback);
     }
 
-    public void Initialize(float time, float step, Action<float> callTick,  Action callback)
+    public async void Initialize(float time, float step, Action<float> callTick,  Action callback)
     {
         _time = time;
         _tick = _time;
         _invokeComplete = callback;
         _invokeTick = callTick;
         _step = step;
+        await UniTask.WaitForFixedUpdate(_cts.Token);
     }
 
-    public void Play()
+    public async UniTask Play()
     {
         if (_tick == 0 ||
             _tick != _time)
             return;
-        ExecuteAsync();
+        await ExecuteAsync();
     }
 
     public void Pause()
@@ -65,6 +68,9 @@ public class Timer
     private async UniTask ExecuteAsync()
     {
         float second;
+
+        
+
         do
         {
             second = _tick > _step ? _step : _tick;

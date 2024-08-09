@@ -25,7 +25,6 @@ namespace Game.Presentation.View
         private void ReloadActive(float reloadTime)
         {
             _reloadBarImage.DOKill();
-            Debug.Log("reload view");
             _reloadBarImage.gameObject.SetActive(true);
             _reloadBarImage.DOFillAmount(1f, reloadTime).OnKill(
                 () => 
