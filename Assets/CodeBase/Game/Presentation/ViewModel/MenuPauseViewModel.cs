@@ -25,6 +25,6 @@ public class MenuPauseViewModel : AbstractViewModel
 
     public void OpenSettings()
     {
-
+        _windowFsm.OpenWindow(typeof(SettingsView), inHistory: true);
     }
 }

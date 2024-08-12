@@ -35,6 +35,7 @@ namespace Game.Infrastructure
             _windowResolve.Set<TestingToolsView>();
             _windowResolve.Set<GameplayButtonsView>();
             _windowResolve.Set<MenuPauseView>();
+            _windowResolve.Set<SettingsView>();
         }
     }
 }

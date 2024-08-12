@@ -54,6 +54,10 @@ namespace Installers
                 .BindInterfacesAndSelfTo<MenuPauseViewModel>()
                 .AsSingle()
                 .NonLazy();
+            Container
+                .BindInterfacesAndSelfTo<SettingsViewModel>()
+                .AsSingle()
+                .NonLazy();
         }
 
         private void InstallService()

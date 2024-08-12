@@ -1,11 +1,13 @@
 using Core.MVVM.ViewModel;
 using Core.MVVM.Windows;
+using Game.Presentation.View;
 using System;
 
 public class SettingsViewModel : AbstractViewModel
 {
     public event Action<bool> InvokeUpdate;
 
+    protected override Type Window => typeof(SettingsView);
 
     public SettingsViewModel(IWindowFsm windowFsm) : base(windowFsm)
     {
