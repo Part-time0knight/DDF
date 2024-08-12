@@ -26,14 +26,14 @@ namespace Game.Presentation.ViewModel
         protected override void HandleOpenedWindow(Type uiWindow)
         {
             base.HandleOpenedWindow(uiWindow);
-            _playerSettings.InvokeShoot += ReloadUpdate;
+            _playerSettings.InvokeShot += ReloadUpdate;
             _hitsSettings.InvokeHitPointsChange += HitPointsUpdate;
         }
 
         protected override void HandleClosedWindow(Type uiWindow)
         {
             base.HandleClosedWindow(uiWindow);
-            _playerSettings.InvokeShoot -= ReloadUpdate;
+            _playerSettings.InvokeShot -= ReloadUpdate;
             _hitsSettings.InvokeHitPointsChange -= HitPointsUpdate;
         }
 
