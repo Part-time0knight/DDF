@@ -43,7 +43,7 @@ namespace Installers
         private void InstallViewModel()
         {
             Container
-                .BindInterfacesAndSelfTo<PlayerViewModel>()
+                .BindInterfacesAndSelfTo<TestingToolsViewModel>()
                 .AsSingle()
                 .NonLazy();
         }

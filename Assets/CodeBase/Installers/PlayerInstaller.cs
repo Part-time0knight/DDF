@@ -4,6 +4,7 @@ using Zenject;
 using UnityEngine;
 using System;
 using Game.Logic.Player.PlayerFsm;
+using Game.Presentation.ViewModel;
 
 namespace Installers
 {
@@ -16,7 +17,9 @@ namespace Installers
         {
             InstallFactories();
             InstallPlayerComponents();
+
             InstallFsm();
+            InstallViewModels();
         }
 
         private void InstallFsm()
@@ -24,6 +27,14 @@ namespace Installers
 
             Container
                 .BindInterfacesAndSelfTo<PlayerFsm>()
+                .AsSingle()
+                .NonLazy();
+        }
+
+        private void InstallViewModels()
+        {
+            Container
+                .BindInterfacesAndSelfTo<PlayerViewModel>()
                 .AsSingle()
                 .NonLazy();
         }

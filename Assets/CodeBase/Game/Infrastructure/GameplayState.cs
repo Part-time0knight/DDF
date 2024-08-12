@@ -1,6 +1,7 @@
 using Core.Infrastructure.GameFsm;
 using Core.Infrastructure.GameFsm.States;
 using Core.MVVM.Windows;
+using Game.Presentation.View;
 
 namespace Game.Infrastructure
 {
@@ -30,7 +31,7 @@ namespace Game.Infrastructure
         private void WindowResolve()
         {
             _windowResolve.CleanUp();
-            //_windowResolve.Set<PlayerView>();
+            _windowResolve.Set<TestingToolsView>();
         }
     }
 }

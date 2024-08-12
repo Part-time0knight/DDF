@@ -1,4 +1,3 @@
-using Game.Logic.Player.Animation;
 using UnityEngine;
 using Zenject;
 
