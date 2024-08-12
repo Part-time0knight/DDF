@@ -32,7 +32,6 @@ namespace Game.Logic.Player.PlayerFsm.States
 
         private void WindowResolve()
         {
-            //_windowResolve.CleanUp();
             _windowResolve.Set<PlayerView>();
         }
     }

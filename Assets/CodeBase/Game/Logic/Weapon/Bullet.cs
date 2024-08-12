@@ -1,6 +1,4 @@
-using Game.Logic.InteractiveObject;
 using Game.Logic.Misc;
-using Game.Logic.StaticData;
 using System;
 using UnityEngine;
 using Zenject;

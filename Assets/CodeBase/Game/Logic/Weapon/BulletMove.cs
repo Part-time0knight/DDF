@@ -27,8 +27,6 @@ namespace Game.Logic.Misc
 
         [Serializable]
         public class BulletSettngs : Settings
-        {
-
-        }
+        { }
     }
 }

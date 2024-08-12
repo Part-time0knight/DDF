@@ -18,8 +18,6 @@ namespace Game.Logic.Player
 
         [Serializable]
         public class PlayerSettings : Settings
-        {
-
-        }
+        { }
     }
 }

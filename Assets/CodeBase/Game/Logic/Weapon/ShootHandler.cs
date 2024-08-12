@@ -23,7 +23,7 @@ namespace Game.Logic.Weapon
             _settings.CurrentAttackDelay = _settings.AttackDelay;
             _settings.CurrentDamage = _settings.Damage;
             _settings.CanShoot = true;
-            _timer.Initialize(0.1f, null).Play();
+            _timer.Initialize(time: 0.1f, null).Play();
             
         }
 
@@ -34,10 +34,8 @@ namespace Game.Logic.Weapon
             _settings.InvokeShot?.Invoke();
             _settings.CanShoot = false;
             _currentBullet.InvokeHit += Hit;
-            _timer.Initialize(_settings.CurrentAttackDelay, 0.05f, () => 
-            { 
-                _settings.CanShoot = true;
-            }).Play();
+            _timer.Initialize(_settings.CurrentAttackDelay, 
+                step: 0.05f, () => _settings.CanShoot = true).Play();
         }
 
         private void Hit(Bullet bullet, GameObject target)
@@ -59,10 +57,14 @@ namespace Game.Logic.Weapon
             [field: SerializeField] public float Damage { get; private set; }
 
             public float CurrentAttackDelay { get; set; }
+            
             public float CurrentDamage { get; set; }
 
             public bool CanShoot { get; set; }
 
+            /// <summary>
+            /// Tag of the GameObject that belongs to the owner of the ShootHandler.
+            /// </summary>
             public string Owner { get; set; }
         }
 

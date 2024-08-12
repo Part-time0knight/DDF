@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Game.Logic.Player.Animation
 {
+
     public class UnitAnimationWrapper : SPUM_Prefabs
     {
 

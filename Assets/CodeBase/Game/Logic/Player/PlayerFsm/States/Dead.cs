@@ -9,8 +9,8 @@ namespace Game.Logic.Player.PlayerFsm.States
         private readonly UnitAnimationWrapper _animation;
 
         public Dead(IGameStateMachine stateMachine,
-            UnitAnimationWrapper animation,
-            PlayerDamageHandler.PlayerSettings damageSettings) : base(stateMachine, damageSettings)
+            PlayerDamageHandler.PlayerSettings damageSettings, 
+            UnitAnimationWrapper animation) : base(stateMachine, damageSettings)
         {
             _animation = animation;
         }

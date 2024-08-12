@@ -4,6 +4,9 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// Class written by the animation creator for testing.
+/// </summary>
 public class SPUM_Prefabs : MonoBehaviour
 {
     [SerializeField] protected float _version;
@@ -41,7 +44,11 @@ public class SPUM_Prefabs : MonoBehaviour
     protected virtual void Start() {
         UnitTypeChanged.AddListener(InitAnimPair);
     }
-    // 이름으로 애니메이션 실행
+
+    /// <summary>
+    /// Starts animation by name.
+    /// </summary>
+    /// <param name="name"></param>
     public virtual void PlayAnimation(string name){
         foreach (var animationName in _nameToHashPair)
         {

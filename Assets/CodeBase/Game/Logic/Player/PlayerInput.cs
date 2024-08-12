@@ -82,7 +82,6 @@ namespace Game.Logic.Player
                 InvokeMoveVertical?.
                     Invoke(OnMoveVertical());
 
-            //if (_isHorizontal || _isVertical)
             InvokeMove?.Invoke(new(OnMoveHorizontal(), OnMoveVertical()));
         }
     }
