@@ -19,6 +19,6 @@ public class MenuPauseViewModel : AbstractViewModel
 
     public override void InvokeOpen()
     {
-        _windowFsm.OpenWindow(Window, true);
+        _windowFsm.OpenWindow(Window, inHistory: true);
     }
 }

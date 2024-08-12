@@ -1,20 +1,18 @@
 using Core.Infrastructure.GameFsm;
-using Core.Infrastructure.GameFsm.States;
 using Game.Logic.Player.Animation;
 using Game.Logic.StaticData;
-using Game.Logic.Weapon;
 
 namespace Game.Logic.Player.PlayerFsm.States
 {
     public class Attack : Hitable
     {
-        private readonly UnitAnimationExtension _animation;
+        private readonly UnitAnimationWrapper _animation;
         private readonly PlayerInput _playerInput;
         private PlayerShootHandler _shootHandler;
 
-        public Attack(IGameStateMachine stateMachine, PlayerInput playerInput,
-        UnitAnimationExtension animation, PlayerShootHandler shootHandler,
-        PlayerDamageHandler.PlayerSettings damageSettings) : base(stateMachine, damageSettings)
+        public Attack(IGameStateMachine stateMachine,
+            PlayerDamageHandler.PlayerSettings damageSettings, PlayerInput playerInput,
+            UnitAnimationWrapper animation, PlayerShootHandler shootHandler) : base(stateMachine, damageSettings)
         {
             _playerInput = playerInput;
             _animation = animation;

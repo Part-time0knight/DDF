@@ -10,12 +10,12 @@ namespace Game.Logic.Player.PlayerFsm.States
     public class Idle : Hitable
     {
         private readonly PlayerShootHandler.PlayerSettings _shootSettings;
-        private readonly UnitAnimationExtension _animation;
+        private readonly UnitAnimationWrapper _animation;
         private readonly PlayerInput _playerInput;
 
 
         public Idle(IGameStateMachine stateMachine,
-            PlayerInput playerInput, UnitAnimationExtension animation,
+            PlayerInput playerInput, UnitAnimationWrapper animation,
             PlayerDamageHandler.PlayerSettings damageSettings,
             PlayerShootHandler.PlayerSettings shootSettings) : base(stateMachine, damageSettings)
         {

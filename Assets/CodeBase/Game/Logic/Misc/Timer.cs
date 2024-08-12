@@ -12,7 +12,7 @@ public class Timer
 
     private float _time;
 
-    private float _tick;
+    private float _currentTime;
 
     private float _step;
 
@@ -40,19 +40,19 @@ public class Timer
     public async void Initialize(float time, float step, Action<float> callTick,  Action callback)
     {
         _time = time;
-        _tick = _time;
+        _currentTime = _time;
         _invokeComplete = callback;
         _invokeTick = callTick;
         _step = step;
         await UniTask.WaitForFixedUpdate(_cts.Token);
     }
 
-    public async UniTask Play()
+    public void Play()
     {
-        if (_tick == 0 ||
-            _tick != _time)
+        if (_currentTime == 0 ||
+            _currentTime != _time)
             return;
-        await ExecuteAsync();
+        ExecuteAsync();
     }
 
     public void Pause()
@@ -60,32 +60,26 @@ public class Timer
 
     public void Stop()
     {
-        _tick = 0;
-        _invokeTick?.Invoke(_tick);
+        _currentTime = 0;
+        _invokeTick?.Invoke(_currentTime);
         _cts.Cancel();
     }
 
     private async UniTask ExecuteAsync()
     {
-        float second;
-
-        
-
         do
         {
-            second = _tick > _step ? _step : _tick;
-
-            await UniTask.Delay(TimeSpan.FromSeconds(second),
-                false, PlayerLoopTiming.FixedUpdate, _cts.Token);
+            await UniTask.Delay(TimeSpan.FromSeconds(Mathf.Min(_step, _currentTime)),
+                delayTiming: PlayerLoopTiming.FixedUpdate, cancellationToken: _cts.Token);
 
             if (!_cts.IsCancellationRequested)
             {
-                _tick -= second;
-                _invokeTick?.Invoke(_tick);
+                _currentTime -= _step;
+                _invokeTick?.Invoke(_currentTime);
             }
-        } while (_tick > 0f && !_cts.IsCancellationRequested);
+        } while (_currentTime > 0f && !_cts.IsCancellationRequested);
 
-        if (_tick == 0 && !_cts.IsCancellationRequested)
+        if (_currentTime <= 0 && !_cts.IsCancellationRequested)
             _invokeComplete?.Invoke();
     }
 

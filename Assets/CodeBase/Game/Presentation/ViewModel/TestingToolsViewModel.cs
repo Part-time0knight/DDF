@@ -24,7 +24,7 @@ namespace Game.Presentation.ViewModel
 
         public override void InvokeOpen()
         {
-            _windowFsm.OpenWindow(Window, true);
+            _windowFsm.OpenWindow(Window, inHistory: true);
         }
 
         public void MakeDamage()

@@ -10,7 +10,7 @@ namespace Game.Logic.Player.PlayerFsm.States
 {
     public class Run : Hitable
     {
-        private readonly UnitAnimationExtension _animation;
+        private readonly UnitAnimationWrapper _animation;
         private readonly PlayerInput _playerInput;
         private readonly PlayerMove _playerMove;
         private readonly Transform _transform;
@@ -18,7 +18,7 @@ namespace Game.Logic.Player.PlayerFsm.States
         private Vector3 _standartScale;
 
         public Run(IGameStateMachine stateMachine, PlayerInput playerInput,
-            UnitAnimationExtension animation, PlayerMove playerMove,
+            UnitAnimationWrapper animation, PlayerMove playerMove,
             Rigidbody2D body, PlayerDamageHandler.PlayerSettings damageSettings) : base(stateMachine, damageSettings)
         {
             _playerInput = playerInput;

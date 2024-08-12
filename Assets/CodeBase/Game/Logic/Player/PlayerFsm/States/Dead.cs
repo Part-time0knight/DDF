@@ -6,10 +6,10 @@ namespace Game.Logic.Player.PlayerFsm.States
 {
     public class Dead : Hitable
     {
-        private readonly UnitAnimationExtension _animation;
+        private readonly UnitAnimationWrapper _animation;
 
         public Dead(IGameStateMachine stateMachine,
-            UnitAnimationExtension animation,
+            UnitAnimationWrapper animation,
             PlayerDamageHandler.PlayerSettings damageSettings) : base(stateMachine, damageSettings)
         {
             _animation = animation;

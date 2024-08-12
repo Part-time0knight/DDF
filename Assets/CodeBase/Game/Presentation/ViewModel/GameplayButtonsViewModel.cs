@@ -21,12 +21,12 @@ namespace Game.Presentation.ViewModel
 
         public override void InvokeOpen()
         {
-            _windowFsm.OpenWindow(Window, true);
+            _windowFsm.OpenWindow(Window, inHistory: true);
         }
 
         public void OpenTestingToolsWindow()
         {
-            _windowFsm.OpenWindow(typeof(TestingToolsView), true);
+            _windowFsm.OpenWindow(typeof(TestingToolsView), inHistory: true);
         }
 
         public void OpenMenuPauseWindow()
