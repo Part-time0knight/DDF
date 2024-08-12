@@ -6,21 +6,6 @@ namespace Game.Logic.Misc
 {
     public class BulletMove : ObjectMove
     {
-        public override bool Block
-        {
-            get => _isStoped;
-            set
-            {
-                _isStoped = value;
-
-                if (_speedMultiplier == Vector2.zero)
-                    return;
-
-                _body.velocity = _isStoped == true ? 
-                    Vector2.zero : _speedMultiplier * _stats.CurrentSpeed;
-            }
-        }
-
         public Action<GameObject> InvokeCollision;
 
         private Vector2 _speedMultiplier = Vector2.zero;

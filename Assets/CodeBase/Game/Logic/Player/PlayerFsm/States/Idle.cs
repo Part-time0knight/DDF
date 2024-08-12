@@ -9,15 +9,19 @@ namespace Game.Logic.Player.PlayerFsm.States
 {
     public class Idle : Hitable
     {
+        private readonly PlayerShootHandler.PlayerSettings _shootSettings;
         private readonly UnitAnimationExtension _animation;
         private readonly PlayerInput _playerInput;
 
+
         public Idle(IGameStateMachine stateMachine,
             PlayerInput playerInput, UnitAnimationExtension animation,
-            PlayerDamageHandler.PlayerSettings damageSettings) : base(stateMachine, damageSettings)
+            PlayerDamageHandler.PlayerSettings damageSettings,
+            PlayerShootHandler.PlayerSettings shootSettings) : base(stateMachine, damageSettings)
         {
             _playerInput = playerInput;
             _animation = animation;
+            _shootSettings = shootSettings;
         }
 
         public override void OnEnter()
@@ -42,7 +46,8 @@ namespace Game.Logic.Player.PlayerFsm.States
 
         private void OnAttack()
         {
-            _stateMachine.Enter<Attack>();
+            if (_shootSettings.CanShoot)
+                _stateMachine.Enter<Attack>();
         }
 
 

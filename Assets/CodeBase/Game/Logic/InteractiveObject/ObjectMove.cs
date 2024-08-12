@@ -5,16 +5,6 @@ namespace Game.Logic.InteractiveObject
 {
     public class ObjectMove
     {
-        public virtual bool Block 
-        {
-            get => _isStoped;
-            set 
-            {
-                _body.velocity = Vector2.zero;
-                _isStoped = value;
-            }
-        }
-
         protected Vector2 Velocity 
         {
             get => _body.velocity;

@@ -2,6 +2,7 @@ using Core.Infrastructure.GameFsm;
 using Core.Infrastructure.GameFsm.States;
 using Game.Logic.Player.Animation;
 using Game.Logic.StaticData;
+using Game.Logic.Weapon;
 
 namespace Game.Logic.Player.PlayerFsm.States
 {
@@ -24,6 +25,7 @@ namespace Game.Logic.Player.PlayerFsm.States
         {
             base.OnEnter();
             _shootHandler.Shoot(_playerInput.MousePosition());
+            
             _animation.PlayAnimation(AnimationNames.ATTACK + AnimationNames.MAGIC, OnAttackEnd);
         }
 
