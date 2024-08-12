@@ -1,18 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
+using Core.MVVM.View;
 using UnityEngine;
+using UnityEngine.UI;
+using Zenject;
 
-public class MenuPauseView : MonoBehaviour
+namespace Game.Presentation.View
 {
-    // Start is called before the first frame update
-    void Start()
+    public class MenuPauseView : AbstractPayloadView<MenuPauseViewModel>
     {
-        
-    }
+        [SerializeField] private Button _backButton;
+        [SerializeField] private Button _settingsButton;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        [Inject]
+        protected override void Construct(MenuPauseViewModel viewModel)
+        {
+            base.Construct(viewModel);
+            _backButton.onClick.AddListener(_viewModel.InvokeClose);
+            _settingsButton.onClick.AddListener(_viewModel.OpenSettings);
+        }
+
+        private void OnDestroy()
+        {
+            _backButton.onClick.RemoveListener(_viewModel.InvokeClose);
+            _settingsButton.onClick.RemoveListener(_viewModel.OpenSettings);
+        }
     }
 }

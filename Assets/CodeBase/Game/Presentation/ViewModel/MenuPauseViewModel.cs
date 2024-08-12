@@ -1,5 +1,6 @@
 using Core.MVVM.ViewModel;
 using Core.MVVM.Windows;
+using Game.Presentation.View;
 using System;
 
 public class MenuPauseViewModel : AbstractViewModel
@@ -20,5 +21,10 @@ public class MenuPauseViewModel : AbstractViewModel
     public override void InvokeOpen()
     {
         _windowFsm.OpenWindow(Window, inHistory: true);
+    }
+
+    public void OpenSettings()
+    {
+
     }
 }

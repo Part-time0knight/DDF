@@ -31,7 +31,7 @@ namespace Game.Presentation.ViewModel
 
         public void OpenMenuPauseWindow()
         {
-            //_windowFsm.OpenWindow(typeof(MenuPauseView), true);
+            _windowFsm.OpenWindow(typeof(MenuPauseView), inHistory: true);
         }
     }
 }

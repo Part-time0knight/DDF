@@ -50,6 +50,10 @@ namespace Installers
                 .BindInterfacesAndSelfTo<GameplayButtonsViewModel>()
                 .AsSingle()
                 .NonLazy();
+            Container
+                .BindInterfacesAndSelfTo<MenuPauseViewModel>()
+                .AsSingle()
+                .NonLazy();
         }
 
         private void InstallService()
