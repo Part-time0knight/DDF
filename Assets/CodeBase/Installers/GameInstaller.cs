@@ -46,6 +46,10 @@ namespace Installers
                 .BindInterfacesAndSelfTo<TestingToolsViewModel>()
                 .AsSingle()
                 .NonLazy();
+            Container
+                .BindInterfacesAndSelfTo<GameplayButtonsViewModel>()
+                .AsSingle()
+                .NonLazy();
         }
 
         private void InstallService()

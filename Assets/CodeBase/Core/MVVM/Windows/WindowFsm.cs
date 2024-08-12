@@ -46,7 +46,7 @@ namespace Core.MVVM.Windows
             if (inHistory)
                 OpenedWindow(window);
             else
-                OpenedWindow(window);
+                OpenWindow(window);
         }
         
         public void OpenWindow(Type window) => 

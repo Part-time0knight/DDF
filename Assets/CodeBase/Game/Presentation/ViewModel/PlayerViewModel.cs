@@ -44,7 +44,7 @@ namespace Game.Presentation.ViewModel
 
         public override void InvokeOpen()
         {
-            _windowFsm.OpenWindow(Window);
+            _windowFsm.OpenWindow(Window, false);
         }
 
         private void HitPointsUpdate()
