@@ -29,7 +29,7 @@ namespace Game.Logic.Weapon
 
         public virtual void Shoot(Vector2 target)
         {
-            _currentBullet = _bulletPool.Spawn(WeapontPoint.position, target);
+            _currentBullet = _bulletPool.Spawn(WeapontPoint.position, target, _settings.Owner);
             _bullets.Add(_currentBullet);
             _settings.InvokeShot?.Invoke();
             _settings.CanShoot = false;
@@ -62,6 +62,8 @@ namespace Game.Logic.Weapon
             public float CurrentDamage { get; set; }
 
             public bool CanShoot { get; set; }
+
+            public string Owner { get; set; }
         }
 
     }

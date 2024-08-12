@@ -49,9 +49,5 @@ namespace Game.Logic.Player.PlayerFsm.States
             if (_shootSettings.CanShoot)
                 _stateMachine.Enter<Attack>();
         }
-
-
-
-
     }
 }

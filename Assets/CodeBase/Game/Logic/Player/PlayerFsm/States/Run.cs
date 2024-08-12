@@ -1,6 +1,4 @@
 using Core.Infrastructure.GameFsm;
-using Core.Infrastructure.GameFsm.States;
-using Core.MVVM.Windows;
 using Game.Logic.Player.Animation;
 using Game.Logic.StaticData;
 using UnityEngine;
@@ -10,6 +8,7 @@ namespace Game.Logic.Player.PlayerFsm.States
 {
     public class Run : Hitable
     {
+        private readonly PlayerShootHandler.PlayerSettings _playerSettings;
         private readonly UnitAnimationWrapper _animation;
         private readonly PlayerInput _playerInput;
         private readonly PlayerMove _playerMove;
@@ -19,12 +18,14 @@ namespace Game.Logic.Player.PlayerFsm.States
 
         public Run(IGameStateMachine stateMachine, PlayerInput playerInput,
             UnitAnimationWrapper animation, PlayerMove playerMove,
-            Rigidbody2D body, PlayerDamageHandler.PlayerSettings damageSettings) : base(stateMachine, damageSettings)
+            Rigidbody2D body, PlayerDamageHandler.PlayerSettings damageSettings,
+            PlayerShootHandler.PlayerSettings playerSettings) : base(stateMachine, damageSettings)
         {
             _playerInput = playerInput;
             _animation = animation;
             _playerMove = playerMove;
             _transform = body.transform;
+            _playerSettings = playerSettings;
             _standartScale = new(
                 _transform.localScale.x,
                 _transform.localScale.y,
@@ -65,7 +66,8 @@ namespace Game.Logic.Player.PlayerFsm.States
         private void OnAttack()
         {
             _playerMove.Stop();
-            _stateMachine.Enter<Attack>();
+            if (_playerSettings.CanShoot)
+                _stateMachine.Enter<Attack>();
 
         }
 

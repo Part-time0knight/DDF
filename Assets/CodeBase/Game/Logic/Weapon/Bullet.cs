@@ -13,16 +13,18 @@ namespace Game.Logic.Weapon
 
         protected Vector2 direction = Vector2.zero;
         protected BulletMove _bulletMove;
+        protected string _owner;
 
         protected virtual void Awake()
         {
             _bulletMove.InvokeCollision += OnHit;
         }
 
-        protected virtual void Initialize(Vector2 startPos, Vector2 targetPos)
+        protected virtual void Initialize(Vector2 startPos, Vector2 targetPos, string owner)
         {
             transform.position = startPos;
             direction = (targetPos - startPos).normalized;
+            _owner = owner;
         }
 
         [Inject]
@@ -38,12 +40,12 @@ namespace Game.Logic.Weapon
 
         private void OnHit(GameObject objectHit)
         {
-            if (objectHit.tag == TagsNames.Player)
+            if (objectHit.tag == _owner)
                 return;
             InvokeHit?.Invoke(this, objectHit);
         }
 
-        public class Pool : MonoMemoryPool<Vector2, Vector2, Bullet>
+        public class Pool : MonoMemoryPool<Vector2, Vector2, string, Bullet>
         {
 
             protected Transform _buffer;
@@ -62,10 +64,10 @@ namespace Game.Logic.Weapon
 
             /// <param name="startPos">World space position</param>
             /// <param name="targetPos">World space position</param>
-            protected override void Reinitialize(Vector2 startPos, Vector2 targetPos, Bullet item)
+            protected override void Reinitialize(Vector2 startPos, Vector2 targetPos, string owner, Bullet item)
             {
-                base.Reinitialize(startPos, targetPos, item);
-                item.Initialize(startPos, targetPos);
+                base.Reinitialize(startPos, targetPos, owner, item);
+                item.Initialize(startPos, targetPos, owner);
             }
         }
     }
