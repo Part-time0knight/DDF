@@ -29,7 +29,7 @@ namespace Game.Logic.Player.PlayerFsm.States
             base.OnEnter();
             _playerInput.InvokeMoveButtonsDown += OnMoveBegin;
             _playerInput.InvokeAttackButton += OnAttack;
-            _animation.PlayAnimation(AnimationNames.IDLE);
+            _animation.PlayAnimation(AnimationNames.Idle);
         }
 
         public override void OnExit()

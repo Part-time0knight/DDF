@@ -38,7 +38,7 @@ namespace Game.Logic.Player.PlayerFsm.States
             _playerInput.InvokeMove += Move;
             _playerInput.InvokeAttackButton += OnAttack;
             _playerInput.InvokeMoveHorizontal += OnMoveHorizontal;
-            _animation.PlayAnimation(AnimationNames.RUN);
+            _animation.PlayAnimation(AnimationNames.Run);
 
         }
 

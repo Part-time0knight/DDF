@@ -22,29 +22,29 @@ public class Timer
         
     }
 
-    public void Initialize(float time, Action callback)
+    public Timer Initialize(float time, Action callback)
     {
-        Initialize(time, 0.5f, null, callback);
+        return Initialize(time, 0.5f, null, callback);
     }
 
-    public void Initialize(float time, float step, Action callback)
+    public Timer Initialize(float time, float step, Action callback)
     {
-        Initialize(time, step, null, callback);
+        return Initialize(time, step, null, callback);
     }
 
-    public void Initialize(float time, Action<float> callTick, Action callback)
+    public Timer Initialize(float time, Action<float> callTick, Action callback)
     {
-        Initialize(time, 0.5f, callTick, callback);
+        return Initialize(time, 0.5f, callTick, callback);
     }
 
-    public async void Initialize(float time, float step, Action<float> callTick,  Action callback)
+    public Timer Initialize(float time, float step, Action<float> callTick,  Action callback)
     {
         _time = time;
         _currentTime = _time;
         _invokeComplete = callback;
         _invokeTick = callTick;
         _step = step;
-        await UniTask.WaitForFixedUpdate(_cts.Token);
+        return this;
     }
 
     public void Play()

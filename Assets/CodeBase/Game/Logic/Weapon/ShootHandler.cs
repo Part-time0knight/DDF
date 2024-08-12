@@ -23,8 +23,8 @@ namespace Game.Logic.Weapon
             _settings.CurrentAttackDelay = _settings.AttackDelay;
             _settings.CurrentDamage = _settings.Damage;
             _settings.CanShoot = true;
-            _timer.Initialize(0.1f, null);
-            _timer.Play();
+            _timer.Initialize(0.1f, null).Play();
+            
         }
 
         public virtual void Shoot(Vector2 target)
@@ -37,9 +37,7 @@ namespace Game.Logic.Weapon
             _timer.Initialize(_settings.CurrentAttackDelay, 0.05f, () => 
             { 
                 _settings.CanShoot = true;
-                //_settings.InvokeCanShoot?.Invoke();
-            });
-            _timer.Play();
+            }).Play();
         }
 
         private void Hit(Bullet bullet, GameObject target)

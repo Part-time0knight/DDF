@@ -2,21 +2,21 @@ namespace Game.Logic.StaticData
 {
     public static class AnimationNames
     {
-        public const string IDLE = "0_idle";
+        public const string Idle = "0_idle";
 
-        public const string RUN = "1_Run";
+        public const string Run = "1_Run";
 
-        public const string ATTACK = "2_Attack_";
+        public const string Attack = "2_Attack_";
 
-        public const string STUN = "3_Debuff_Stun";
+        public const string Stun = "3_Debuff_Stun";
 
-        public const string DEATH = "4_Death";
+        public const string Death = "4_Death";
 
-        public const string SKILL = "5_Skill_";
+        public const string Skill = "5_Skill_";
 
         //use with attack or skill
-        public const string BOW = "Bow";
-        public const string MAGIC = "Magic";
-        public const string SWORD = "Normal";
+        public const string Bow = "Bow";
+        public const string Magic = "Magic";
+        public const string Sword = "Normal";
     }
 }

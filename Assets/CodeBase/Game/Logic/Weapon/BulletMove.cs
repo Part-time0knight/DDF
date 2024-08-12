@@ -16,21 +16,13 @@ namespace Game.Logic.Misc
             _stats = stats;
         }
 
-        public override void Move(Vector2 speedMultiplier)
+        protected override Vector2 CollisionCheck(Vector2 speedMultiplier)
         {
-            _speedMultiplier = speedMultiplier;
-            Velocity = speedMultiplier * _stats.CurrentSpeed;
-        }
-
-        public void CollisionCheck()
-        {
-            if (_isStoped)
-                return;
-
             _body.Cast(_speedMultiplier, _filter, _raycasts, _stats.CurrentSpeed * Time.fixedDeltaTime + _collisionOffset);
 
             foreach (var hit in _raycasts)
                 InvokeCollision?.Invoke(hit.transform.gameObject);
+            return speedMultiplier;
         }
 
         [Serializable]

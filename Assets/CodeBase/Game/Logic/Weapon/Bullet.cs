@@ -1,5 +1,6 @@
 using Game.Logic.InteractiveObject;
 using Game.Logic.Misc;
+using Game.Logic.StaticData;
 using System;
 using UnityEngine;
 using Zenject;
@@ -22,7 +23,6 @@ namespace Game.Logic.Weapon
         {
             transform.position = startPos;
             direction = (targetPos - startPos).normalized;
-            _bulletMove.Move(direction);
         }
 
         [Inject]
@@ -33,15 +33,13 @@ namespace Game.Logic.Weapon
 
         private void FixedUpdate()
         {
-            _bulletMove.CollisionCheck();
+            _bulletMove.Move(direction);
         }
 
         private void OnHit(GameObject objectHit)
         {
-            if (objectHit.tag == "Player")
+            if (objectHit.tag == TagsNames.Player)
                 return;
-
-            Debug.Log(objectHit.name);
             InvokeHit?.Invoke(this, objectHit);
         }
 

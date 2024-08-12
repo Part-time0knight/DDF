@@ -18,7 +18,7 @@ namespace Game.Logic.Player.PlayerFsm.States
         public override void OnEnter()
         {
             base.OnEnter();
-            _animation.PlayAnimation(AnimationNames.DEATH);
+            _animation.PlayAnimation(AnimationNames.Death);
         }
 
         protected override void OnHit()
