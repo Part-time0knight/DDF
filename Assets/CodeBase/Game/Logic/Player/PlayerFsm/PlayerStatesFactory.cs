@@ -1,12 +1,12 @@
 using Game.Domain.Factories.GameFsm;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Zenject;
 
-public class PlayerStatesFactory : GameStatesFactory
+namespace Game.Logic.Player.PlayerFsm
 {
-    public PlayerStatesFactory(DiContainer container) : base(container)
+    public class PlayerStatesFactory : StatesFactory
     {
+        public PlayerStatesFactory(DiContainer container) : base(container)
+        {
+        }
     }
 }

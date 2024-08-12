@@ -3,7 +3,7 @@ using Game.Logic.Player;
 using Zenject;
 using UnityEngine;
 using System;
-using Game.Domain.Factories.GameFsm;
+using Game.Logic.Player.PlayerFsm;
 
 namespace Installers
 {
@@ -14,14 +14,24 @@ namespace Installers
 
         public override void InstallBindings()
         {
-            InstallFactory();
+            InstallFactories();
             InstallPlayerComponents();
+            InstallFsm();
         }
 
-        private void InstallFactory()
+        private void InstallFsm()
+        {
+
+            Container
+                .BindInterfacesAndSelfTo<PlayerFsm>()
+                .AsSingle()
+                .NonLazy();
+        }
+
+        private void InstallFactories()
         {
             Container
-                .BindInterfacesAndSelfTo<AnimationStatesFactory>()
+                .BindInterfacesAndSelfTo<PlayerStatesFactory>()
                 .AsSingle()
                 .NonLazy();
         }
@@ -32,7 +42,6 @@ namespace Installers
             Container.BindInstance(_settings.Animation).AsSingle();
             Container.BindInstance(_settings.Body).AsSingle();
 
-            Container.BindInterfacesAndSelfTo<AnimationFsm>().AsSingle();
             Container.BindInterfacesAndSelfTo<PlayerInput>().AsSingle();
             Container.BindInterfacesAndSelfTo<PlayerShootHandler>().AsSingle();
             Container.BindInterfacesAndSelfTo<PlayerMove>().AsSingle();

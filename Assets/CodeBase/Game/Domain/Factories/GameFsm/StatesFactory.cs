@@ -4,14 +4,14 @@ using Zenject;
 
 namespace Game.Domain.Factories.GameFsm
 {
-    public class GameStatesFactory : IStatesFactory
+    public class StatesFactory : IStatesFactory
     {
         private readonly DiContainer _container;
 
-        public GameStatesFactory(DiContainer container) =>
+        public StatesFactory(DiContainer container) =>
             _container = container;
 
-        public TState Create<TState>() where TState : class, IExitableState
+        public virtual TState Create<TState>() where TState : class, IExitableState
         {
             TState state = _container.Instantiate<TState>();
             return state;

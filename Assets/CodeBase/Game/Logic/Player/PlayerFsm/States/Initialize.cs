@@ -3,15 +3,15 @@ using Core.Infrastructure.GameFsm.States;
 using Core.MVVM.Windows;
 using Game.Presentation.View;
 
-namespace Game.Logic.Player.PlayerFsm
+namespace Game.Logic.Player.PlayerFsm.States
 {
-    public class PlayerGameplayState : IState
+    public class Initialize : IState
     {
         private readonly IGameStateMachine _stateMachine;
         private readonly IWindowResolve _windowResolve;
         private readonly IWindowFsm _windowFsm;
 
-        public PlayerGameplayState(IGameStateMachine stateMachine, IWindowFsm windowFsm, IWindowResolve windowResolve)
+        public Initialize(IGameStateMachine stateMachine, IWindowFsm windowFsm, IWindowResolve windowResolve)
         {
             _stateMachine = stateMachine;
             _windowResolve = windowResolve;
@@ -22,11 +22,12 @@ namespace Game.Logic.Player.PlayerFsm
         {
             WindowResolve();
             _windowFsm.OpenWindow(typeof(PlayerView), false);
+            _stateMachine.Enter<Idle>();
         }
 
         public void OnExit()
         {
-            _windowFsm.CloseWindow(typeof(PlayerView));
+            
         }
 
         private void WindowResolve()

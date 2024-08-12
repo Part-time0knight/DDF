@@ -4258,9 +4258,9 @@ GameObject:
   - component: {fileID: 7766512923665431578}
   - component: {fileID: 6297506539284539194}
   - component: {fileID: 9137219179897476931}
-  - component: {fileID: 2772481157500148225}
   - component: {fileID: 5554741271621885132}
-  - component: {fileID: 2945388948673295653}
+  - component: {fileID: 7973738547693138740}
+  - component: {fileID: 3101597203207834015}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -4349,18 +4349,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.45}
   m_Size: {x: 0.5, y: 0.85}
   m_Direction: 0
---- !u!114 &2772481157500148225
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9027092269198735959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e00aab09f0e08d4bab4a21f732c3e83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5554741271621885132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4379,7 +4367,19 @@ MonoBehaviour:
   _installerPrefabs: []
   _autoRun: 1
   _kernel: {fileID: 0}
---- !u!114 &2945388948673295653
+--- !u!114 &7973738547693138740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9027092269198735959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e00aab09f0e08d4bab4a21f732c3e83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3101597203207834015
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4392,7 +4392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _components:
-  - {fileID: 2772481157500148225}
+  - {fileID: 7973738547693138740}
   _identifier: 
   _useSceneContext: 0
   _context: {fileID: 0}

@@ -1,7 +1,6 @@
 using Core.MVVM.Windows;
-using Game.Domain.Factories;
 using Game.Domain.Factories.GameFsm;
-using Game.Logic.Player.PlayerFsm;
+using Game.Infrastructure;
 using Game.Logic.Weapon;
 using Game.Presentation.ViewModel;
 using UnityEngine;
@@ -26,7 +25,7 @@ namespace Installers
         private void InstallFactory()
         {
             Container
-                .BindInterfacesAndSelfTo<GameStatesFactory>()
+                .BindInterfacesAndSelfTo<StatesFactory>()
                 .AsSingle()
                 .NonLazy();
         }
@@ -57,7 +56,7 @@ namespace Installers
                 .NonLazy();
 
             Container
-                .BindInterfacesAndSelfTo<PlayerStateMachine>()
+                .BindInterfacesAndSelfTo<GameFsm>()
                 .AsSingle()
                 .NonLazy();
 
