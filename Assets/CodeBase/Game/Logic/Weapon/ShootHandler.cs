@@ -6,14 +6,12 @@ namespace Game.Logic.Weapon
 {
     public abstract class ShootHandler
     {
-        public bool Block;
 
         protected readonly Bullet.Pool _bulletPool;
         protected readonly Settings _settings;
 
         protected List<Bullet> _bullets = new();
         protected Timer _timer = new();
-        protected bool _onLoad = false;
         protected Bullet _currentBullet;
 
         protected abstract Transform WeapontPoint { get; set; }
@@ -24,27 +22,20 @@ namespace Game.Logic.Weapon
             _settings = settings;
             _settings.CurrentAttackDelay = _settings.AttackDelay;
             _settings.CurrentDamage = _settings.Damage;
-            Block = false;
-            _timer.Initialize(0.1f, null);
-            _timer.Play();
-            //_settings.TimeToAttack = 0;
+            _settings.CanShoot = true;
+            _timer.Initialize(time: 0.1f, null).Play();
+            
         }
 
         public virtual void Shoot(Vector2 target)
         {
-            if (Block)
-                return;
-            _currentBullet = _bulletPool.Spawn(WeapontPoint.position, target);
+            _currentBullet = _bulletPool.Spawn(WeapontPoint.position, target, _settings.Owner);
             _bullets.Add(_currentBullet);
-            _settings.InvokeShoot?.Invoke();
+            _settings.InvokeShot?.Invoke();
+            _settings.CanShoot = false;
             _currentBullet.InvokeHit += Hit;
-            _onLoad = true;
-            _timer.Initialize(_settings.CurrentAttackDelay, 0.05f, () => 
-            { 
-                _onLoad = false;
-                _settings.InvokeCanShoot?.Invoke();
-            });
-            _timer.Play();
+            _timer.Initialize(_settings.CurrentAttackDelay, 
+                step: 0.05f, () => _settings.CanShoot = true).Play();
         }
 
         private void Hit(Bullet bullet, GameObject target)
@@ -58,20 +49,23 @@ namespace Game.Logic.Weapon
         public class Settings
         {
             /// <summary>
-            /// Called when the cooldown timer ends. 
+            /// Called when handler make a shot. 
             /// </summary>
-            public Action InvokeCanShoot;
-            /// <summary>
-            /// Called when the cooldown timer ticks. 
-            /// </summary>
-            public Action InvokeShoot;
+            public Action InvokeShot;
 
             [field: SerializeField] public float AttackDelay { get; private set; }
             [field: SerializeField] public float Damage { get; private set; }
 
             public float CurrentAttackDelay { get; set; }
+            
             public float CurrentDamage { get; set; }
-            public float TimeToAttack { get; set; }
+
+            public bool CanShoot { get; set; }
+
+            /// <summary>
+            /// Tag of the GameObject that belongs to the owner of the ShootHandler.
+            /// </summary>
+            public string Owner { get; set; }
         }
 
     }

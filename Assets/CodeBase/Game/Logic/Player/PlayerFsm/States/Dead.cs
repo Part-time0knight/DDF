@@ -6,11 +6,11 @@ namespace Game.Logic.Player.PlayerFsm.States
 {
     public class Dead : Hitable
     {
-        private readonly UnitAnimationExtension _animation;
+        private readonly UnitAnimationWrapper _animation;
 
         public Dead(IGameStateMachine stateMachine,
-            UnitAnimationExtension animation,
-            PlayerDamageHandler.PlayerSettings damageSettings) : base(stateMachine, damageSettings)
+            PlayerDamageHandler.PlayerSettings damageSettings, 
+            UnitAnimationWrapper animation) : base(stateMachine, damageSettings)
         {
             _animation = animation;
         }
@@ -18,7 +18,7 @@ namespace Game.Logic.Player.PlayerFsm.States
         public override void OnEnter()
         {
             base.OnEnter();
-            _animation.PlayAnimation(AnimationNames.DEATH);
+            _animation.PlayAnimation(AnimationNames.Death);
         }
 
         protected override void OnHit()

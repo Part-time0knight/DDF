@@ -46,6 +46,18 @@ namespace Installers
                 .BindInterfacesAndSelfTo<TestingToolsViewModel>()
                 .AsSingle()
                 .NonLazy();
+            Container
+                .BindInterfacesAndSelfTo<GameplayButtonsViewModel>()
+                .AsSingle()
+                .NonLazy();
+            Container
+                .BindInterfacesAndSelfTo<MenuPauseViewModel>()
+                .AsSingle()
+                .NonLazy();
+            Container
+                .BindInterfacesAndSelfTo<SettingsViewModel>()
+                .AsSingle()
+                .NonLazy();
         }
 
         private void InstallService()

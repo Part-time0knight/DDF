@@ -5,38 +5,22 @@ namespace Game.Logic.InteractiveObject
 {
     public class ObjectMove
     {
-        public virtual bool Block 
-        {
-            get => _isStoped;
-            set 
-            {
-                _body.velocity = Vector2.zero;
-                _isStoped = value;
-            }
-        }
-
         protected Vector2 Velocity 
         {
             get => _body.velocity;
-            set
-            {
-                _body.velocity = value;
-            }
+            set => _body.velocity = value;
 
         }
 
         protected readonly Rigidbody2D _body;
         protected Settings _stats;
-        protected bool _isStoped;
         protected ContactFilter2D _filter;
         protected List<RaycastHit2D> _raycasts = new();
         protected float _collisionOffset;
-        protected Vector2 _resultSpeed;
 
         public ObjectMove(Rigidbody2D body, Settings stats)
         {
             _body = body;
-            _isStoped = false;
             _filter = new ContactFilter2D();
             _stats = stats;
             _collisionOffset = 0.1f;
@@ -44,24 +28,22 @@ namespace Game.Logic.InteractiveObject
         }
 
         public virtual void Move(Vector2 speedMultiplier)
-        {
-            if (_isStoped)
-                return;
+            => Velocity = CollisionCheck(speedMultiplier) * _stats.CurrentSpeed;
 
-            _body.Cast(speedMultiplier, _filter, _raycasts, _stats.CurrentSpeed * Time.fixedDeltaTime + _collisionOffset);
-
-            _resultSpeed = speedMultiplier;
-
-            foreach (var cast in _raycasts)
-            {
-                _resultSpeed.x = cast.normal.x != 0 ? 0 : _resultSpeed.x;
-                _resultSpeed.y = cast.normal.y != 0 ? 0 : _resultSpeed.y;
-            }
-            Velocity = _resultSpeed * _stats.CurrentSpeed;
-        }
 
         public void Stop()
             => _body.velocity = Vector2.zero;
+
+        protected virtual Vector2 CollisionCheck(Vector2 speedMultiplier)
+        {
+            _body.Cast(speedMultiplier, _filter, _raycasts, _stats.CurrentSpeed * Time.fixedDeltaTime + _collisionOffset);
+            foreach (var cast in _raycasts)
+            {
+                speedMultiplier.x = cast.normal.x != 0 ? 0 : speedMultiplier.x;
+                speedMultiplier.y = cast.normal.y != 0 ? 0 : speedMultiplier.y;
+            }
+            return speedMultiplier;
+        }
 
         public class Settings
         {

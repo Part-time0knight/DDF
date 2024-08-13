@@ -838,7 +838,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _settings:
     <Weapon>k__BackingField: {fileID: 6175339281961653993}
-    <Animation>k__BackingField: {fileID: 1144103553565948289}
+    <Animation>k__BackingField: {fileID: 5016145706314335143}
     <Body>k__BackingField: {fileID: 6297506539284539194}
 --- !u!1 &1951781275742792082
 GameObject:
@@ -2255,7 +2255,7 @@ GameObject:
   - component: {fileID: 6288915824651136833}
   - component: {fileID: 5654048641770882079}
   - component: {fileID: 7030156120272017706}
-  - component: {fileID: 1144103553565948289}
+  - component: {fileID: 5016145706314335143}
   m_Layer: 0
   m_Name: UnitRoot
   m_TagString: Untagged
@@ -2313,7 +2313,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1144103553565948289
+--- !u!114 &5016145706314335143
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2322,13 +2322,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4531980534992474241}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c17feccb1185124a8351ffe46f3eccb, type: 3}
+  m_Script: {fileID: 11500000, guid: b5fc60855d40a6e4c8496196a82013cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _version: 156
   _spriteOBj: {fileID: 44854011245231118}
   EditChk: 0
-  _code: Unit009
+  _code: Unit008
   _anim: {fileID: 7030156120272017706}
   _horse: 0
   _horseString: 
@@ -3283,7 +3283,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7299384034653222147}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 2
   m_Camera: {fileID: 0}
@@ -3347,9 +3347,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7299384034653222147}
   m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &7891808960390997535
 MonoBehaviour:

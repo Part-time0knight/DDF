@@ -21,7 +21,7 @@ namespace Game.Logic.Player.PlayerFsm.States
         public void OnEnter()
         {
             WindowResolve();
-            _windowFsm.OpenWindow(typeof(PlayerView), false);
+            _windowFsm.OpenWindow(typeof(PlayerView), inHistory: false);
             _stateMachine.Enter<Idle>();
         }
 
@@ -32,7 +32,6 @@ namespace Game.Logic.Player.PlayerFsm.States
 
         private void WindowResolve()
         {
-            _windowResolve.CleanUp();
             _windowResolve.Set<PlayerView>();
         }
     }

@@ -6,21 +6,6 @@ namespace Game.Logic.Misc
 {
     public class BulletMove : ObjectMove
     {
-        public override bool Block
-        {
-            get => _isStoped;
-            set
-            {
-                _isStoped = value;
-
-                if (_speedMultiplier == Vector2.zero)
-                    return;
-
-                _body.velocity = _isStoped == true ? 
-                    Vector2.zero : _speedMultiplier * _stats.CurrentSpeed;
-            }
-        }
-
         public Action<GameObject> InvokeCollision;
 
         private Vector2 _speedMultiplier = Vector2.zero;
@@ -31,27 +16,17 @@ namespace Game.Logic.Misc
             _stats = stats;
         }
 
-        public override void Move(Vector2 speedMultiplier)
+        protected override Vector2 CollisionCheck(Vector2 speedMultiplier)
         {
-            _speedMultiplier = speedMultiplier;
-            Velocity = speedMultiplier * _stats.CurrentSpeed;
-        }
-
-        public void CollisionCheck()
-        {
-            if (_isStoped)
-                return;
-
             _body.Cast(_speedMultiplier, _filter, _raycasts, _stats.CurrentSpeed * Time.fixedDeltaTime + _collisionOffset);
 
             foreach (var hit in _raycasts)
                 InvokeCollision?.Invoke(hit.transform.gameObject);
+            return speedMultiplier;
         }
 
         [Serializable]
         public class BulletSettngs : Settings
-        {
-
-        }
+        { }
     }
 }

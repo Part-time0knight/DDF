@@ -19,12 +19,12 @@ namespace Game.Presentation.ViewModel
 
         public override void InvokeClose()
         {
-            _windowFsm.CloseWindow(Window);
+            _windowFsm.CloseWindow();
         }
 
         public override void InvokeOpen()
         {
-            _windowFsm.OpenWindow(Window);
+            _windowFsm.OpenWindow(Window, inHistory: true);
         }
 
         public void MakeDamage()

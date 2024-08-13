@@ -63,7 +63,7 @@ namespace Installers
         public class Settings
         {
             [field: SerializeField] public Transform Weapon { get; private set; }
-            [field: SerializeField] public UnitAnimationExtension Animation { get; private set; }
+            [field: SerializeField] public UnitAnimationWrapper Animation { get; private set; }
             [field: SerializeField] public Rigidbody2D Body { get; private set; }
         }
     }

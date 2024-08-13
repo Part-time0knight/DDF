@@ -1,3 +1,4 @@
+using Game.Logic.StaticData;
 using Game.Logic.Weapon;
 using System;
 using UnityEngine;
@@ -12,12 +13,11 @@ namespace Game.Logic.Player
             Transform weaponPoint) : base(bulletPool, settings)
         {
             WeapontPoint = weaponPoint;
+            _settings.Owner = Tags.Player;
         }
 
         [Serializable]
         public class PlayerSettings : Settings
-        {
-
-        }
+        { }
     }
 }
