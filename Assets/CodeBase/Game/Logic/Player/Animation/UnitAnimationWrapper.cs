@@ -51,6 +51,11 @@ namespace Game.Logic.Player.Animation
             }
         }
 
+        public void AnimationSpeed(float speed)
+        {
+            _anim.speed = speed;
+        }
+
         public void InvokeCallback()
         {
             _clipCallback?.Invoke();

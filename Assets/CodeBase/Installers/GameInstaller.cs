@@ -1,6 +1,8 @@
 using Core.MVVM.Windows;
 using Game.Domain.Factories.GameFsm;
 using Game.Infrastructure;
+using Game.Infrastructure.Signals;
+using Game.Logic.InteractiveObject;
 using Game.Logic.Weapon;
 using Game.Presentation.ViewModel;
 using UnityEngine;
@@ -15,11 +17,19 @@ namespace Installers
 
         public override void InstallBindings()
         {
+            InstallSignals();
             InstallFactory();
             InstallPools();
             InstallService();
             InstallViewModel();
             
+        }
+
+        private void InstallSignals()
+        {
+            SignalBusInstaller.Install(Container);
+            Container.DeclareSignal<PauseSignal>();
+
         }
 
         private void InstallFactory()
@@ -34,10 +44,10 @@ namespace Installers
         {
             BulletBuffer buffer = Container.InstantiatePrefabForComponent<BulletBuffer>(_bufferPrefab);
 
-            Container.Bind<BulletBuffer>().FromInstance(buffer);
+            Container.Bind<BulletBuffer>().FromInstance(buffer).AsSingle();
 
             Container.BindMemoryPool<Bullet, Bullet.Pool>()
-                .FromComponentInNewPrefab(_bulletPrfab).AsSingle();
+                .FromComponentInNewPrefab(_bulletPrfab);
         }
 
         private void InstallViewModel()
@@ -72,7 +82,8 @@ namespace Installers
                 .AsSingle()
                 .NonLazy();
 
-            
+
+            Container.Bind<Pause>().AsSingle();
         }
     }
 }

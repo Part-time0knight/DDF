@@ -1,21 +1,24 @@
 using Core.MVVM.ViewModel;
 using Core.MVVM.Windows;
+using Game.Logic.InteractiveObject;
 using Game.Presentation.View;
 using System;
 
 public class MenuPauseViewModel : AbstractViewModel
 {
+    private readonly Pause _pause;
 
     protected override Type Window => typeof(MenuPauseView);
 
-    public MenuPauseViewModel(IWindowFsm windowFsm) : base(windowFsm)
+    public MenuPauseViewModel(IWindowFsm windowFsm, Pause pause) : base(windowFsm)
     {
-
+        _pause = pause;
     }
 
     public override void InvokeClose()
     {
         _windowFsm.CloseWindow();
+        _pause.Set(pause: false);
     }
 
     public override void InvokeOpen()
