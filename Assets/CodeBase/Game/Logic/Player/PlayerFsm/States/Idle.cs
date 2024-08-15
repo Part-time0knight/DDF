@@ -1,7 +1,4 @@
 using Core.Infrastructure.GameFsm;
-using Core.Infrastructure.GameFsm.States;
-using Core.MVVM.Windows;
-using Game.Logic.InteractiveObject;
 using Game.Logic.Player.Animation;
 using Game.Logic.StaticData;
 
@@ -49,5 +46,6 @@ namespace Game.Logic.Player.PlayerFsm.States
             if (_shootSettings.CanShoot)
                 _stateMachine.Enter<Attack>();
         }
+
     }
 }

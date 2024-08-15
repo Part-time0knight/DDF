@@ -6,11 +6,11 @@ using System;
 
 public class MenuPauseViewModel : AbstractViewModel
 {
-    private readonly Pause _pause;
+    private readonly IPauseHandler _pause;
 
     protected override Type Window => typeof(MenuPauseView);
 
-    public MenuPauseViewModel(IWindowFsm windowFsm, Pause pause) : base(windowFsm)
+    public MenuPauseViewModel(IWindowFsm windowFsm, IPauseHandler pause) : base(windowFsm)
     {
         _pause = pause;
     }
@@ -18,7 +18,7 @@ public class MenuPauseViewModel : AbstractViewModel
     public override void InvokeClose()
     {
         _windowFsm.CloseWindow();
-        _pause.Set(pause: false);
+        _pause.Active = false;
     }
 
     public override void InvokeOpen()

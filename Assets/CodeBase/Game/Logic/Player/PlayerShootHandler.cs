@@ -1,3 +1,4 @@
+using Game.Logic.InteractiveObject;
 using Game.Logic.StaticData;
 using Game.Logic.Weapon;
 using System;
@@ -9,8 +10,8 @@ namespace Game.Logic.Player
     {
         protected override Transform WeapontPoint { get; set; }
 
-        public PlayerShootHandler(Bullet.Pool bulletPool, PlayerSettings settings,
-            Transform weaponPoint) : base(bulletPool, settings)
+        public PlayerShootHandler(Bullet.Pool bulletPool, PlayerSettings settings, IPauseHandler pauseHandler,
+            Transform weaponPoint) : base(bulletPool, settings, pauseHandler)
         {
             WeapontPoint = weaponPoint;
             _settings.Owner = Tags.Player;

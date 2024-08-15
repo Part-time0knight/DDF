@@ -1,7 +1,6 @@
 using Core.MVVM.Windows;
 using Game.Domain.Factories.GameFsm;
 using Game.Infrastructure;
-using Game.Infrastructure.Signals;
 using Game.Logic.InteractiveObject;
 using Game.Logic.Weapon;
 using Game.Presentation.ViewModel;
@@ -17,19 +16,11 @@ namespace Installers
 
         public override void InstallBindings()
         {
-            InstallSignals();
             InstallFactory();
             InstallPools();
             InstallService();
             InstallViewModel();
             
-        }
-
-        private void InstallSignals()
-        {
-            SignalBusInstaller.Install(Container);
-            Container.DeclareSignal<PauseSignal>();
-
         }
 
         private void InstallFactory()
@@ -73,6 +64,11 @@ namespace Installers
         private void InstallService()
         {
             Container
+                .BindInterfacesTo<PauseHandler>()
+                .AsSingle()
+                .NonLazy();
+
+            Container
                 .BindInterfacesAndSelfTo<WindowFsm>()
                 .AsSingle()
                 .NonLazy();
@@ -81,9 +77,6 @@ namespace Installers
                 .BindInterfacesAndSelfTo<GameFsm>()
                 .AsSingle()
                 .NonLazy();
-
-
-            Container.Bind<Pause>().AsSingle();
         }
     }
 }

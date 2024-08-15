@@ -11,9 +11,8 @@ namespace Game.Logic.Misc
         private Vector2 _speedMultiplier = Vector2.zero;
 
 
-        public BulletMove(Rigidbody2D body, BulletSettngs stats) : base(body, stats)
+        public BulletMove(Rigidbody2D body, BulletSettngs stats, IPauseHandler pauseHandler) : base(body, stats, pauseHandler)
         {
-            _stats = stats;
         }
 
         protected override Vector2 CollisionCheck(Vector2 speedMultiplier)

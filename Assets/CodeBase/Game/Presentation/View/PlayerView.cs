@@ -18,6 +18,7 @@ namespace Game.Presentation.View
             base.Construct(viewModel);
             _viewModel.InvokeReloadActive += ReloadActive;
             _viewModel.InvokeHitsUpdate += HitsUpdate;
+            _viewModel.InvokePause += OnPause;
             _reloadBarImage.fillAmount = 0;
             _hitsBarImage.fillAmount = 1;
         }
@@ -37,6 +38,14 @@ namespace Game.Presentation.View
         private void HitsUpdate(float ratioHits)
         {
             _hitsBarImage.fillAmount = ratioHits;
+        }
+
+        private void OnPause(bool pause)
+        {
+            if (pause)
+                _reloadBarImage.DOPause();
+            else
+                _reloadBarImage.DOPlay();
         }
     }
 }

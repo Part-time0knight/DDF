@@ -8,11 +8,11 @@ namespace Game.Presentation.ViewModel
 {
     public class GameplayButtonsViewModel : AbstractViewModel
     {
-        private readonly Pause _pause;
+        private readonly IPauseHandler _pause;
 
         protected override Type Window => typeof(GameplayButtonsView);
 
-        public GameplayButtonsViewModel(IWindowFsm windowFsm, Pause pause) : base(windowFsm)
+        public GameplayButtonsViewModel(IWindowFsm windowFsm, IPauseHandler pause) : base(windowFsm)
         {
             _pause = pause;
         }
@@ -34,7 +34,7 @@ namespace Game.Presentation.ViewModel
 
         public void OpenMenuPauseWindow()
         {
-            _pause.Set(pause: true);
+            _pause.Active = true;
             _windowFsm.OpenWindow(typeof(MenuPauseView), inHistory: true);
         }
     }

@@ -1,14 +1,32 @@
+using Game.Logic.InteractiveObject;
 using System;
 using System.Linq;
 using UnityEngine;
+using Zenject;
 
 namespace Game.Logic.Player.Animation
 {
 
-    public class UnitAnimationWrapper : SPUM_Prefabs
+    public class UnitAnimationWrapper : SPUM_Prefabs, IPauseble, IDisposable
     {
 
         private Action _clipCallback;
+
+        private IPauseHandler _pauseHandler;
+
+        public float CurrentClipSpeed => _anim.speed;
+
+        [Inject]
+        private void Construct(IPauseHandler pauseHandler)
+        {
+            _pauseHandler = pauseHandler;
+            _pauseHandler.SubscribeElement(this);
+        }
+
+        public void Dispose()
+        {
+            _pauseHandler.UnsubscribeElement(this);
+        }
 
         public override void PlayAnimation(string name)
         {
@@ -51,7 +69,7 @@ namespace Game.Logic.Player.Animation
             }
         }
 
-        public void AnimationSpeed(float speed)
+        private void AnimationSpeed(float speed)
         {
             _anim.speed = speed;
         }
@@ -61,5 +79,14 @@ namespace Game.Logic.Player.Animation
             _clipCallback?.Invoke();
             _clipCallback = null;
         }
+
+        public void OnPause(bool active)
+        {
+            if (active)
+                AnimationSpeed(0f);
+            else
+                AnimationSpeed(1f);
+        }
+
     }
 }
