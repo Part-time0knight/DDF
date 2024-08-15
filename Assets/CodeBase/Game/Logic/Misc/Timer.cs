@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Timer
 {
+    private bool _active;
+    
     private Action _invokeComplete;
     private Action<float> _invokeTick;
 
@@ -16,10 +18,11 @@ public class Timer
 
     private float _step;
 
+    public bool Active => _active;
+
     public Timer()
     {
-        _cts = new();
-        
+        _active = false;
     }
 
     public Timer Initialize(float time, Action callback)
@@ -44,14 +47,16 @@ public class Timer
         _invokeComplete = callback;
         _invokeTick = callTick;
         _step = step;
+
         return this;
     }
 
     public void Play()
     {
-        if (_currentTime == 0 ||
-            _currentTime != _time)
+        if (_currentTime == 0)
             return;
+        _active = true;
+        _cts = new();
         ExecuteAsync();
     }
 
@@ -78,9 +83,12 @@ public class Timer
                 _invokeTick?.Invoke(_currentTime);
             }
         } while (_currentTime > 0f && !_cts.IsCancellationRequested);
+        
+        _active = false;
 
         if (_currentTime <= 0 && !_cts.IsCancellationRequested)
             _invokeComplete?.Invoke();
+
     }
 
 }

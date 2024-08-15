@@ -1,6 +1,9 @@
 using Core.Infrastructure.GameFsm;
+using Game.Logic.InteractiveObject;
 using Game.Logic.Player.Animation;
 using Game.Logic.StaticData;
+using UnityEngine.Playables;
+using Zenject;
 
 namespace Game.Logic.Player.PlayerFsm.States
 {
@@ -8,11 +11,13 @@ namespace Game.Logic.Player.PlayerFsm.States
     {
         private readonly UnitAnimationWrapper _animation;
         private readonly PlayerInput _playerInput;
-        private PlayerShootHandler _shootHandler;
+        private readonly PlayerShootHandler _shootHandler;
 
         public Attack(IGameStateMachine stateMachine,
-            PlayerDamageHandler.PlayerSettings damageSettings, PlayerInput playerInput,
-            UnitAnimationWrapper animation, PlayerShootHandler shootHandler) : base(stateMachine, damageSettings)
+            PlayerDamageHandler.PlayerSettings damageSettings,
+            PlayerInput playerInput,
+            UnitAnimationWrapper animation,
+            PlayerShootHandler shootHandler) : base(stateMachine, damageSettings)
         {
             _playerInput = playerInput;
             _animation = animation;
@@ -23,7 +28,6 @@ namespace Game.Logic.Player.PlayerFsm.States
         {
             base.OnEnter();
             _shootHandler.Shoot(_playerInput.MousePosition());
-            
             _animation.PlayAnimation(AnimationNames.Attack + AnimationNames.Magic, OnAttackEnd);
         }
 

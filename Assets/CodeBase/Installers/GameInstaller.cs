@@ -1,6 +1,7 @@
 using Core.MVVM.Windows;
 using Game.Domain.Factories.GameFsm;
 using Game.Infrastructure;
+using Game.Logic.InteractiveObject;
 using Game.Logic.Weapon;
 using Game.Presentation.ViewModel;
 using UnityEngine;
@@ -34,10 +35,10 @@ namespace Installers
         {
             BulletBuffer buffer = Container.InstantiatePrefabForComponent<BulletBuffer>(_bufferPrefab);
 
-            Container.Bind<BulletBuffer>().FromInstance(buffer);
+            Container.Bind<BulletBuffer>().FromInstance(buffer).AsSingle();
 
             Container.BindMemoryPool<Bullet, Bullet.Pool>()
-                .FromComponentInNewPrefab(_bulletPrfab).AsSingle();
+                .FromComponentInNewPrefab(_bulletPrfab);
         }
 
         private void InstallViewModel()
@@ -63,6 +64,11 @@ namespace Installers
         private void InstallService()
         {
             Container
+                .BindInterfacesTo<PauseHandler>()
+                .AsSingle()
+                .NonLazy();
+
+            Container
                 .BindInterfacesAndSelfTo<WindowFsm>()
                 .AsSingle()
                 .NonLazy();
@@ -71,8 +77,6 @@ namespace Installers
                 .BindInterfacesAndSelfTo<GameFsm>()
                 .AsSingle()
                 .NonLazy();
-
-            
         }
     }
 }

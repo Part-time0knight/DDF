@@ -6,7 +6,7 @@ namespace Game.Logic.Player
 {
     public class PlayerMove : ObjectMove
     {
-        public PlayerMove(Rigidbody2D body, PlayerSettings stats) : base(body, stats)
+        public PlayerMove(Rigidbody2D body, PlayerSettings stats, IPauseHandler pauseHandler) : base(body, stats, pauseHandler)
         { }
 
         [Serializable]

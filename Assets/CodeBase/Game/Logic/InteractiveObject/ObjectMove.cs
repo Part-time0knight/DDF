@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Game.Logic.InteractiveObject
 {
-    public class ObjectMove
+    public class ObjectMove : IPauseble, IInitializable, IDisposable
     {
         protected Vector2 Velocity 
         {
@@ -13,26 +15,56 @@ namespace Game.Logic.InteractiveObject
         }
 
         protected readonly Rigidbody2D _body;
-        protected Settings _stats;
-        protected ContactFilter2D _filter;
-        protected List<RaycastHit2D> _raycasts = new();
-        protected float _collisionOffset;
+        protected readonly Settings _stats;
+        protected readonly IPauseHandler _pause;
 
-        public ObjectMove(Rigidbody2D body, Settings stats)
+        protected ContactFilter2D _filter;
+        protected List<RaycastHit2D> _raycasts;
+        protected float _collisionOffset;
+        protected Vector2 _pausedVelocity;
+        protected bool _paused;
+
+        public ObjectMove(Rigidbody2D body, Settings stats, IPauseHandler pause)
         {
             _body = body;
-            _filter = new ContactFilter2D();
             _stats = stats;
+            _pause = pause;
+
+            _filter = new();
+            _raycasts = new();
+
             _collisionOffset = 0.1f;
             _stats.CurrentSpeed = _stats.Speed;
+            _paused = false;
+        }
+
+        public void Initialize()
+        {
+            _pause.SubscribeElement(this);
+        }
+
+        public void Dispose()
+        {
+            _pause.UnsubscribeElement(this);
         }
 
         public virtual void Move(Vector2 speedMultiplier)
-            => Velocity = CollisionCheck(speedMultiplier) * _stats.CurrentSpeed;
+            => Velocity = CollisionCheck(speedMultiplier) * 
+            _stats.CurrentSpeed * PauseSpeed();
 
 
         public void Stop()
             => _body.velocity = Vector2.zero;
+
+        public virtual void OnPause(bool active)
+        {
+            _paused = active;
+            if (_paused )
+                Velocity = Vector2.zero;
+        }
+
+        protected virtual float PauseSpeed()
+            => _paused == false ? 1f : 0f;
 
         protected virtual Vector2 CollisionCheck(Vector2 speedMultiplier)
         {
