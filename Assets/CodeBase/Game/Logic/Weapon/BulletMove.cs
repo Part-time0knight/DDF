@@ -1,10 +1,10 @@
-using Game.Logic.InteractiveObject;
+using Game.Logic.Handlers;
 using System;
 using UnityEngine;
 
 namespace Game.Logic.Misc
 {
-    public class BulletMove : ObjectMove
+    public class BulletMove : MoveHandler
     {
         public Action<GameObject> InvokeCollision;
 

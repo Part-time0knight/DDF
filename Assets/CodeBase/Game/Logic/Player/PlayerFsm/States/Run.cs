@@ -11,13 +11,13 @@ namespace Game.Logic.Player.PlayerFsm.States
         private readonly PlayerShootHandler.PlayerSettings _playerSettings;
         private readonly UnitAnimationWrapper _animation;
         private readonly PlayerInput _playerInput;
-        private readonly PlayerMove _playerMove;
+        private readonly PlayerMoveHandler _playerMove;
         private readonly Transform _transform;
 
         private Vector3 _standartScale;
 
         public Run(IGameStateMachine stateMachine, PlayerInput playerInput,
-            UnitAnimationWrapper animation, PlayerMove playerMove,
+            UnitAnimationWrapper animation, PlayerMoveHandler playerMove,
             Rigidbody2D body, PlayerDamageHandler.PlayerSettings damageSettings,
             PlayerShootHandler.PlayerSettings playerSettings) : base(stateMachine, damageSettings)
         {

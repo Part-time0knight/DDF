@@ -1,7 +1,7 @@
 
 using System.Collections.Generic;
 
-namespace Game.Logic.InteractiveObject
+namespace Game.Logic.Handlers
 {
     public class PauseHandler : IPauseHandler
     {

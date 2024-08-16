@@ -1,7 +1,7 @@
 using Core.MVVM.Windows;
 using Game.Domain.Factories.GameFsm;
 using Game.Infrastructure;
-using Game.Logic.InteractiveObject;
+using Game.Logic.Handlers;
 using Game.Logic.Weapon;
 using Game.Presentation.ViewModel;
 using UnityEngine;

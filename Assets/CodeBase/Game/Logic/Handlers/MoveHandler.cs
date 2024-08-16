@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-namespace Game.Logic.InteractiveObject
+namespace Game.Logic.Handlers
 {
-    public class ObjectMove : IPauseble, IInitializable, IDisposable
+    public class MoveHandler : IPauseble, IInitializable, IDisposable
     {
         protected Vector2 Velocity 
         {
@@ -24,7 +24,7 @@ namespace Game.Logic.InteractiveObject
         protected Vector2 _pausedVelocity;
         protected bool _paused;
 
-        public ObjectMove(Rigidbody2D body, Settings stats, IPauseHandler pause)
+        public MoveHandler(Rigidbody2D body, Settings stats, IPauseHandler pause)
         {
             _body = body;
             _stats = stats;

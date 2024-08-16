@@ -55,7 +55,7 @@ namespace Installers
 
             Container.BindInterfacesAndSelfTo<PlayerInput>().AsSingle();
             Container.BindInterfacesAndSelfTo<PlayerShootHandler>().AsSingle();
-            Container.BindInterfacesAndSelfTo<PlayerMove>().AsSingle();
+            Container.BindInterfacesAndSelfTo<PlayerMoveHandler>().AsSingle();
             Container.BindInterfacesAndSelfTo<PlayerDamageHandler>().AsSingle();
         }
 

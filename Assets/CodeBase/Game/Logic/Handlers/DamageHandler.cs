@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Game.Logic.InteractiveObject
+namespace Game.Logic.Handlers
 {
     public abstract class DamageHandler
     {

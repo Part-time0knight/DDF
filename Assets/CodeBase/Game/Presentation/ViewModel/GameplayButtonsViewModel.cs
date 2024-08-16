@@ -1,6 +1,6 @@
 using Core.MVVM.ViewModel;
 using Core.MVVM.Windows;
-using Game.Logic.InteractiveObject;
+using Game.Logic.Handlers;
 using Game.Presentation.View;
 using System;
 

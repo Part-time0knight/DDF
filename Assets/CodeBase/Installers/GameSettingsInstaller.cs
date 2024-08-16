@@ -17,7 +17,7 @@ namespace Installers
         public class PlayerSettings
         {
             public PlayerShootHandler.PlayerSettings PlayerWeapon;
-            public PlayerMove.PlayerSettings PlayerMove;
+            public PlayerMoveHandler.PlayerSettings PlayerMove;
             public PlayerDamageHandler.PlayerSettings PlayerHits;
         }
 

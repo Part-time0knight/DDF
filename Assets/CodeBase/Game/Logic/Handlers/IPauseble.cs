@@ -1,4 +1,4 @@
-namespace Game.Logic.InteractiveObject
+namespace Game.Logic.Handlers
 {
     public interface IPauseble
     {

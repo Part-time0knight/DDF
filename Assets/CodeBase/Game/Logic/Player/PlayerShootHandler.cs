@@ -1,4 +1,4 @@
-using Game.Logic.InteractiveObject;
+using Game.Logic.Handlers;
 using Game.Logic.StaticData;
 using Game.Logic.Weapon;
 using System;
