@@ -12,12 +12,10 @@ namespace Game.Logic.Weapon
         protected readonly Bullet.Pool _bulletPool;
         protected readonly Settings _settings;
         protected readonly IPauseHandler _pauseHandler;
+        protected readonly Timer _timer = new();
 
         protected List<Bullet> _bullets = new();
-        protected Timer _timer = new();
         protected Bullet _currentBullet;
-
-        protected abstract Transform WeapontPoint { get; set; }
 
         public ShootHandler(Bullet.Pool bulletPool, Settings settings,
             IPauseHandler pauseHandler)
@@ -29,17 +27,18 @@ namespace Game.Logic.Weapon
             _settings.CurrentAttackDelay = _settings.AttackDelay;
             _settings.CurrentDamage = _settings.Damage;
             _settings.CanShoot = true;
-            
         }
 
-        public void Initialize()
+        public virtual void Initialize()
         {
-            _timer.Initialize(time: 0.01f, 
-                () => _pauseHandler.SubscribeElement(this)).Play();
+            _timer.Initialize(
+                time: 0f, step: 0f, 
+                callback: () => _pauseHandler.SubscribeElement(this))
+                .Play();
             
         }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
             _pauseHandler.UnsubscribeElement(this);
         }
@@ -55,15 +54,35 @@ namespace Game.Logic.Weapon
             }
         }
 
-        public virtual void Shoot(Vector2 target)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="weponPos">World space position</param>
+        /// <param name="target">World space position</param>
+        /// <param name="onReloadEnd"></param>
+        public virtual void Shoot(Vector2 weponPos, Vector2 target, Action onReloadEnd = null)
         {
-            _currentBullet = _bulletPool.Spawn(WeapontPoint.position, target, _settings.Owner);
+            _currentBullet = _bulletPool
+                .Spawn(weponPos, target, _settings.Owner);
             _bullets.Add(_currentBullet);
             _settings.InvokeShot?.Invoke();
             _settings.CanShoot = false;
             _currentBullet.InvokeHit += Hit;
-            _timer.Initialize(_settings.CurrentAttackDelay, 
-                step: 0.05f, () => _settings.CanShoot = true).Play();
+            
+            Action onEnd = () =>
+            {
+                _settings.CanShoot = true;
+                onReloadEnd?.Invoke();
+            };
+
+            if (_timer.Active)
+            {
+                _timer.Stop();
+                Debug.LogWarning(GetType().Name + " broken timer");
+            }
+
+            _timer.Initialize(
+                _settings.CurrentAttackDelay, step: 0.05f, onEnd).Play();
         }
 
         public virtual void SetPause(bool active)
