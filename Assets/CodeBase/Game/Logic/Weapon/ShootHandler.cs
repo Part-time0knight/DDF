@@ -29,7 +29,7 @@ namespace Game.Logic.Weapon
             _settings.CanShoot = true;
         }
 
-        public void Initialize()
+        public virtual void Initialize()
         {
             _timer.Initialize(
                 time: 0f, step: 0f, 
@@ -38,7 +38,7 @@ namespace Game.Logic.Weapon
             
         }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
             _pauseHandler.UnsubscribeElement(this);
         }
@@ -54,6 +54,12 @@ namespace Game.Logic.Weapon
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="weponPos">World space position</param>
+        /// <param name="target">World space position</param>
+        /// <param name="onReloadEnd"></param>
         public virtual void Shoot(Vector2 weponPos, Vector2 target, Action onReloadEnd = null)
         {
             _currentBullet = _bulletPool

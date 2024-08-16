@@ -3,21 +3,44 @@ using Game.Logic.Handlers;
 using Game.Logic.StaticData;
 using Game.Logic.Weapon;
 using System;
-using System.Collections;
 using UnityEngine;
 
 namespace Game.Logic.Player
 {
     public class PlayerShootHandler : ShootHandler
     {
-        private Transform _weapon;
-        private bool _breakAutomatic = false;
+        private readonly Transform _weapon;
+        private readonly PlayerInput _playerInput;
 
-        public PlayerShootHandler(Bullet.Pool bulletPool, PlayerSettings settings, IPauseHandler pauseHandler,
-            Transform weaponPoint) : base(bulletPool, settings, pauseHandler)
+        private bool _breakAutomatic = false;
+        private Vector2 _target = Vector2.left;
+
+
+        public PlayerShootHandler(Bullet.Pool bulletPool, 
+            PlayerSettings settings, IPauseHandler pauseHandler,
+            Transform weaponPoint, PlayerInput playerInput) : base(bulletPool, settings, pauseHandler)
         {
             _weapon = weaponPoint;
             _settings.Owner = Tags.Player;
+            _playerInput = playerInput;
+        }
+
+        public override void Initialize()
+        {
+            base.Initialize();
+            _playerInput.InvokeMove += UpdateTarget;
+        }
+
+        public override void Dispose()
+        {
+            base.Dispose();
+            _playerInput.InvokeMove -= UpdateTarget;
+        }
+
+        private void UpdateTarget(Vector2 direction)
+        {
+            if (direction != Vector2.zero)
+                _target = direction + (Vector2)_weapon.position;
         }
 
         public void StartAutomatic()
@@ -36,7 +59,8 @@ namespace Game.Logic.Player
             do
             {
                 await UniTask.WaitWhile(() => _timer.Active);
-                Shoot(_weapon.position, Vector2.left);
+                if (!_breakAutomatic)
+                    Shoot(_weapon.position, _target);
             } while (!_breakAutomatic);
         }
 

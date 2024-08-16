@@ -8,7 +8,7 @@ namespace Game.Logic.Player.PlayerFsm.States
 {
     public class Run : Hitable
     {
-        private readonly PlayerShootHandler.PlayerSettings _playerSettings;
+        private readonly PlayerShootHandler _playerShoot;
         private readonly UnitAnimationWrapper _animation;
         private readonly PlayerInput _playerInput;
         private readonly PlayerMoveHandler _playerMove;
@@ -19,13 +19,13 @@ namespace Game.Logic.Player.PlayerFsm.States
         public Run(IGameStateMachine stateMachine, PlayerInput playerInput,
             UnitAnimationWrapper animation, PlayerMoveHandler playerMove,
             Rigidbody2D body, PlayerDamageHandler.PlayerSettings damageSettings,
-            PlayerShootHandler.PlayerSettings playerSettings) : base(stateMachine, damageSettings)
+            PlayerShootHandler playerShoot) : base(stateMachine, damageSettings)
         {
             _playerInput = playerInput;
             _animation = animation;
             _playerMove = playerMove;
             _transform = body.transform;
-            _playerSettings = playerSettings;
+            _playerShoot = playerShoot;
             _standartScale = new(
                 _transform.localScale.x,
                 _transform.localScale.y,
@@ -37,8 +37,10 @@ namespace Game.Logic.Player.PlayerFsm.States
             base.OnEnter();
             _playerInput.InvokeMoveButtonsUp += OnMoveEnd;
             _playerInput.InvokeMove += Move;
-            //_playerInput.InvokeAttackButton += OnAttack;
             _playerInput.InvokeMoveHorizontal += OnMoveHorizontal;
+
+            _playerShoot.StartAutomatic();
+
             _animation.PlayAnimation(AnimationNames.Run);
 
         }
@@ -63,21 +65,13 @@ namespace Game.Logic.Player.PlayerFsm.States
 
         }
 
-        //private void OnAttack()
-        //{
-        //    _playerMove.Stop();
-        //    if (_playerSettings.CanShoot)
-        //        _stateMachine.Enter<Attack>();
-
-        //}
-
         public override void OnExit()
         {
             base.OnExit();
             _playerInput.InvokeMoveButtonsUp -= OnMoveEnd;
             _playerInput.InvokeMove -= Move;
-            //_playerInput.InvokeAttackButton -= OnAttack;
             _playerInput.InvokeMoveHorizontal -= OnMoveHorizontal;
+            _playerShoot.StopAutomatic();
         }
 
 
