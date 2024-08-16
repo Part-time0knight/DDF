@@ -37,12 +37,6 @@ namespace Game.Logic.Player
             _playerInput.InvokeMove -= UpdateTarget;
         }
 
-        private void UpdateTarget(Vector2 direction)
-        {
-            if (direction != Vector2.zero)
-                _target = direction + (Vector2)_weapon.position;
-        }
-
         public void StartAutomatic()
         {
             _breakAutomatic = false;
@@ -64,6 +58,11 @@ namespace Game.Logic.Player
             } while (!_breakAutomatic);
         }
 
+        private void UpdateTarget(Vector2 direction)
+        {
+            if (direction != Vector2.zero)
+                _target = direction + (Vector2)_weapon.position;
+        }
 
         [Serializable]
         public class PlayerSettings : Settings

@@ -6,7 +6,6 @@ namespace Game.Logic.Player.PlayerFsm.States
 {
     public class Idle : Hitable
     {
-        private readonly PlayerShootHandler.PlayerSettings _shootSettings;
         private readonly UnitAnimationWrapper _animation;
         private readonly PlayerInput _playerInput;
         private readonly PlayerShootHandler _playerShoot;
@@ -15,12 +14,10 @@ namespace Game.Logic.Player.PlayerFsm.States
         public Idle(IGameStateMachine stateMachine,
             PlayerInput playerInput, UnitAnimationWrapper animation,
             PlayerDamageHandler.PlayerSettings damageSettings,
-            PlayerShootHandler.PlayerSettings shootSettings,
             PlayerShootHandler _shootHandler) : base(stateMachine, damageSettings)
         {
             _playerInput = playerInput;
             _animation = animation;
-            _shootSettings = shootSettings;
             _playerShoot = _shootHandler;
         }
 
@@ -29,7 +26,6 @@ namespace Game.Logic.Player.PlayerFsm.States
             base.OnEnter();
             _playerInput.InvokeMoveButtonsDown += OnMoveBegin;
             _playerShoot.StartAutomatic();
-            //_playerInput.InvokeAttackButton += OnAttack;
             _animation.PlayAnimation(AnimationNames.Idle);
         }
 
@@ -38,19 +34,11 @@ namespace Game.Logic.Player.PlayerFsm.States
             base.OnExit();
             _playerShoot.StopAutomatic();
             _playerInput.InvokeMoveButtonsDown -= OnMoveBegin;
-            //_playerInput.InvokeAttackButton -= OnAttack;
         }
 
         private void OnMoveBegin()
         {
             _stateMachine.Enter<Run>();
         }
-
-        //private void OnAttack()
-        //{
-        //    if (_shootSettings.CanShoot)
-        //        _stateMachine.Enter<Attack>();
-        //}
-
     }
 }
