@@ -28,7 +28,7 @@ namespace Game.Logic.Player.PlayerFsm.States
         {
             base.OnEnter();
             _shootHandler.Shoot(_playerInput.MousePosition());
-            //_animation.PlayAnimation(AnimationNames.Attack + AnimationNames.Magic, OnAttackEnd);
+            _animation.PlayAnimation(AnimationNames.Attack + AnimationNames.Magic, OnAttackEnd);
         }
 
         private void OnAttackEnd()
