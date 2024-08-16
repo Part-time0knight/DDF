@@ -9,31 +9,36 @@ namespace Game.Logic.Player.PlayerFsm.States
         private readonly PlayerShootHandler.PlayerSettings _shootSettings;
         private readonly UnitAnimationWrapper _animation;
         private readonly PlayerInput _playerInput;
+        private readonly PlayerShootHandler _playerShoot;
 
 
         public Idle(IGameStateMachine stateMachine,
             PlayerInput playerInput, UnitAnimationWrapper animation,
             PlayerDamageHandler.PlayerSettings damageSettings,
-            PlayerShootHandler.PlayerSettings shootSettings) : base(stateMachine, damageSettings)
+            PlayerShootHandler.PlayerSettings shootSettings,
+            PlayerShootHandler _shootHandler) : base(stateMachine, damageSettings)
         {
             _playerInput = playerInput;
             _animation = animation;
             _shootSettings = shootSettings;
+            _playerShoot = _shootHandler;
         }
 
         public override void OnEnter()
         {
             base.OnEnter();
             _playerInput.InvokeMoveButtonsDown += OnMoveBegin;
-            _playerInput.InvokeAttackButton += OnAttack;
+            _playerShoot.StartAutomatic();
+            //_playerInput.InvokeAttackButton += OnAttack;
             _animation.PlayAnimation(AnimationNames.Idle);
         }
 
         public override void OnExit()
         {
             base.OnExit();
+            _playerShoot.StopAutomatic();
             _playerInput.InvokeMoveButtonsDown -= OnMoveBegin;
-            _playerInput.InvokeAttackButton -= OnAttack;
+            //_playerInput.InvokeAttackButton -= OnAttack;
         }
 
         private void OnMoveBegin()
@@ -41,11 +46,11 @@ namespace Game.Logic.Player.PlayerFsm.States
             _stateMachine.Enter<Run>();
         }
 
-        private void OnAttack()
-        {
-            if (_shootSettings.CanShoot)
-                _stateMachine.Enter<Attack>();
-        }
+        //private void OnAttack()
+        //{
+        //    if (_shootSettings.CanShoot)
+        //        _stateMachine.Enter<Attack>();
+        //}
 
     }
 }

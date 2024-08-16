@@ -17,7 +17,7 @@ namespace Game.Logic.Player
 
         public event Action<Vector2> InvokeMove;
 
-        public event Action InvokeAttackButton;
+        //public event Action InvokeAttackButton;
         public event Action InvokeSpellButton;
 
         private bool _isHorizontal;
@@ -93,8 +93,8 @@ namespace Game.Logic.Player
             if (OnMoveButtonUp())
                 InvokeMoveButtonsUp?.Invoke();
 
-            if (OnAttackButton())
-                InvokeAttackButton?.Invoke();
+            //if (OnAttackButton())
+                //InvokeAttackButton?.Invoke();
             if (OnSpellButton())
                 InvokeSpellButton?.Invoke();
         }

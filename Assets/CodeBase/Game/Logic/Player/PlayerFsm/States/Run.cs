@@ -37,7 +37,7 @@ namespace Game.Logic.Player.PlayerFsm.States
             base.OnEnter();
             _playerInput.InvokeMoveButtonsUp += OnMoveEnd;
             _playerInput.InvokeMove += Move;
-            _playerInput.InvokeAttackButton += OnAttack;
+            //_playerInput.InvokeAttackButton += OnAttack;
             _playerInput.InvokeMoveHorizontal += OnMoveHorizontal;
             _animation.PlayAnimation(AnimationNames.Run);
 
@@ -63,20 +63,20 @@ namespace Game.Logic.Player.PlayerFsm.States
 
         }
 
-        private void OnAttack()
-        {
-            _playerMove.Stop();
-            if (_playerSettings.CanShoot)
-                _stateMachine.Enter<Attack>();
+        //private void OnAttack()
+        //{
+        //    _playerMove.Stop();
+        //    if (_playerSettings.CanShoot)
+        //        _stateMachine.Enter<Attack>();
 
-        }
+        //}
 
         public override void OnExit()
         {
             base.OnExit();
             _playerInput.InvokeMoveButtonsUp -= OnMoveEnd;
             _playerInput.InvokeMove -= Move;
-            _playerInput.InvokeAttackButton -= OnAttack;
+            //_playerInput.InvokeAttackButton -= OnAttack;
             _playerInput.InvokeMoveHorizontal -= OnMoveHorizontal;
         }
 
