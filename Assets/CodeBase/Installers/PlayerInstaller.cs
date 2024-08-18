@@ -17,9 +17,9 @@ namespace Installers
         {
             InstallFactories();
             InstallPlayerComponents();
-
-            InstallFsm();
             InstallViewModels();
+            InstallFsm();
+
         }
 
         private void InstallFsm()

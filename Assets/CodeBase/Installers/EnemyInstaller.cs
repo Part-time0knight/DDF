@@ -1,5 +1,6 @@
 using Game.Logic.Enemy;
 using Game.Logic.Enemy.EnemyFsm;
+using Game.Presentation.ViewModel;
 using System;
 using UnityEngine;
 using Zenject;
@@ -11,8 +12,11 @@ public class EnemyInstaller : MonoInstaller
     public override void InstallBindings()
     {
         InstallFactories();
+        InstallViewModels();
         InstallFsm();
+
         InstallPlayerComponents();
+
     }
 
     private void InstallPlayerComponents()
@@ -24,9 +28,16 @@ public class EnemyInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<EnemyDamageHandler>().AsSingle();
     }
 
+    private void InstallViewModels()
+    {
+        Container
+            .BindInterfacesAndSelfTo<EnemyViewModel>()
+            .AsSingle()
+            .NonLazy();
+    }
+
     private void InstallFsm()
     {
-
         Container
             .BindInterfacesAndSelfTo<EnemyFsm>()
             .AsSingle()

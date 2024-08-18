@@ -14,11 +14,12 @@ namespace Game.Logic.Enemy.EnemyFsm
         public void Initialize()
         {
             StateResolve();
-            Enter<Run>();
+            Enter<Initialize>();
         }
 
         protected void StateResolve()
         {
+            _states.Add(typeof(Initialize), _factory.Create<Initialize>());
             _states.Add(typeof(Run), _factory.Create<Run>());
             _states.Add(typeof(Dead), _factory.Create<Dead>());
         }
