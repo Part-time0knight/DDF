@@ -11,7 +11,7 @@ namespace Game.Logic.Weapon
 
         protected Vector2 _direction = Vector2.zero;
         protected Vector2 _sampleDirection = Vector2.zero;
-        protected BulletMove _bulletMove;
+        protected BulletMoveHandler _bulletMove;
         protected string _owner;
 
         public void SetPause(bool active)
@@ -36,7 +36,7 @@ namespace Game.Logic.Weapon
         }
 
         [Inject]
-        private void Construct(BulletMove bulletMove)
+        private void Construct(BulletMoveHandler bulletMove)
         {
             _bulletMove = bulletMove;
         }

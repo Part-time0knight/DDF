@@ -33,9 +33,7 @@ namespace Installers
 
         private void InstallPools()
         {
-
             Container.Bind<BulletBuffer>().FromComponentInNewPrefab(_bufferPrefab).AsSingle();
-
             Container.BindMemoryPool<Bullet, Bullet.Pool>()
                 .FromComponentInNewPrefab(_bulletPrfab);
         }

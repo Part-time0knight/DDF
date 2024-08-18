@@ -49,8 +49,11 @@ namespace Game.Logic.Handlers
         }
 
         public virtual void Move(Vector2 speedMultiplier)
-            => Velocity = CollisionCheck(speedMultiplier) * 
+        { 
+            Velocity = CollisionCheck(speedMultiplier) *
             _stats.CurrentSpeed * PauseSpeed();
+            _stats.CurrentPosition = _body.position;
+        }
 
 
         public void Stop()
@@ -81,6 +84,8 @@ namespace Game.Logic.Handlers
         {
             [field: SerializeField] public float Speed { get; private set; }
             public float CurrentSpeed { get; set; }
+
+            public Vector2 CurrentPosition { get; set; }
         }
     }
 }

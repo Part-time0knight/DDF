@@ -23,7 +23,6 @@ namespace Game.Logic.Player.PlayerFsm
             _states.Add(typeof(Initialize), _factory.Create<Initialize>());
             _states.Add(typeof(Idle), _factory.Create<Idle>());
             _states.Add(typeof(Run), _factory.Create<Run>());
-            //_states.Add(typeof(Attack), _factory.Create<Attack>());
             _states.Add(typeof(Dead), _factory.Create<Dead>());
         }
     }

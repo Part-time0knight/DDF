@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace Game.Logic.Misc
 {
-    public class BulletMove : MoveHandler
+    public class BulletMoveHandler : MoveHandler
     {
         public Action<GameObject> InvokeCollision;
 
         private Vector2 _speedMultiplier = Vector2.zero;
 
 
-        public BulletMove(Rigidbody2D body, BulletSettngs stats, IPauseHandler pauseHandler) : base(body, stats, pauseHandler)
+        public BulletMoveHandler(Rigidbody2D body, BulletSettngs stats, IPauseHandler pauseHandler) : base(body, stats, pauseHandler)
         {
         }
 
