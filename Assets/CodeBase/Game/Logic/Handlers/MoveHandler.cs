@@ -35,6 +35,7 @@ namespace Game.Logic.Handlers
 
             _collisionOffset = 0.1f;
             _stats.CurrentSpeed = _stats.Speed;
+            _stats.CurrentPosition = _body.position;
             _paused = false;
         }
 

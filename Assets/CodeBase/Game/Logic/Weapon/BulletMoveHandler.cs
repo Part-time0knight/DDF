@@ -8,7 +8,7 @@ namespace Game.Logic.Misc
     {
         public Action<GameObject> InvokeCollision;
 
-        private Vector2 _speedMultiplier = Vector2.zero;
+        //private Vector2 _speedMultiplier = Vector2.zero;
 
 
         public BulletMoveHandler(Rigidbody2D body, BulletSettngs stats, IPauseHandler pauseHandler) : base(body, stats, pauseHandler)
@@ -17,7 +17,7 @@ namespace Game.Logic.Misc
 
         protected override Vector2 CollisionCheck(Vector2 speedMultiplier)
         {
-            _body.Cast(_speedMultiplier, _filter, _raycasts, _stats.CurrentSpeed * Time.fixedDeltaTime + _collisionOffset);
+            _body.Cast(Vector2.zero, _filter, _raycasts, _stats.CurrentSpeed * Time.fixedDeltaTime + _collisionOffset);
 
             foreach (var hit in _raycasts)
                 InvokeCollision?.Invoke(hit.transform.gameObject);

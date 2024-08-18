@@ -1,7 +1,6 @@
 using Game.Logic.Enemy;
 using Game.Logic.Misc;
 using Game.Logic.Player;
-using Game.Logic.Weapon;
 using System;
 using UnityEngine;
 using Zenject;
@@ -33,6 +32,7 @@ namespace Installers
         public class EnemySettings
         {
             public EnemyMoveHandler.EnemySettings Move;
+            public EnemyDamageHandler.EnemySettings Hits;
         }
 
         public override void InstallBindings()
@@ -44,6 +44,7 @@ namespace Installers
             Container.BindInstance(Projectile.Move).AsSingle();
 
             Container.BindInstance(Enemy.Move).AsSingle();
+            Container.BindInstance(Enemy.Hits).AsSingle();
         }
     }
 }

@@ -12,7 +12,6 @@ public class EnemyInstaller : MonoInstaller
     {
         InstallFactories();
         InstallFsm();
-        InstallViewModels();
         InstallPlayerComponents();
     }
 
@@ -31,14 +30,6 @@ public class EnemyInstaller : MonoInstaller
             .BindInterfacesAndSelfTo<EnemyFsm>()
             .AsSingle()
             .NonLazy();
-    }
-
-    private void InstallViewModels()
-    {
-        //Container
-        //    .BindInterfacesAndSelfTo<PlayerViewModel>()
-        //    .AsSingle()
-        //    .NonLazy();
     }
 
     private void InstallFactories()

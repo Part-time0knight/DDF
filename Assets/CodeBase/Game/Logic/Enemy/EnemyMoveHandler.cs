@@ -7,6 +7,8 @@ namespace Game.Logic.Enemy
 {
     public class EnemyMoveHandler : MoveHandler
     {
+        public Action<GameObject> InvokeCollision;
+
         private readonly PlayerMoveHandler.PlayerSettings _playerSettings;
         private Vector2 _playerDirection;
 
@@ -22,6 +24,15 @@ namespace Game.Logic.Enemy
         {
             _playerDirection = (_playerSettings.CurrentPosition - _stats.CurrentPosition).normalized;
             Move(_playerDirection);
+        }
+
+        protected override Vector2 CollisionCheck(Vector2 speedMultiplier)
+        {
+            _body.Cast(speedMultiplier, _filter, _raycasts, _stats.CurrentSpeed * Time.fixedDeltaTime + _collisionOffset);
+
+            foreach (var hit in _raycasts)
+                InvokeCollision?.Invoke(hit.transform.gameObject);
+            return speedMultiplier;
         }
 
         [Serializable]

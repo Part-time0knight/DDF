@@ -20,7 +20,7 @@ namespace Game.Logic.Enemy.EnemyFsm
         protected void StateResolve()
         {
             _states.Add(typeof(Run), _factory.Create<Run>());
-            //_states.Add(typeof(Dead), _factory.Create<Dead>());
+            _states.Add(typeof(Dead), _factory.Create<Dead>());
         }
     }
 }
