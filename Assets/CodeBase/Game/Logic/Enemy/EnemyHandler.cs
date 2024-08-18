@@ -1,21 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Game.Logic.Handlers;
+using Zenject;
 
 namespace Game.Logic.Enemy
 {
-    public class EnemyHandler : MonoBehaviour
+    public class EnemyHandler : UnitHandler
     {
-        // Start is called before the first frame update
-        void Start()
-        {
+        private EnemyDamageHandler _damageHandler;
 
+        public override void MakeCollizion(int damage)
+            => TakeDamage(damage);
+
+        public void TakeDamage(int damage)
+        {
+            _damageHandler.TakeDamage(damage);
         }
 
-        // Update is called once per frame
-        void Update()
+        [Inject]
+        private void Construct(EnemyDamageHandler damageHandler)
         {
-
+            _damageHandler = damageHandler;
         }
     }
 }

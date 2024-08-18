@@ -1,3 +1,4 @@
+using Game.Logic.Enemy;
 using Game.Logic.Handlers;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,8 @@ namespace Game.Logic.Weapon
 
         protected List<Bullet> _bullets = new();
         protected Bullet _currentBullet;
+
+        private UnitHandler _unitHandler;
 
         public ShootHandler(Bullet.Pool bulletPool, Settings settings,
             IPauseHandler pauseHandler)
@@ -63,7 +66,7 @@ namespace Game.Logic.Weapon
         public virtual void Shoot(Vector2 weponPos, Vector2 target, Action onReloadEnd = null)
         {
             _currentBullet = _bulletPool
-                .Spawn(weponPos, target, _settings.Owner);
+                .Spawn(weponPos, target);
             _bullets.Add(_currentBullet);
             _settings.InvokeShot?.Invoke();
             _settings.CanShoot = false;
@@ -99,11 +102,15 @@ namespace Game.Logic.Weapon
 
         }
 
-        private void Hit(Bullet bullet, GameObject target)
+        protected virtual void Hit(Bullet bullet, GameObject target)
         {
+            _unitHandler = target.GetComponent<UnitHandler>();
+            if (target.tag == _settings.Owner || !_unitHandler)
+                return;
             bullet.InvokeHit -= Hit;
             _bulletPool.Despawn(bullet);
             _bullets.Remove(bullet);
+            _unitHandler.MakeCollizion(_settings.CurrentDamage);
         }
 
         [Serializable]
@@ -115,11 +122,11 @@ namespace Game.Logic.Weapon
             public Action InvokeShot;
 
             [field: SerializeField] public float AttackDelay { get; private set; }
-            [field: SerializeField] public float Damage { get; private set; }
+            [field: SerializeField] public int Damage { get; private set; }
 
             public float CurrentAttackDelay { get; set; }
             
-            public float CurrentDamage { get; set; }
+            public int CurrentDamage { get; set; }
 
             public bool CanShoot { get; set; }
 

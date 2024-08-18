@@ -13,6 +13,7 @@ namespace Game.Logic.Misc
 
         public BulletMoveHandler(Rigidbody2D body, BulletSettngs stats, IPauseHandler pauseHandler) : base(body, stats, pauseHandler)
         {
+            _filter.useTriggers = true;
         }
 
         protected override Vector2 CollisionCheck(Vector2 speedMultiplier)

@@ -26,3 +26,5 @@ MonoBehaviour:
   <Enemy>k__BackingField:
     Move:
       <Speed>k__BackingField: 4
+    Hits:
+      <HitPoints>k__BackingField: 6

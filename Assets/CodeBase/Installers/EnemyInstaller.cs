@@ -21,6 +21,7 @@ public class EnemyInstaller : MonoInstaller
 
         Container.BindInterfacesAndSelfTo<EnemyMoveHandler>().AsSingle();
         Container.BindInterfacesAndSelfTo<EnemyTickHandler>().AsSingle();
+        Container.BindInterfacesAndSelfTo<EnemyDamageHandler>().AsSingle();
     }
 
     private void InstallFsm()

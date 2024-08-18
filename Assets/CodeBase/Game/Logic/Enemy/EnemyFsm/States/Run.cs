@@ -33,6 +33,7 @@ namespace Game.Logic.Enemy.EnemyFsm.States
         {
             _tickHandler.OnFixedTick -= UpdateMove;
             _damageSettings.InvokeHitPointsChange -= OnHit;
+            _moveHandler.Stop();
         }
 
         private void UpdateMove()
