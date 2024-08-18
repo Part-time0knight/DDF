@@ -14,7 +14,6 @@ namespace Game.Logic.Player
         private readonly EnemyMoveHandler.EnemySettings _enemySettings;
 
         private bool _breakAutomatic = false;
-        private Vector2 _target = Vector2.left;
 
         public PlayerShootHandler(Bullet.Pool bulletPool, 
             PlayerSettings settings,

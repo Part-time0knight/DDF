@@ -105,12 +105,13 @@ namespace Game.Logic.Weapon
         protected virtual void Hit(Bullet bullet, GameObject target)
         {
             _unitHandler = target.GetComponent<UnitHandler>();
-            if (target.tag == _settings.Owner || !_unitHandler)
+            if (target.tag == _settings.Owner)
                 return;
             bullet.InvokeHit -= Hit;
             _bulletPool.Despawn(bullet);
             _bullets.Remove(bullet);
-            _unitHandler.MakeCollizion(_settings.CurrentDamage);
+            if (_unitHandler)
+                _unitHandler.MakeCollizion(_settings.CurrentDamage);
         }
 
         [Serializable]
