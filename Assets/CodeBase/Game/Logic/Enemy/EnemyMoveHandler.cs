@@ -11,6 +11,7 @@ namespace Game.Logic.Enemy
 
         private readonly PlayerMoveHandler.PlayerSettings _playerSettings;
         private Vector2 _playerDirection;
+        private Vector3 _standartScale;
 
         public EnemyMoveHandler(Rigidbody2D body, EnemySettingsHandler stats,
             IPauseHandler pause, PlayerMoveHandler.PlayerSettings playerSettings)
@@ -18,11 +19,20 @@ namespace Game.Logic.Enemy
         {
             _playerSettings = playerSettings;
             _playerDirection = Vector2.zero;
+            _standartScale = new(
+                _body.transform.localScale.x,
+                _body.transform.localScale.y,
+                _body.transform.localScale.z);
         }
 
         public override void Move(Vector2 speedMultiplier)
-            => Velocity = CollisionCheck(speedMultiplier) *
-                _stats.CurrentSpeed * PauseSpeed();
+        {
+            base.Move(speedMultiplier);
+            Vector3 scale = new(
+                _standartScale.x * Mathf.Sign(speedMultiplier.x),
+                _standartScale.y, _standartScale.z);
+            _body.transform.localScale = scale;
+        }
 
         public void MoveToPlayer()
         {
