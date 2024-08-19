@@ -32,7 +32,7 @@ MonoBehaviour:
     Move:
       <Speed>k__BackingField: 3
     Hits:
-      <HitPoints>k__BackingField: 3
+      <HitPoints>k__BackingField: 2
     Damage:
       <Damage>k__BackingField: 1
       <DamageDelay>k__BackingField: 0.5
