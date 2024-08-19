@@ -1,4 +1,5 @@
 using Game.Logic.Handlers;
+using Game.Logic.Player.Animation;
 using System;
 using UnityEngine;
 
@@ -8,13 +9,18 @@ namespace Game.Logic.Player
     {
 
         private Vector3 _standartScale;
+        private UnitAnimationWrapper _animation;
 
-        public PlayerMoveHandler(Rigidbody2D body, PlayerSettings stats, IPauseHandler pauseHandler) : base(body, stats, pauseHandler)
+        public PlayerMoveHandler(Rigidbody2D body,
+            PlayerSettings stats,
+            IPauseHandler pauseHandler,
+            UnitAnimationWrapper animation) : base(body, stats, pauseHandler)
         {
+            _animation = animation;
             _standartScale = new(
-                _body.transform.localScale.x,
-                _body.transform.localScale.y,
-                _body.transform.localScale.z);
+                _animation.transform.localScale.x,
+                _animation.transform.localScale.y,
+                _animation.transform.localScale.z);
         }
 
         public override void Move(Vector2 speedMultiplier)
@@ -23,7 +29,7 @@ namespace Game.Logic.Player
             Vector3 scale = new(
                 _standartScale.x * Mathf.Sign(speedMultiplier.x),
                 _standartScale.y, _standartScale.z);
-            _body.transform.localScale = scale;
+            _animation.transform.localScale = scale;
         }
 
         [Serializable]
