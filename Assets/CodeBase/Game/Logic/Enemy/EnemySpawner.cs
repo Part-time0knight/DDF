@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
+using static UnityEngine.EventSystems.EventTrigger;
 
 namespace Game.Logic.Enemy
 {
@@ -76,9 +77,18 @@ namespace Game.Logic.Enemy
                 {
                     _timer.Initialize(_settings.Delay).Play();
                     CalculatePosition();
-                    _enemies.Add(_pool.Spawn(_position));
+                    var enemy = _pool.Spawn(_position);
+                    enemy.InvokeDeath += OnDeath;
+                    _enemies.Add(enemy);
                 }
             } while (!_breakTimer);
+        }
+
+        private void OnDeath(EnemyHandler enemyHandler)
+        {
+            _enemies.Remove(enemyHandler);
+            _pool.Despawn(enemyHandler);
+            enemyHandler.InvokeDeath -= OnDeath;
         }
 
         private void CalculatePosition()

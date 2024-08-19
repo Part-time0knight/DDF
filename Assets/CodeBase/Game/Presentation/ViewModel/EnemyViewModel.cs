@@ -24,6 +24,7 @@ namespace Game.Presentation.ViewModel
         {
             base.HandleOpenedWindow(uiWindow);
             _hitsSettings.InvokeHitPointsChange += HitPointsUpdate;
+            HitPointsUpdate();
         }
 
         protected override void HandleClosedWindow(Type uiWindow)

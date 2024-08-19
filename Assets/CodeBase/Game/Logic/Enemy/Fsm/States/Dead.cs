@@ -7,14 +7,11 @@ namespace Game.Logic.Enemy.Fsm.States
 {
     public class Dead : IState
     {
-        private readonly IGameStateMachine _stateMachine;
         private readonly Rigidbody2D _body;
         private List<Collider2D> _colliders = new();
 
-        public Dead(IGameStateMachine stateMachine,
-            Rigidbody2D body) 
+        public Dead(Rigidbody2D body) 
         { 
-            _stateMachine = stateMachine;
             _body = body;
         }
 
@@ -28,7 +25,6 @@ namespace Game.Logic.Enemy.Fsm.States
         public void OnExit()
         {
             _colliders.ForEach((collider) => collider.enabled = true);
-            _stateMachine.Enter<Run>();
         }
     }
 }
