@@ -17,7 +17,6 @@ namespace Game.Logic.Enemy
         private readonly EnemyHandler.Pool _pool;
         private readonly Timer _timer;
         private readonly Settings _settings;
-        private readonly EnemyMoveHandler.EnemySettings _moveSettings;
         private readonly PlayerMoveHandler.PlayerSettings _playerSettings;
 
         private readonly List<EnemyHandler> _enemies;
@@ -27,14 +26,12 @@ namespace Game.Logic.Enemy
 
         public EnemySpawner(IPauseHandler pauseHandler,
             EnemyHandler.Pool pool, Settings settings,
-            EnemyMoveHandler.EnemySettings enemySettings,
             PlayerMoveHandler.PlayerSettings playerSettings)
         {
             _pauseHandler = pauseHandler;
             _pool = pool;
             _timer = new();
             _settings = settings;
-            _moveSettings = enemySettings;
             _playerSettings = playerSettings;
             _enemies = new();
         }
@@ -111,11 +108,11 @@ namespace Game.Logic.Enemy
         {
             if (_enemies.Count == 0)
                 return;
-            _moveSettings.CurrentPosition = _enemies[0].GetPosition();
+            NearestEnemy = _enemies[0].GetPosition();
             foreach (var enemy in _enemies)
             {
                 if (Vector2.Distance(_playerSettings.CurrentPosition, enemy.GetPosition()) <
-                    Vector2.Distance(_moveSettings.CurrentPosition, _playerSettings.CurrentPosition))
+                    Vector2.Distance(NearestEnemy, _playerSettings.CurrentPosition))
                     NearestEnemy = enemy.GetPosition();
             }
         }

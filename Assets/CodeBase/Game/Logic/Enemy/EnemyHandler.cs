@@ -1,6 +1,7 @@
 using Game.Logic.Enemy.Fsm;
 using Game.Logic.Enemy.Fsm.States;
 using Game.Logic.Handlers;
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -8,6 +9,8 @@ namespace Game.Logic.Enemy
 {
     public class EnemyHandler : UnitHandler
     {
+        public event Action InvokeDeath;
+
         private EnemyDamageHandler _damageHandler;
         private EnemyFsm _fsm;
 

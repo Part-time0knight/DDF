@@ -24,6 +24,10 @@ namespace Installers
 
         private void InstallFsm()
         {
+            Container
+                .BindInterfacesTo<PlayerWindowFsm>()
+                .AsSingle()
+                .NonLazy();
 
             Container
                 .BindInterfacesAndSelfTo<PlayerFsm>()

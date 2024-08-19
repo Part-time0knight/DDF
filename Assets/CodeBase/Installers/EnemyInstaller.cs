@@ -41,6 +41,11 @@ public class EnemyInstaller : MonoInstaller
     private void InstallFsm()
     {
         Container
+            .BindInterfacesTo<EnemyWindowFsm>()
+            .AsSingle()
+            .NonLazy();
+
+        Container
             .BindInterfacesAndSelfTo<EnemyFsm>()
             .AsSingle()
             .NonLazy();
