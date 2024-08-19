@@ -3,7 +3,7 @@ using Game.Logic.Player;
 using Zenject;
 using UnityEngine;
 using System;
-using Game.Logic.Player.PlayerFsm;
+using Game.Logic.Player.Fsm;
 using Game.Presentation.ViewModel;
 
 namespace Installers

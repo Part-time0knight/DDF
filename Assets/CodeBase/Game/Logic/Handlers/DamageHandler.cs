@@ -27,10 +27,24 @@ namespace Game.Logic.Handlers
 
         public class Settings
         {
-            [field: SerializeField] public int HitPoints { get; private set; }
+            [field: SerializeField] public int HitPoints { get; protected set; }
             public int CurrentHits { get; set; }
 
             public Action InvokeHitPointsChange;
+
+            public Settings()
+            { }
+
+            public Settings(int hitPoints, int currentHits)
+            {
+                HitPoints = hitPoints;
+                CurrentHits = currentHits;
+            }
+
+            public Settings(Settings settings) : this(
+                settings.HitPoints,
+                settings.CurrentHits)
+            { }
         }
     }
 }

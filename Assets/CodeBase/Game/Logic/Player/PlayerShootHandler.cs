@@ -11,7 +11,7 @@ namespace Game.Logic.Player
     public class PlayerShootHandler : ShootHandler
     {
         private readonly Transform _weapon;
-        private readonly EnemyMoveHandler.EnemySettings _enemySettings;
+        private readonly EnemySpawner _enemy;
 
         private bool _breakAutomatic = false;
 
@@ -19,11 +19,11 @@ namespace Game.Logic.Player
             PlayerSettings settings,
             IPauseHandler pauseHandler,
             Transform weaponPoint,
-            EnemyMoveHandler.EnemySettings enemySettings) : base(bulletPool, settings, pauseHandler)
+            EnemySpawner enemy) : base(bulletPool, settings, pauseHandler)
         {
             _weapon = weaponPoint;
             _settings.Owner = Tags.Player;
-            _enemySettings = enemySettings;
+            _enemy = enemy;
 
         }
 
@@ -54,7 +54,7 @@ namespace Game.Logic.Player
             {
                 await UniTask.WaitWhile(() => _timer.Active);
                 if (!_breakAutomatic)
-                    Shoot(_weapon.position, _enemySettings.CurrentPosition);
+                    Shoot(_weapon.position, _enemy.NearestEnemy);
             } while (!_breakAutomatic);
         }
 

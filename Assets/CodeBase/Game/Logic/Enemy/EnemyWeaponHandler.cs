@@ -11,9 +11,9 @@ namespace Game.Logic.Enemy
         private readonly Timer _timer = new();
         private readonly PlayerHandler _playerHandler;
 
-        public EnemyWeaponHandler(Settings settings, PlayerHandler playerHandler)
+        public EnemyWeaponHandler(EnemySettingsHandler settings, PlayerHandler playerHandler)
         {
-            _settings = settings;
+            _settings = settings.WeaponSettings;
             _settings.CurrentDamage = _settings.Damage;
             _playerHandler = playerHandler;
         }
@@ -33,6 +33,21 @@ namespace Game.Logic.Enemy
             [field: SerializeField] public float DamageDelay { get; private set; }
             public int CurrentDamage { get; set; }
 
+            public Settings()
+            { }
+
+            public Settings(int damage, int currentDamage, float damageDelay)
+            {
+                Damage = damage;
+                CurrentDamage = currentDamage;
+                DamageDelay = damageDelay;
+            }
+
+            public Settings(Settings settings) : this(
+                settings.Damage,
+                settings.CurrentDamage,
+                settings.DamageDelay)
+            { }
         }
     }
 }

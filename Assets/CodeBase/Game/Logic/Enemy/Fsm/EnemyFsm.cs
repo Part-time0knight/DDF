@@ -1,15 +1,14 @@
+using Game.Logic.Enemy.Fsm.States;
 using Core.Domain.Factories;
 using Core.Infrastructure.GameFsm;
-using Game.Logic.Player.PlayerFsm.States;
 using Zenject;
 
-namespace Game.Logic.Player.PlayerFsm
+namespace Game.Logic.Enemy.Fsm
 {
-    public class PlayerFsm : AbstractGameStateMachine, IInitializable
+    public class EnemyFsm : AbstractGameStateMachine, IInitializable
     {
-        public PlayerFsm(IStatesFactory factory) : base(factory)
+        public EnemyFsm(IStatesFactory factory) : base(factory)
         {
-
         }
 
         public void Initialize()
@@ -18,10 +17,9 @@ namespace Game.Logic.Player.PlayerFsm
             Enter<Initialize>();
         }
 
-        private void StateResolve()
+        protected void StateResolve()
         {
             _states.Add(typeof(Initialize), _factory.Create<Initialize>());
-            _states.Add(typeof(Idle), _factory.Create<Idle>());
             _states.Add(typeof(Run), _factory.Create<Run>());
             _states.Add(typeof(Dead), _factory.Create<Dead>());
         }

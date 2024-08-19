@@ -1,7 +1,7 @@
 using Core.Infrastructure.GameFsm;
 using Core.Infrastructure.GameFsm.States;
 
-namespace Game.Logic.Player.PlayerFsm.States
+namespace Game.Logic.Player.Fsm.States
 {
     public abstract class Hitable : IState
     {

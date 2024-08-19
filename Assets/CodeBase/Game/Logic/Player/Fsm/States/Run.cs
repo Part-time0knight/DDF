@@ -4,7 +4,7 @@ using Game.Logic.StaticData;
 using UnityEngine;
 
 
-namespace Game.Logic.Player.PlayerFsm.States
+namespace Game.Logic.Player.Fsm.States
 {
     public class Run : Hitable
     {
@@ -63,6 +63,12 @@ namespace Game.Logic.Player.PlayerFsm.States
             _playerMove.Stop();
             _stateMachine.Enter<Idle>();
 
+        }
+
+        protected override void OnHit()
+        {
+            base.OnHit();
+            _playerMove.Stop();
         }
 
         public override void OnExit()

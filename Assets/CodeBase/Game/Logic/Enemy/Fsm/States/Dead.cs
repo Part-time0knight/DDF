@@ -3,7 +3,7 @@ using Core.Infrastructure.GameFsm.States;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.Logic.Enemy.EnemyFsm.States
+namespace Game.Logic.Enemy.Fsm.States
 {
     public class Dead : IState
     {

@@ -83,10 +83,26 @@ namespace Game.Logic.Handlers
 
         public class Settings
         {
-            [field: SerializeField] public float Speed { get; private set; }
+            [field: SerializeField] public float Speed { get; protected set; }
             public float CurrentSpeed { get; set; }
 
             public Vector2 CurrentPosition { get; set; }
+
+            public Settings()
+            { }
+
+            public Settings(float speed, float currentSpeed, Vector2 currentPosition)
+            {
+                Speed = speed;
+                CurrentSpeed = currentSpeed;
+                CurrentPosition = currentPosition;
+            }
+
+            public Settings(Settings settings) : this(
+                settings.Speed,
+                settings.CurrentSpeed,
+                settings.CurrentPosition)
+            { }
         }
     }
 }

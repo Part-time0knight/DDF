@@ -1,7 +1,7 @@
 using Game.Domain.Factories.GameFsm;
 using Zenject;
 
-namespace Game.Logic.Player.PlayerFsm
+namespace Game.Logic.Player.Fsm
 {
     public class PlayerStatesFactory : StatesFactory
     {

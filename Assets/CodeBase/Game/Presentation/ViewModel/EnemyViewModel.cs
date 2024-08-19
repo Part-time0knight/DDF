@@ -15,9 +15,9 @@ namespace Game.Presentation.ViewModel
         protected override Type Window => typeof(EnemyView);
 
         public EnemyViewModel(IWindowFsm windowFsm,
-            EnemyDamageHandler.EnemySettings hitsSettings) : base(windowFsm)
+            EnemySettingsHandler settings) : base(windowFsm)
         {
-            _hitsSettings = hitsSettings;
+            _hitsSettings = settings.DamageSettings;
         }
 
         protected override void HandleOpenedWindow(Type uiWindow)

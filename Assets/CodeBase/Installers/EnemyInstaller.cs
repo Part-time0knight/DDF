@@ -1,5 +1,5 @@
 using Game.Logic.Enemy;
-using Game.Logic.Enemy.EnemyFsm;
+using Game.Logic.Enemy.Fsm;
 using Game.Presentation.ViewModel;
 using System;
 using UnityEngine;
@@ -22,11 +22,12 @@ public class EnemyInstaller : MonoInstaller
     private void InstallPlayerComponents()
     {
         Container.BindInstance(_settings.Body).AsSingle();
-
+        
         Container.BindInterfacesAndSelfTo<EnemyWeaponHandler>().AsSingle();
         Container.BindInterfacesAndSelfTo<EnemyMoveHandler>().AsSingle();
         Container.BindInterfacesAndSelfTo<EnemyTickHandler>().AsSingle();
         Container.BindInterfacesAndSelfTo<EnemyDamageHandler>().AsSingle();
+        Container.BindInterfacesAndSelfTo<EnemySettingsHandler>().AsSingle();
     }
 
     private void InstallViewModels()

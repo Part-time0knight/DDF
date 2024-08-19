@@ -2,6 +2,7 @@ using Game.Logic.Enemy;
 using Game.Logic.Misc;
 using Game.Logic.Player;
 using System;
+using System.ComponentModel;
 using UnityEngine;
 using Zenject;
 
@@ -12,7 +13,9 @@ namespace Installers
     {
         [field: SerializeField] public PlayerSettings Player { get; private set; }
         [field: SerializeField] public ProjectileSettings Projectile { get; private set; }
+        [field: SerializeField] public EnemySpawnerSettings SpawnerSettings { get; private set; }
         [field: SerializeField] public EnemySettings Enemy { get; private set; }
+
 
         [Serializable]
         public class PlayerSettings
@@ -36,6 +39,12 @@ namespace Installers
             public EnemyWeaponHandler.Settings Damage;
         }
 
+        [Serializable]
+        public class EnemySpawnerSettings
+        {
+            public EnemySpawner.Settings Spawner;
+        }
+
         public override void InstallBindings()
         {
             Container.BindInstance(Player.Weapon).AsSingle();
@@ -43,6 +52,8 @@ namespace Installers
             Container.BindInstance(Player.Hits).AsSingle();
 
             Container.BindInstance(Projectile.Move).AsSingle();
+
+            Container.BindInstance(SpawnerSettings.Spawner).AsSingle();
 
             Container.BindInstance(Enemy.Move).AsSingle();
             Container.BindInstance(Enemy.Hits).AsSingle();

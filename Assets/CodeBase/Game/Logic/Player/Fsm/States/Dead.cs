@@ -2,7 +2,7 @@ using Core.Infrastructure.GameFsm;
 using Game.Logic.Player.Animation;
 using Game.Logic.StaticData;
 
-namespace Game.Logic.Player.PlayerFsm.States
+namespace Game.Logic.Player.Fsm.States
 {
     public class Dead : Hitable
     {

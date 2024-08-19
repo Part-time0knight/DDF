@@ -6,7 +6,7 @@ using Game.Logic.StaticData;
 using Game.Presentation.View;
 using UnityEngine;
 
-namespace Game.Logic.Enemy.EnemyFsm.States
+namespace Game.Logic.Enemy.Fsm.States
 {
     public class Run : IState
     {
@@ -23,7 +23,7 @@ namespace Game.Logic.Enemy.EnemyFsm.States
             EnemyMoveHandler moveHandler,
             EnemyTickHandler tickHandler,
             EnemyWeaponHandler weapon,
-            EnemyDamageHandler.EnemySettings damageSettings)
+            EnemySettingsHandler settings)
         {
             _stateMachine = stateMachine;
             _windowFsm = windowFsm;
@@ -31,8 +31,7 @@ namespace Game.Logic.Enemy.EnemyFsm.States
             _moveHandler = moveHandler;
             _tickHandler = tickHandler;
             _weapon = weapon;
-            _damageSettings = damageSettings;
-            
+            _damageSettings = settings.DamageSettings;
         }
 
         public void OnEnter()

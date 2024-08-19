@@ -12,17 +12,21 @@ namespace Game.Logic.Enemy
         private readonly PlayerMoveHandler.PlayerSettings _playerSettings;
         private Vector2 _playerDirection;
 
-        public EnemyMoveHandler(Rigidbody2D body, EnemySettings stats,
+        public EnemyMoveHandler(Rigidbody2D body, EnemySettingsHandler stats,
             IPauseHandler pause, PlayerMoveHandler.PlayerSettings playerSettings)
-            : base(body, stats, pause)
+            : base(body, stats.MoveSettings, pause)
         {
             _playerSettings = playerSettings;
             _playerDirection = Vector2.zero;
         }
 
+        public override void Move(Vector2 speedMultiplier)
+            => Velocity = CollisionCheck(speedMultiplier) *
+                _stats.CurrentSpeed * PauseSpeed();
+
         public void MoveToPlayer()
         {
-            _playerDirection = (_playerSettings.CurrentPosition - _stats.CurrentPosition).normalized;
+            _playerDirection = (_playerSettings.CurrentPosition - _body.position).normalized;
             Move(_playerDirection);
         }
 
@@ -38,7 +42,8 @@ namespace Game.Logic.Enemy
         [Serializable]
         public class EnemySettings : Settings
         {
-
+            public EnemySettings(Settings settings) : base(settings)
+            { }
         }
     }
 }
