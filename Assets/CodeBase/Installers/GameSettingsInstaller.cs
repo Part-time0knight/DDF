@@ -33,6 +33,7 @@ namespace Installers
         {
             public EnemyMoveHandler.EnemySettings Move;
             public EnemyDamageHandler.EnemySettings Hits;
+            public EnemyWeaponHandler.Settings Damage;
         }
 
         public override void InstallBindings()
@@ -45,6 +46,7 @@ namespace Installers
 
             Container.BindInstance(Enemy.Move).AsSingle();
             Container.BindInstance(Enemy.Hits).AsSingle();
+            Container.BindInstance(Enemy.Damage).AsSingle();
         }
     }
 }

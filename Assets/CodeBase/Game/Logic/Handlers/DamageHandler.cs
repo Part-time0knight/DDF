@@ -21,6 +21,7 @@ namespace Game.Logic.Handlers
             if (_pauseHandler.Active)
                 return;
             _stats.CurrentHits -= damage;
+            _stats.CurrentHits = Mathf.Max(Mathf.Min(_stats.CurrentHits, _stats.HitPoints), 0);
             _stats.InvokeHitPointsChange?.Invoke();
         }
 

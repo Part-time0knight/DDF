@@ -23,6 +23,7 @@ public class EnemyInstaller : MonoInstaller
     {
         Container.BindInstance(_settings.Body).AsSingle();
 
+        Container.BindInterfacesAndSelfTo<EnemyWeaponHandler>().AsSingle();
         Container.BindInterfacesAndSelfTo<EnemyMoveHandler>().AsSingle();
         Container.BindInterfacesAndSelfTo<EnemyTickHandler>().AsSingle();
         Container.BindInterfacesAndSelfTo<EnemyDamageHandler>().AsSingle();

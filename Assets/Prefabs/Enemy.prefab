@@ -299,7 +299,7 @@ GameObject:
   - component: {fileID: 4551205676828217966}
   - component: {fileID: 2638426361454452200}
   - component: {fileID: 1031422388623179700}
-  - component: {fileID: 6271030883754623432}
+  - component: {fileID: 6903381741645205666}
   m_Layer: 0
   m_Name: EnemyCanvas
   m_TagString: Untagged
@@ -402,7 +402,7 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
---- !u!114 &6271030883754623432
+--- !u!114 &6903381741645205666
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -411,7 +411,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4144120231404297139}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41edb649a8d4155498f12f6e9ad878e0, type: 3}
+  m_Script: {fileID: 11500000, guid: cbdfd70ef9434d24cb4674a00658ffc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   OnAnimationShow:
@@ -420,7 +420,6 @@ MonoBehaviour:
   OnAnimationHide:
     m_PersistentCalls:
       m_Calls: []
-  _reloadBarImage: {fileID: 0}
   _hitsBarImage: {fileID: 473243370209021673}
 --- !u!1 &5040762080325144264
 GameObject:

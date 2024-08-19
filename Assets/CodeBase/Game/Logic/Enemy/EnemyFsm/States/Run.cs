@@ -1,7 +1,10 @@
 using Core.Infrastructure.GameFsm;
 using Core.Infrastructure.GameFsm.States;
 using Core.MVVM.Windows;
+using Game.Logic.Player;
+using Game.Logic.StaticData;
 using Game.Presentation.View;
+using UnityEngine;
 
 namespace Game.Logic.Enemy.EnemyFsm.States
 {
@@ -12,12 +15,14 @@ namespace Game.Logic.Enemy.EnemyFsm.States
 
         private readonly EnemyMoveHandler _moveHandler;
         private readonly EnemyTickHandler _tickHandler;
+        private readonly EnemyWeaponHandler _weapon;
         private readonly EnemyDamageHandler.EnemySettings _damageSettings;
 
         public Run(IGameStateMachine stateMachine,
             IWindowFsm windowFsm,
             EnemyMoveHandler moveHandler,
             EnemyTickHandler tickHandler,
+            EnemyWeaponHandler weapon,
             EnemyDamageHandler.EnemySettings damageSettings)
         {
             _stateMachine = stateMachine;
@@ -25,7 +30,9 @@ namespace Game.Logic.Enemy.EnemyFsm.States
 
             _moveHandler = moveHandler;
             _tickHandler = tickHandler;
+            _weapon = weapon;
             _damageSettings = damageSettings;
+            
         }
 
         public void OnEnter()
@@ -33,6 +40,7 @@ namespace Game.Logic.Enemy.EnemyFsm.States
             _windowFsm.OpenWindow(typeof(EnemyView), inHistory: false);
             _tickHandler.OnFixedTick += UpdateMove;
             _damageSettings.InvokeHitPointsChange += OnHit;
+            _moveHandler.InvokeCollision += HitPlayer;
         }
 
         public void OnExit()
@@ -40,7 +48,15 @@ namespace Game.Logic.Enemy.EnemyFsm.States
             _windowFsm.CloseWindow(typeof(EnemyView));
             _tickHandler.OnFixedTick -= UpdateMove;
             _damageSettings.InvokeHitPointsChange -= OnHit;
+            _moveHandler.InvokeCollision -= HitPlayer;
             _moveHandler.Stop();
+        }
+
+        private void HitPlayer(GameObject gameObject)
+        {
+            if (gameObject.tag != Tags.Player)
+                return;
+            _weapon.TickableDamage();
         }
 
         private void UpdateMove()
