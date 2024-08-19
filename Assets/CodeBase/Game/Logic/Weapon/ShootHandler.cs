@@ -36,10 +36,9 @@ namespace Game.Logic.Weapon
         public virtual void Initialize()
         {
             _timer.Initialize(
-                time: 0f, step: 0f, 
-                callback: () => _pauseHandler.SubscribeElement(this))
+                time: 0f, step: 0f, null)
                 .Play();
-            
+            _pauseHandler.SubscribeElement(this);
         }
 
         public virtual void Dispose()
@@ -47,7 +46,7 @@ namespace Game.Logic.Weapon
             _pauseHandler.UnsubscribeElement(this);
         }
 
-        public void OnPause(bool active)
+        public virtual void OnPause(bool active)
         {
             if (_timer.Active)
             {
