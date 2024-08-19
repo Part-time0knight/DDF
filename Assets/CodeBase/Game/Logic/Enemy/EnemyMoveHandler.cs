@@ -10,19 +10,34 @@ namespace Game.Logic.Enemy
         public Action<GameObject> InvokeCollision;
 
         private readonly PlayerMoveHandler.PlayerSettings _playerSettings;
+        private readonly Animator _animator;
         private Vector2 _playerDirection;
+        private Vector3 _standartScale;
 
-        public EnemyMoveHandler(Rigidbody2D body, EnemySettingsHandler stats,
-            IPauseHandler pause, PlayerMoveHandler.PlayerSettings playerSettings)
+        public EnemyMoveHandler(Rigidbody2D body,
+            EnemySettingsHandler stats,
+            IPauseHandler pause,
+            PlayerMoveHandler.PlayerSettings playerSettings,
+            Animator animator)
             : base(body, stats.MoveSettings, pause)
         {
             _playerSettings = playerSettings;
             _playerDirection = Vector2.zero;
+            _animator = animator;
+            _standartScale = new(
+                _animator.transform.localScale.x,
+                _animator.transform.localScale.y,
+                _animator.transform.localScale.z);
         }
 
         public override void Move(Vector2 speedMultiplier)
-            => Velocity = CollisionCheck(speedMultiplier) *
-                _stats.CurrentSpeed * PauseSpeed();
+        {
+            base.Move(speedMultiplier);
+            Vector3 scale = new(
+                _standartScale.x * Mathf.Sign(speedMultiplier.x),
+                _standartScale.y, _standartScale.z);
+            _animator.transform.localScale = scale;
+        }
 
         public void MoveToPlayer()
         {

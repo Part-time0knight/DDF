@@ -22,7 +22,8 @@ public class EnemyInstaller : MonoInstaller
     private void InstallPlayerComponents()
     {
         Container.BindInstance(_settings.Body).AsSingle();
-        
+        Container.BindInstance(_settings.Animator).AsSingle();
+
         Container.BindInterfacesAndSelfTo<EnemyWeaponHandler>().AsSingle();
         Container.BindInterfacesAndSelfTo<EnemyMoveHandler>().AsSingle();
         Container.BindInterfacesAndSelfTo<EnemyTickHandler>().AsSingle();
@@ -63,5 +64,6 @@ public class EnemyInstaller : MonoInstaller
     public class Settings
     {
         [field: SerializeField] public Rigidbody2D Body { get; private set; }
+        [field: SerializeField] public Animator Animator { get; private set; }
     }
 }
