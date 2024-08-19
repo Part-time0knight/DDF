@@ -11,8 +11,7 @@ namespace Game.Logic.Weapon
 
         protected Vector2 _direction = Vector2.zero;
         protected Vector2 _sampleDirection = Vector2.zero;
-        protected BulletMove _bulletMove;
-        protected string _owner;
+        protected BulletMoveHandler _bulletMove;
 
         public void SetPause(bool active)
         {
@@ -27,16 +26,15 @@ namespace Game.Logic.Weapon
             _bulletMove.InvokeCollision += OnHit;
         }
 
-        protected virtual void Initialize(Vector2 startPos, Vector2 targetPos, string owner)
+        protected virtual void Initialize(Vector2 startPos, Vector2 targetPos)
         {
             transform.position = startPos;
             _direction = (targetPos - startPos).normalized;
             _sampleDirection = _direction;
-            _owner = owner;
         }
 
         [Inject]
-        private void Construct(BulletMove bulletMove)
+        private void Construct(BulletMoveHandler bulletMove)
         {
             _bulletMove = bulletMove;
         }
@@ -48,8 +46,6 @@ namespace Game.Logic.Weapon
 
         private void OnHit(GameObject objectHit)
         {
-            if (objectHit.tag == _owner)
-                return;
             InvokeHit?.Invoke(this, objectHit);
         }
 
@@ -58,7 +54,7 @@ namespace Game.Logic.Weapon
             _bulletMove.InvokeCollision -= OnHit;
         }
 
-        public class Pool : MonoMemoryPool<Vector2, Vector2, string, Bullet>
+        public class Pool : MonoMemoryPool<Vector2, Vector2, Bullet>
         {
 
             protected Transform _buffer;
@@ -77,10 +73,10 @@ namespace Game.Logic.Weapon
 
             /// <param name="startPos">World space position</param>
             /// <param name="targetPos">World space position</param>
-            protected override void Reinitialize(Vector2 startPos, Vector2 targetPos, string owner, Bullet item)
+            protected override void Reinitialize(Vector2 startPos, Vector2 targetPos, Bullet item)
             {
-                base.Reinitialize(startPos, targetPos, owner, item);
-                item.Initialize(startPos, targetPos, owner);
+                base.Reinitialize(startPos, targetPos, item);
+                item.Initialize(startPos, targetPos);
             }
         }
     }

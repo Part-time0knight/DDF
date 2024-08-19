@@ -13,13 +13,26 @@ MonoBehaviour:
   m_Name: GameSettingsInstaller
   m_EditorClassIdentifier: 
   <Player>k__BackingField:
-    PlayerWeapon:
-      <AttackDelay>k__BackingField: 1
+    Weapon:
+      <AttackDelay>k__BackingField: 0.75
       <Damage>k__BackingField: 1
-    PlayerMove:
+    Move:
       <Speed>k__BackingField: 6
-    PlayerHits:
+    Hits:
       <HitPoints>k__BackingField: 3
   <Projectile>k__BackingField:
-    BulletMove:
+    Move:
       <Speed>k__BackingField: 10
+  <SpawnerSettings>k__BackingField:
+    Spawner:
+      <HorizontalBorders>k__BackingField: {x: -10, y: 10}
+      <VerticalBorders>k__BackingField: {x: -6, y: 6}
+      <Delay>k__BackingField: 1
+  <Enemy>k__BackingField:
+    Move:
+      <Speed>k__BackingField: 3
+    Hits:
+      <HitPoints>k__BackingField: 3
+    Damage:
+      <Damage>k__BackingField: 1
+      <DamageDelay>k__BackingField: 0.5

@@ -10,7 +10,7 @@ public class ProjectileInstaller : MonoInstaller
     public override void InstallBindings()
     {
         Container.BindInstance(_settings.Body).AsSingle();
-        Container.BindInterfacesAndSelfTo<BulletMove>().AsSingle();
+        Container.BindInterfacesAndSelfTo<BulletMoveHandler>().AsSingle();
     }
 
     [Serializable]

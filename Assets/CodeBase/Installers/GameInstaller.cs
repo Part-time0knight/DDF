@@ -1,9 +1,11 @@
 using Core.MVVM.Windows;
 using Game.Domain.Factories.GameFsm;
 using Game.Infrastructure;
-using Game.Logic.InteractiveObject;
+using Game.Logic.Enemy;
+using Game.Logic.Handlers;
 using Game.Logic.Weapon;
 using Game.Presentation.ViewModel;
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -11,8 +13,7 @@ namespace Installers
 {
     public class GameInstaller : MonoInstaller
     {
-        [SerializeField] private BulletBuffer _bufferPrefab;
-        [SerializeField] private Bullet _bulletPrfab;
+        [SerializeField] private Settings _settings;
 
         public override void InstallBindings()
         {
@@ -33,12 +34,12 @@ namespace Installers
 
         private void InstallPools()
         {
-            BulletBuffer buffer = Container.InstantiatePrefabForComponent<BulletBuffer>(_bufferPrefab);
-
-            Container.Bind<BulletBuffer>().FromInstance(buffer).AsSingle();
-
+            Container.Bind<BulletBuffer>().FromComponentInNewPrefab(_settings.BufferPrefab).AsSingle();
             Container.BindMemoryPool<Bullet, Bullet.Pool>()
-                .FromComponentInNewPrefab(_bulletPrfab);
+                .FromComponentInNewPrefab(_settings.BulletPrfab);
+
+            Container.BindMemoryPool<EnemyHandler, EnemyHandler.Pool>()
+                .FromComponentInNewPrefab(_settings.EnemyHandler);
         }
 
         private void InstallViewModel()
@@ -69,6 +70,11 @@ namespace Installers
                 .NonLazy();
 
             Container
+                .BindInterfacesAndSelfTo<EnemySpawner>()
+                .AsSingle()
+                .NonLazy();
+
+            Container
                 .BindInterfacesAndSelfTo<WindowFsm>()
                 .AsSingle()
                 .NonLazy();
@@ -77,6 +83,19 @@ namespace Installers
                 .BindInterfacesAndSelfTo<GameFsm>()
                 .AsSingle()
                 .NonLazy();
+        }
+
+        [Serializable]
+        public class Settings
+        {
+            [field: SerializeField]
+            public BulletBuffer BufferPrefab { get; private set; }
+
+            [field: SerializeField]
+            public Bullet BulletPrfab { get; private set; }
+
+            [field: SerializeField]
+            public EnemyHandler EnemyHandler { get; private set; }
         }
     }
 }

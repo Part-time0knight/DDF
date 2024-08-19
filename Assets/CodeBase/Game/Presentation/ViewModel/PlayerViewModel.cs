@@ -3,8 +3,7 @@ using Core.MVVM.ViewModel;
 using Core.MVVM.Windows;
 using System;
 using Game.Logic.Player;
-using Zenject;
-using Game.Logic.InteractiveObject;
+using Game.Logic.Handlers;
 
 namespace Game.Presentation.ViewModel
 {

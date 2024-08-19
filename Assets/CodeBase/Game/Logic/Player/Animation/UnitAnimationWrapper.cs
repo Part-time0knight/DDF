@@ -1,4 +1,4 @@
-using Game.Logic.InteractiveObject;
+using Game.Logic.Handlers;
 using System;
 using System.Linq;
 using UnityEngine;

@@ -3,7 +3,7 @@ using Game.Logic.Player;
 using Zenject;
 using UnityEngine;
 using System;
-using Game.Logic.Player.PlayerFsm;
+using Game.Logic.Player.Fsm;
 using Game.Presentation.ViewModel;
 
 namespace Installers
@@ -17,13 +17,17 @@ namespace Installers
         {
             InstallFactories();
             InstallPlayerComponents();
-
-            InstallFsm();
             InstallViewModels();
+            InstallFsm();
+
         }
 
         private void InstallFsm()
         {
+            Container
+                .BindInterfacesTo<PlayerWindowFsm>()
+                .AsSingle()
+                .NonLazy();
 
             Container
                 .BindInterfacesAndSelfTo<PlayerFsm>()
@@ -55,7 +59,7 @@ namespace Installers
 
             Container.BindInterfacesAndSelfTo<PlayerInput>().AsSingle();
             Container.BindInterfacesAndSelfTo<PlayerShootHandler>().AsSingle();
-            Container.BindInterfacesAndSelfTo<PlayerMove>().AsSingle();
+            Container.BindInterfacesAndSelfTo<PlayerMoveHandler>().AsSingle();
             Container.BindInterfacesAndSelfTo<PlayerDamageHandler>().AsSingle();
         }
 
