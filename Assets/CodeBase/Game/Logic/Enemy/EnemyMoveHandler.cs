@@ -1,5 +1,6 @@
 using Game.Logic.Handlers;
 using Game.Logic.Player;
+using Game.Logic.StaticData;
 using System;
 using UnityEngine;
 
@@ -13,6 +14,8 @@ namespace Game.Logic.Enemy
         private readonly Animator _animator;
         private Vector2 _playerDirection;
         private Vector3 _standartScale;
+        private bool _blockX;
+        private bool _blockY;
 
         public EnemyMoveHandler(Rigidbody2D body,
             EnemySettingsHandler stats,
@@ -50,7 +53,15 @@ namespace Game.Logic.Enemy
             _body.Cast(speedMultiplier, _filter, _raycasts, _stats.CurrentSpeed * Time.fixedDeltaTime + _collisionOffset);
 
             foreach (var hit in _raycasts)
-                InvokeCollision?.Invoke(hit.transform.gameObject);
+                if(hit.transform.tag != Tags.Enemy)
+                    InvokeCollision?.Invoke(hit.transform.gameObject);
+                else
+                {
+                    _blockX = hit.normal.x != 0;
+                    _blockY = hit.normal.y != 0;
+                    speedMultiplier.x = _blockX ? 0 : speedMultiplier.x;
+                    speedMultiplier.y = _blockY ? 0 : speedMultiplier.y;
+                }
             return speedMultiplier;
         }
 

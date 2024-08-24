@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Player>k__BackingField:
     Weapon:
-      <AttackDelay>k__BackingField: 0.75
+      <AttackDelay>k__BackingField: 1
       <Damage>k__BackingField: 1
     Move:
       <Speed>k__BackingField: 6
     Hits:
-      <HitPoints>k__BackingField: 3
+      <HitPoints>k__BackingField: 10
   <Projectile>k__BackingField:
     Move:
       <Speed>k__BackingField: 10
@@ -30,7 +30,7 @@ MonoBehaviour:
       <Delay>k__BackingField: 1
   <Enemy>k__BackingField:
     Move:
-      <Speed>k__BackingField: 3
+      <Speed>k__BackingField: 1
     Hits:
       <HitPoints>k__BackingField: 2
     Damage:

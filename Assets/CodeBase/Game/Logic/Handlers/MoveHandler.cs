@@ -33,7 +33,7 @@ namespace Game.Logic.Handlers
             _filter = new();
             _raycasts = new();
 
-            _collisionOffset = 0.1f;
+            _collisionOffset = 0f;
             _stats.CurrentSpeed = _stats.Speed;
             _stats.CurrentPosition = _body.position;
             _paused = false;
