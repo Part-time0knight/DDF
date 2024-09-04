@@ -1,6 +1,7 @@
 using Game.Logic.Handlers;
 using Game.Logic.Player;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.Logic.Enemy
@@ -11,6 +12,8 @@ namespace Game.Logic.Enemy
 
         private readonly PlayerMoveHandler.PlayerSettings _playerSettings;
         private readonly Animator _animator;
+        private readonly List<RaycastHit2D> _raycasts;
+
         private Vector2 _playerDirection;
         private Vector3 _standartScale;
 
@@ -28,6 +31,7 @@ namespace Game.Logic.Enemy
                 _animator.transform.localScale.x,
                 _animator.transform.localScale.y,
                 _animator.transform.localScale.z);
+            _raycasts = new();
         }
 
         public override void Move(Vector2 speedMultiplier)

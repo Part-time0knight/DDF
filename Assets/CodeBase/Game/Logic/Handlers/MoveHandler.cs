@@ -11,16 +11,21 @@ namespace Game.Logic.Handlers
         {
             get => _body.velocity;
             set => _body.velocity = value;
-
         }
 
         protected readonly Rigidbody2D _body;
         protected readonly Settings _stats;
         protected readonly IPauseHandler _pause;
 
+        protected readonly List<RaycastHit2D> _raycastsX;
+        protected readonly List<RaycastHit2D> _raycastsY;
+
         protected ContactFilter2D _filter;
-        protected List<RaycastHit2D> _raycasts;
         protected float _collisionOffset;
+        protected float _collisionDistance;
+        protected float _distanceBetween;
+        protected Vector2 _closestColliderPoint;
+
         protected Vector2 _pausedVelocity;
         protected bool _paused;
 
@@ -31,7 +36,8 @@ namespace Game.Logic.Handlers
             _pause = pause;
 
             _filter = new();
-            _raycasts = new();
+            _raycastsX = new();
+            _raycastsY = new();
 
             _collisionOffset = 0.1f;
             _stats.CurrentSpeed = _stats.Speed;
@@ -72,11 +78,23 @@ namespace Game.Logic.Handlers
 
         protected virtual Vector2 CollisionCheck(Vector2 speedMultiplier)
         {
-            _body.Cast(speedMultiplier, _filter, _raycasts, _stats.CurrentSpeed * Time.fixedDeltaTime + _collisionOffset);
-            foreach (var cast in _raycasts)
+            _raycastsX.Clear();
+            _raycastsY.Clear();
+            _body.Cast(new(speedMultiplier.x, 0f), _filter, _raycastsX, speedMultiplier.magnitude * Time.fixedDeltaTime + _collisionOffset);
+            _body.Cast(new(0f, speedMultiplier.y), _filter, _raycastsY, speedMultiplier.magnitude * Time.fixedDeltaTime + _collisionOffset);
+            foreach (var ray in _raycastsX)
             {
-                speedMultiplier.x = cast.normal.x != 0 ? 0 : speedMultiplier.x;
-                speedMultiplier.y = cast.normal.y != 0 ? 0 : speedMultiplier.y;
+                _collisionDistance = ray.distance;
+                _closestColliderPoint = _body.ClosestPoint(ray.point);
+                _distanceBetween = Vector2.Distance(_closestColliderPoint, ray.point) - _collisionOffset;
+                speedMultiplier = new(speedMultiplier.normalized.x * _distanceBetween, speedMultiplier.y);
+            }
+            foreach (var ray in _raycastsY)
+            {
+                _collisionDistance = ray.distance;
+                _closestColliderPoint = _body.ClosestPoint(ray.point);
+                _distanceBetween = Vector2.Distance(_closestColliderPoint, ray.point) - _collisionOffset;
+                speedMultiplier = new(speedMultiplier.x, speedMultiplier.normalized.y * _distanceBetween);
             }
             return speedMultiplier;
         }
