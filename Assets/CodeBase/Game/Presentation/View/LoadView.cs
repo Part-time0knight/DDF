@@ -21,6 +21,7 @@ namespace Game.Presentation.View
 
         private void UpdateLoad(float progress)
         {
+            _settings.FillLoad.fillAmount = 0f;
             _settings.FillLoad.DOKill();
             _settings.FillLoad.DOFillAmount(progress, _settings.FillAnimationSpeed);
         }

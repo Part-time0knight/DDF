@@ -9,6 +9,7 @@ namespace Game.Infrastructure.States.MainMenu
     {
         private readonly IWindowFsm _windowFsm;
         private readonly SceneLoader _sceneLoader;
+        private readonly Timer _timer = new();
 
         public Load(IWindowFsm windowFsm,
             SceneLoader sceneLoader) 
@@ -19,7 +20,7 @@ namespace Game.Infrastructure.States.MainMenu
 
         public void OnEnter()
         {
-            _sceneLoader.LoadGameplay();
+            _timer.Initialize(0.4f, _sceneLoader.LoadGameplay).Play();
             _windowFsm.OpenWindow(typeof(LoadView), true);
         }
 

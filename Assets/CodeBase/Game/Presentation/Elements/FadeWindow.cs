@@ -28,12 +28,14 @@ namespace Game.Presentation.Elements
         public void FadeOff(Action callback)
         {
             Clear();
-            _tween = _group?
+            _tween = _group
                 .DOFade(0f, _settings.FadeDuration)
+                .SetDelay(_settings.FadeOffDelay)
                 .OnComplete(callback.Invoke);
+
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             Clear();
         }
@@ -49,6 +51,7 @@ namespace Game.Presentation.Elements
         public class Settings
         {
             [field: SerializeField] public float FadeDuration { get; private set; } = 0.2f;
+            [field: SerializeField] public float FadeOffDelay { get; private set; } = 0.2f;
         }
     }
 }

@@ -30,6 +30,7 @@ namespace Game.Logic.Player.Animation
 
         public override void PlayAnimation(string name)
         {
+            if (_anim == null) return;
             base.PlayAnimation(name);
         }
 

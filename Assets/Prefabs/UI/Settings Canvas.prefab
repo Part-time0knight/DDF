@@ -175,7 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _settings:
     <FadeDuration>k__BackingField: 0.2
-    <Group>k__BackingField: {fileID: 7934051606355027902}
+    <FadeOffDelay>k__BackingField: 0.2
 --- !u!1 &1251965001468590383
 GameObject:
   m_ObjectHideFlags: 0
@@ -504,6 +504,7 @@ GameObject:
   - component: {fileID: 2078688494532700743}
   - component: {fileID: 4695832187927112093}
   - component: {fileID: 5503590191424373149}
+  - component: {fileID: 8974804993179884904}
   m_Layer: 0
   m_Name: BackButton
   m_TagString: Untagged
@@ -613,6 +614,23 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8974804993179884904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6521022842971513793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e30a03d83d92a8047b89a4772c57af1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _settings:
+    <BounceDuration>k__BackingField: 0.4
+    <BounceScale>k__BackingField: 0.1
+    <BounceVibrato>k__BackingField: 10
+    <BounceElasticity>k__BackingField: 1
 --- !u!1 &6943407432151252254
 GameObject:
   m_ObjectHideFlags: 0

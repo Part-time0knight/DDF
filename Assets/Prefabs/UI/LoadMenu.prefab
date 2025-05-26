@@ -176,7 +176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _settings:
     <FadeDuration>k__BackingField: 0.1
-    <Group>k__BackingField: {fileID: 7789774634764068525}
+    <FadeOffDelay>k__BackingField: 0
 --- !u!1 &5257353263622204147
 GameObject:
   m_ObjectHideFlags: 0

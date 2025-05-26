@@ -524,6 +524,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 880970005}
     m_Modifications:
+    - target: {fileID: 189895479131574952, guid: 25276335657558647943a4c07cbbdf88, type: 3}
+      propertyPath: _settings.<FadeOffDelay>k__BackingField
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 766469220100290398, guid: 25276335657558647943a4c07cbbdf88, type: 3}
       propertyPath: m_Camera
       value: 
@@ -535,6 +539,54 @@ PrefabInstance:
     - target: {fileID: 1160396532308667965, guid: 25276335657558647943a4c07cbbdf88, type: 3}
       propertyPath: m_Name
       value: MainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 3210781438458799248, guid: 25276335657558647943a4c07cbbdf88, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3210781438458799248, guid: 25276335657558647943a4c07cbbdf88, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3210781438458799248, guid: 25276335657558647943a4c07cbbdf88, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3210781438458799248, guid: 25276335657558647943a4c07cbbdf88, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6027852859048470111, guid: 25276335657558647943a4c07cbbdf88, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6027852859048470111, guid: 25276335657558647943a4c07cbbdf88, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6027852859048470111, guid: 25276335657558647943a4c07cbbdf88, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6027852859048470111, guid: 25276335657558647943a4c07cbbdf88, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237715476147407922, guid: 25276335657558647943a4c07cbbdf88, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237715476147407922, guid: 25276335657558647943a4c07cbbdf88, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237715476147407922, guid: 25276335657558647943a4c07cbbdf88, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237715476147407922, guid: 25276335657558647943a4c07cbbdf88, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8393023161126227305, guid: 25276335657558647943a4c07cbbdf88, type: 3}
       propertyPath: m_Pivot.x
@@ -614,6 +666,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8393023161126227305, guid: 25276335657558647943a4c07cbbdf88, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9025988134154657403, guid: 25276335657558647943a4c07cbbdf88, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9025988134154657403, guid: 25276335657558647943a4c07cbbdf88, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9025988134154657403, guid: 25276335657558647943a4c07cbbdf88, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9025988134154657403, guid: 25276335657558647943a4c07cbbdf88, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9157934530408758049, guid: 25276335657558647943a4c07cbbdf88, type: 3}
