@@ -60,7 +60,7 @@ namespace Game.Logic.Enemy
         public void BeginSpawn()
         {
             _breakTimer = false;
-            Repeater();
+            Repeater().Forget();
         }
 
         public void StopSpawn()
