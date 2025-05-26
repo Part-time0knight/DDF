@@ -3,7 +3,7 @@ using Core.Infrastructure.GameFsm.States;
 using Core.MVVM.Windows;
 using Game.Presentation.View;
 
-namespace Game.Infrastructure
+namespace Game.Infrastructure.States.Gameplay
 {
     public class GameplayState : IState
     {
