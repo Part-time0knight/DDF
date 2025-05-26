@@ -20,6 +20,7 @@ namespace Game.Infrastructure
         private void StateResolve()
         {
             _states.Add(typeof(GameplayState), _factory.Create<GameplayState>());
+            _states.Add(typeof(Load), _factory.Create<Load>());
         }
     }
 }

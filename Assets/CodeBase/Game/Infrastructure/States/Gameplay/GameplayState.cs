@@ -36,6 +36,7 @@ namespace Game.Infrastructure.States.Gameplay
             _windowResolve.Set<GameplayButtonsView>();
             _windowResolve.Set<MenuPauseView>();
             _windowResolve.Set<SettingsView>();
+            _windowResolve.Set<LoadView>();
         }
     }
 }

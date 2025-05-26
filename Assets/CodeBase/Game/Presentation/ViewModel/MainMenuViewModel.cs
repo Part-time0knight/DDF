@@ -4,7 +4,6 @@ using Core.MVVM.Windows;
 using Game.Infrastructure.States.MainMenu;
 using Game.Presentation.View;
 using System;
-using UnityEngine;
 
 namespace Game.Presentation.ViewModel
 {

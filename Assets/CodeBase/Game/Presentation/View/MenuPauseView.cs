@@ -8,6 +8,7 @@ namespace Game.Presentation.View
     public class MenuPauseView : AbstractPayloadView<MenuPauseViewModel>
     {
         [SerializeField] private Button _backButton;
+        [SerializeField] private Button _menuButton;
         [SerializeField] private Button _settingsButton;
 
         [Inject]
@@ -15,12 +16,14 @@ namespace Game.Presentation.View
         {
             base.Construct(viewModel);
             _backButton.onClick.AddListener(_viewModel.InvokeClose);
+            _menuButton.onClick.AddListener(_viewModel.InvokeMenu);
             _settingsButton.onClick.AddListener(_viewModel.OpenSettings);
         }
 
         protected override void OnDestroy()
         {
             _backButton.onClick.RemoveListener(_viewModel.InvokeClose);
+            _menuButton.onClick.RemoveListener(_viewModel.InvokeMenu);
             _settingsButton.onClick.RemoveListener(_viewModel.OpenSettings);
         }
     }

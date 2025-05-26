@@ -3,6 +3,7 @@ using Game.Domain.Factories.GameFsm;
 using Game.Infrastructure;
 using Game.Logic.Enemy;
 using Game.Logic.Handlers;
+using Game.Logic.Misc;
 using Game.Logic.Weapon;
 using Game.Presentation.ViewModel;
 using System;
@@ -60,6 +61,10 @@ namespace Installers
                 .BindInterfacesAndSelfTo<SettingsViewModel>()
                 .AsSingle()
                 .NonLazy();
+            Container
+                .BindInterfacesAndSelfTo<LoadViewModel>()
+                .AsSingle()
+                .NonLazy();
         }
 
         private void InstallService()
@@ -81,6 +86,11 @@ namespace Installers
 
             Container
                 .BindInterfacesAndSelfTo<GameFsm>()
+                .AsSingle()
+                .NonLazy();
+
+            Container
+                .BindInterfacesAndSelfTo<SceneLoader>()
                 .AsSingle()
                 .NonLazy();
         }
