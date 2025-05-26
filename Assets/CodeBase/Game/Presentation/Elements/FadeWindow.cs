@@ -1,47 +1,54 @@
 using DG.Tweening;
-using Game.Logic.Enemy.Fsm.States;
 using System;
 using UnityEngine;
 
-public class FadeWindow : MonoBehaviour
+namespace Game.Presentation.Elements
 {
-    [SerializeField] private Settings _settings;
-
-    private Tween _tween;
-
-
-    public void FadeOn(Action callback)
+    [RequireComponent(typeof(CanvasGroup))]
+    public class FadeWindow : MonoBehaviour
     {
-        Clear();
-        _tween = _settings.Group?
-            .DOFade(1f, _settings.FadeDuration)
-            .OnComplete(callback.Invoke);
-    }
+        [SerializeField] private Settings _settings;
 
-    public void FadeOff(Action callback)
-    {
-        Clear();
-        _tween = _settings.Group?
-            .DOFade(0f, _settings.FadeDuration)
-            .OnComplete(callback.Invoke);
-    }
+        private Tween _tween;
+        private CanvasGroup _group;
 
-    private void OnDestroy()
-    {
-        Clear();
-    }
+        private void Awake()
+        {
+            _group = GetComponent<CanvasGroup>();
+        }
 
-    private void Clear()
-    {
-        if (_tween == null) return;
-        _tween.Kill();
-        _tween = null;
-    }
+        public void FadeOn(Action callback)
+        {
+            Clear();
+            _tween = _group?
+                .DOFade(1f, _settings.FadeDuration)
+                .OnComplete(callback.Invoke);
+        }
 
-    [Serializable]
-    public class Settings
-    {
-        [field: SerializeField] public float FadeDuration { get; private set; }
-        [field: SerializeField] public CanvasGroup Group { get; private set; }
+        public void FadeOff(Action callback)
+        {
+            Clear();
+            _tween = _group?
+                .DOFade(0f, _settings.FadeDuration)
+                .OnComplete(callback.Invoke);
+        }
+
+        private void OnDestroy()
+        {
+            Clear();
+        }
+
+        private void Clear()
+        {
+            if (_tween == null) return;
+            _tween.Kill();
+            _tween = null;
+        }
+
+        [Serializable]
+        public class Settings
+        {
+            [field: SerializeField] public float FadeDuration { get; private set; } = 0.2f;
+        }
     }
 }
