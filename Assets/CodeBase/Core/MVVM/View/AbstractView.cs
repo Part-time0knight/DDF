@@ -35,9 +35,12 @@ namespace Core.MVVM.View
 
         public virtual void Show()
         {
-            if(OnAnimationShow.GetPersistentEventCount() > 0)
-                OnAnimationShow?.Invoke(() =>  SetActive(true));
-            else 
+            if (OnAnimationShow.GetPersistentEventCount() > 0)
+            {
+                CanvasElement.enabled = true;
+                OnAnimationShow?.Invoke(() => SetActive(true));
+            }
+            else
                 SetActive(true);
         }
 
