@@ -21,6 +21,7 @@ namespace Game.Infrastructure
         {
             _states.Add(typeof(Initialize), _factory.Create<Initialize>());
             _states.Add(typeof(MainMenuState), _factory.Create<MainMenuState>());
+            _states.Add(typeof(Load), _factory.Create<Load>());
             _states.Add(typeof(Exit), _factory.Create<Exit>());
         }
     }

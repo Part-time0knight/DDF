@@ -37,7 +37,7 @@ namespace Game.Presentation.ViewModel
 
         public void InvokeStartPlay()
         {
-
+            _gameFsm.Enter<Load>();
         }
 
         public void InvokeExit()

@@ -3,6 +3,8 @@ using Core.MVVM.Windows;
 using Game.Presentation.ViewModel;
 using Zenject;
 using Game.Domain.Factories.GameFsm;
+using Game.Logic.Misc;
+
 
 public class MainMenuInstaller : MonoInstaller
 {
@@ -27,6 +29,10 @@ public class MainMenuInstaller : MonoInstaller
             .BindInterfacesAndSelfTo<MainMenuViewModel>()
             .AsSingle()
             .NonLazy();
+        Container
+            .BindInterfacesAndSelfTo<LoadViewModel>()
+            .AsSingle()
+            .NonLazy();
 
     }
 
@@ -39,6 +45,11 @@ public class MainMenuInstaller : MonoInstaller
 
         Container
             .BindInterfacesAndSelfTo<MainMenuFsm>()
+            .AsSingle()
+            .NonLazy();
+
+        Container
+            .BindInterfacesAndSelfTo<SceneLoader>()
             .AsSingle()
             .NonLazy();
     }

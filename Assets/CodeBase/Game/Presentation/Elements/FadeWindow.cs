@@ -13,7 +13,7 @@ public class FadeWindow : MonoBehaviour
     public void FadeOn(Action callback)
     {
         Clear();
-        _tween = _settings.Group
+        _tween = _settings.Group?
             .DOFade(1f, _settings.FadeDuration)
             .OnComplete(callback.Invoke);
     }
@@ -21,9 +21,14 @@ public class FadeWindow : MonoBehaviour
     public void FadeOff(Action callback)
     {
         Clear();
-        _tween = _settings.Group
+        _tween = _settings.Group?
             .DOFade(0f, _settings.FadeDuration)
             .OnComplete(callback.Invoke);
+    }
+
+    private void OnDestroy()
+    {
+        Clear();
     }
 
     private void Clear()
