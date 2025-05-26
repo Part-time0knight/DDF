@@ -40,7 +40,7 @@ namespace Game.Logic.Player
         public void StartAutomatic()
         {
             _breakAutomatic = false;
-            Repeater();
+            Repeater().Forget();
         }
 
         public void StopAutomatic()
