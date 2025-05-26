@@ -9,8 +9,8 @@ namespace Game.Logic.Handlers
     {
         protected Vector2 Velocity 
         {
-            get => _body.velocity;
-            set => _body.velocity = value;
+            get => _body.linearVelocity;
+            set => _body.linearVelocity = value;
         }
 
         protected readonly Rigidbody2D _body;
@@ -64,7 +64,7 @@ namespace Game.Logic.Handlers
 
 
         public void Stop()
-            => _body.velocity = Vector2.zero;
+            => _body.linearVelocity = Vector2.zero;
 
         public virtual void OnPause(bool active)
         {
