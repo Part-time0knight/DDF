@@ -18,6 +18,7 @@ namespace Game.Logic.Enemy.Fsm.States
 
         public void OnEnter()
         {
+            Debug.Log("Enter state Dead");
             _body.GetAttachedColliders(_colliders);
             _colliders.ForEach((collider) => collider.enabled = false);
         }

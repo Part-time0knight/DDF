@@ -2,6 +2,7 @@ using Core.Infrastructure.GameFsm;
 using Core.Infrastructure.GameFsm.States;
 using Core.MVVM.Windows;
 using Game.Presentation.View;
+using UnityEngine;
 
 namespace Game.Logic.Enemy.Fsm.States
 {
@@ -20,8 +21,9 @@ namespace Game.Logic.Enemy.Fsm.States
 
         public void OnEnter()
         {
+            Debug.Log("Enter state Initialize");
             WindowResolve();
-            _stateMachine.Enter<Run>();
+            //_stateMachine.Enter<Run>();
         }
 
         public void OnExit()

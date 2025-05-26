@@ -12,7 +12,7 @@ namespace Game.Logic.Enemy
 
         private readonly PlayerMoveHandler.PlayerSettings _playerSettings;
         private readonly Animator _animator;
-        private readonly List<RaycastHit2D> _raycasts;
+        private readonly List<Collider2D> _raycasts;
 
         private Vector2 _playerDirection;
         private Vector3 _standartScale;
@@ -31,6 +31,8 @@ namespace Game.Logic.Enemy
                 _animator.transform.localScale.x,
                 _animator.transform.localScale.y,
                 _animator.transform.localScale.z);
+            _filter.useTriggers = true;
+            _filter.SetLayerMask(Physics2D.AllLayers);
             _raycasts = new();
         }
 
@@ -51,7 +53,8 @@ namespace Game.Logic.Enemy
 
         protected override Vector2 CollisionCheck(Vector2 speedMultiplier)
         {
-            _body.Cast(speedMultiplier, _filter, _raycasts, _stats.CurrentSpeed * Time.fixedDeltaTime + _collisionOffset);
+            _raycasts.Clear();
+            _body.Overlap(_filter, _raycasts);
 
             foreach (var hit in _raycasts)
                 InvokeCollision?.Invoke(hit.transform.gameObject);
