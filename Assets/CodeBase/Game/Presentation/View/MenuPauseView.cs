@@ -18,7 +18,7 @@ namespace Game.Presentation.View
             _settingsButton.onClick.AddListener(_viewModel.OpenSettings);
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
             _backButton.onClick.RemoveListener(_viewModel.InvokeClose);
             _settingsButton.onClick.RemoveListener(_viewModel.OpenSettings);

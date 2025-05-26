@@ -27,7 +27,7 @@ MonoBehaviour:
     Spawner:
       <HorizontalBorders>k__BackingField: {x: -10, y: 10}
       <VerticalBorders>k__BackingField: {x: -6, y: 6}
-      <Delay>k__BackingField: 1
+      <Delay>k__BackingField: 0.9
   <Enemy>k__BackingField:
     Move:
       <Speed>k__BackingField: 3
