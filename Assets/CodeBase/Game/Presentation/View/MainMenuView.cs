@@ -1,4 +1,5 @@
 using Core.MVVM.View;
+using Game.Domain.Dto;
 using Game.Presentation.ViewModel;
 using System;
 using UnityEngine;
@@ -11,18 +12,22 @@ namespace Game.Presentation.View
     {
         [SerializeField] private Settings _settings;
 
+        
+
         [Inject]
         protected override void Construct(MainMenuViewModel viewModel)
         {
             base.Construct(viewModel);
             _settings.ExitButton.onClick.AddListener(_viewModel.InvokeExit);
             _settings.PlayButton.onClick.AddListener(_viewModel.InvokeStartPlay);
+            _settings.CharacterButton.onClick.AddListener(_viewModel.InvokeChooseCharacter);
         }
 
         protected override void OnDestroy()
         {
             _settings.ExitButton.onClick.RemoveListener(_viewModel.InvokeExit);
             _settings.PlayButton.onClick.RemoveListener(_viewModel.InvokeStartPlay);
+            _settings.CharacterButton.onClick.RemoveListener(_viewModel.InvokeChooseCharacter);
             base.OnDestroy();
         }
 
@@ -30,6 +35,8 @@ namespace Game.Presentation.View
         public class Settings
         {
             [field: SerializeField] public Button PlayButton { get; private set; }
+            [field: SerializeField] public Button CharacterButton { get; private set; }
+            [field: SerializeField] public Button SettingsButton { get; private set; }
             [field: SerializeField] public Button ExitButton { get; private set; }
         }
     }

@@ -4,18 +4,27 @@ using Game.Presentation.ViewModel;
 using Zenject;
 using Game.Domain.Factories.GameFsm;
 using Game.Logic.Misc;
+using Game.Logic.Character;
+using Game.Logic.Weapon;
+using UnityEngine.UI;
+using Game.Presentation.View;
+using UnityEngine;
+using System;
 
 
 public class MainMenuInstaller : MonoInstaller
 {
+    [SerializeField] private Settings _settings;
+
     public override void InstallBindings()
     {
         InstallViewModel();
         InstallServices();
-        InstallFactory();
+        InstallFactories();
+        InstallPools();
     }
 
-    private void InstallFactory()
+    private void InstallFactories()
     {
         Container
             .BindInterfacesAndSelfTo<StatesFactory>()
@@ -23,10 +32,21 @@ public class MainMenuInstaller : MonoInstaller
             .NonLazy();
     }
 
+    private void InstallPools()
+    {
+        Container.BindMemoryPool<Image, CharacterView.Pool>()
+            .FromComponentInNewPrefab(_settings.CharacterIconPrefab)
+            .UnderTransform(_settings.CharacterIconContainer); ;
+    }
+
     private void InstallViewModel()
     {
         Container
             .BindInterfacesAndSelfTo<MainMenuViewModel>()
+            .AsSingle()
+            .NonLazy();
+        Container
+            .BindInterfacesAndSelfTo<CharacterViewModel>()
             .AsSingle()
             .NonLazy();
         Container
@@ -52,5 +72,17 @@ public class MainMenuInstaller : MonoInstaller
             .BindInterfacesAndSelfTo<SceneLoader>()
             .AsSingle()
             .NonLazy();
+
+        Container
+            .BindInterfacesAndSelfTo<CharacterService>()
+            .AsSingle()
+            .NonLazy();
+    }
+
+    [Serializable]
+    public class Settings
+    {
+        [field: SerializeField] public Image CharacterIconPrefab { get; private set; }
+        [field: SerializeField] public RectTransform CharacterIconContainer { get; private set; }
     }
 }

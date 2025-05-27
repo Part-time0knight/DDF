@@ -36,3 +36,4 @@ MonoBehaviour:
     Damage:
       <Damage>k__BackingField: 1
       <DamageDelay>k__BackingField: 0.5
+  <CharacterList>k__BackingField: {fileID: 11400000, guid: 566242f40e31cc74c85bbb9dcc05612f, type: 2}

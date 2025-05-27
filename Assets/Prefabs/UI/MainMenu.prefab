@@ -300,6 +300,8 @@ MonoBehaviour:
         m_CallState: 2
   _settings:
     <PlayButton>k__BackingField: {fileID: 5898951214900273517}
+    <CharacterButton>k__BackingField: {fileID: 8144186018618443646}
+    <SettingsButton>k__BackingField: {fileID: 8366085980622618716}
     <ExitButton>k__BackingField: {fileID: 4916579850700260471}
 --- !u!114 &189895479131574952
 MonoBehaviour:
@@ -315,6 +317,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _settings:
     <FadeDuration>k__BackingField: 0.2
+    <FadeOffDelay>k__BackingField: 0.2
 --- !u!1 &1188530545596811825
 GameObject:
   m_ObjectHideFlags: 0

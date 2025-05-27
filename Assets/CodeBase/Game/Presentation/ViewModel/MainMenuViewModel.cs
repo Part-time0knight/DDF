@@ -29,7 +29,12 @@ namespace Game.Presentation.ViewModel
             _windowFsm.OpenWindow(Window, inHistory: true);
         }
 
-        public void InvokeChooseHeroes()
+        public void InvokeChooseCharacter()
+        {
+            _windowFsm.OpenWindow(typeof(CharacterView), true);
+        }
+
+        public void InvokeSettings()
         {
 
         }
