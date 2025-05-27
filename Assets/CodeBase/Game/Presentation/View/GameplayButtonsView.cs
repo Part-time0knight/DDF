@@ -19,7 +19,7 @@ namespace Game.Presentation.View
             _menuPauseButton.onClick.AddListener(_viewModel.OpenMenuPauseWindow);
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
             _TestingToolsButton.onClick.RemoveListener(_viewModel.OpenTestingToolsWindow);
             _menuPauseButton.onClick.RemoveListener(_viewModel.OpenMenuPauseWindow);

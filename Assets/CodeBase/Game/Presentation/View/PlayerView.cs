@@ -47,5 +47,13 @@ namespace Game.Presentation.View
             else
                 _reloadBarImage.DOPlay();
         }
+
+        protected override void OnDestroy()
+        {
+            _viewModel.InvokeReloadActive -= ReloadActive;
+            _viewModel.InvokeHitsUpdate -= HitsUpdate;
+            _viewModel.InvokePause -= OnPause;
+            base.OnDestroy();
+        }
     }
 }

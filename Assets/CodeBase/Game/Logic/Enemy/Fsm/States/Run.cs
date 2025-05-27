@@ -36,6 +36,7 @@ namespace Game.Logic.Enemy.Fsm.States
 
         public void OnEnter()
         {
+            Debug.Log("Enter state run");
             _windowFsm.OpenWindow(typeof(EnemyView), inHistory: false);
             _tickHandler.OnFixedTick += UpdateMove;
             _damageSettings.InvokeHitPointsChange += OnHit;

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Player>k__BackingField:
     Weapon:
-      <AttackDelay>k__BackingField: 0.75
+      <AttackDelay>k__BackingField: 0.55
       <Damage>k__BackingField: 1
     Move:
       <Speed>k__BackingField: 6
@@ -22,12 +22,12 @@ MonoBehaviour:
       <HitPoints>k__BackingField: 3
   <Projectile>k__BackingField:
     Move:
-      <Speed>k__BackingField: 10
+      <Speed>k__BackingField: 20
   <SpawnerSettings>k__BackingField:
     Spawner:
       <HorizontalBorders>k__BackingField: {x: -10, y: 10}
       <VerticalBorders>k__BackingField: {x: -6, y: 6}
-      <Delay>k__BackingField: 1
+      <Delay>k__BackingField: 0.9
   <Enemy>k__BackingField:
     Move:
       <Speed>k__BackingField: 3
@@ -36,3 +36,4 @@ MonoBehaviour:
     Damage:
       <Damage>k__BackingField: 1
       <DamageDelay>k__BackingField: 0.5
+  <CharacterList>k__BackingField: {fileID: 11400000, guid: 566242f40e31cc74c85bbb9dcc05612f, type: 2}

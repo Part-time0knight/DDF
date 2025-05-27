@@ -108,15 +108,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -244,15 +246,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -284,6 +288,7 @@ GameObject:
   - component: {fileID: 6789857430226631887}
   - component: {fileID: 3461538428205073223}
   - component: {fileID: 4885207582313412650}
+  - component: {fileID: 7822978018147341873}
   m_Layer: 0
   m_Name: TestingToolsCanvas
   m_TagString: Untagged
@@ -400,13 +405,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnAnimationShow:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7822978018147341873}
+        m_TargetAssemblyTypeName: FadeWindow, Assembly-CSharp
+        m_MethodName: FadeOn
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnAnimationHide:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7822978018147341873}
+        m_TargetAssemblyTypeName: FadeWindow, Assembly-CSharp
+        m_MethodName: FadeOff
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _makeDamageButton: {fileID: 4216905549875898701}
   _healDamageButton: {fileID: 1926812603515449338}
   _backButton: {fileID: 7108385097581351263}
+--- !u!114 &7822978018147341873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1742519188147565047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eed886ecae971c47a9db71c418fa754, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _settings:
+    <FadeDuration>k__BackingField: 0.2
+    <FadeOffDelay>k__BackingField: 0.2
 --- !u!1 &4254621382130818826
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,6 +463,7 @@ GameObject:
   - component: {fileID: 6795148759375386877}
   - component: {fileID: 403491917688308583}
   - component: {fileID: 1926812603515449338}
+  - component: {fileID: 9138688778578065609}
   m_Layer: 0
   m_Name: TestHealButton
   m_TagString: Untagged
@@ -528,6 +573,23 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &9138688778578065609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4254621382130818826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e30a03d83d92a8047b89a4772c57af1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _settings:
+    <BounceDuration>k__BackingField: 0.4
+    <BounceScale>k__BackingField: 0.1
+    <BounceVibrato>k__BackingField: 10
+    <BounceElasticity>k__BackingField: 1
 --- !u!1 &4367812274392994603
 GameObject:
   m_ObjectHideFlags: 0
@@ -540,6 +602,7 @@ GameObject:
   - component: {fileID: 7135304150296319403}
   - component: {fileID: 5115994155879804423}
   - component: {fileID: 4216905549875898701}
+  - component: {fileID: 4679987888839257599}
   m_Layer: 0
   m_Name: TestDamageButton
   m_TagString: Untagged
@@ -649,6 +712,23 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4679987888839257599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4367812274392994603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e30a03d83d92a8047b89a4772c57af1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _settings:
+    <BounceDuration>k__BackingField: 0.4
+    <BounceScale>k__BackingField: 0.1
+    <BounceVibrato>k__BackingField: 10
+    <BounceElasticity>k__BackingField: 1
 --- !u!1 &7747634764867851713
 GameObject:
   m_ObjectHideFlags: 0
@@ -661,6 +741,7 @@ GameObject:
   - component: {fileID: 1291139601022621441}
   - component: {fileID: 3216840639683598677}
   - component: {fileID: 7108385097581351263}
+  - component: {fileID: 8637744525854762106}
   m_Layer: 0
   m_Name: BackButton
   m_TagString: Untagged
@@ -770,6 +851,23 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8637744525854762106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7747634764867851713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e30a03d83d92a8047b89a4772c57af1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _settings:
+    <BounceDuration>k__BackingField: 0.4
+    <BounceScale>k__BackingField: 0.1
+    <BounceVibrato>k__BackingField: 10
+    <BounceElasticity>k__BackingField: 1
 --- !u!1 &8234760545870426788
 GameObject:
   m_ObjectHideFlags: 0
@@ -983,15 +1081,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0

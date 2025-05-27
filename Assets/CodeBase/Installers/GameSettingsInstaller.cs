@@ -1,6 +1,7 @@
 using Game.Logic.Enemy;
 using Game.Logic.Misc;
 using Game.Logic.Player;
+using Game.Logic.StaticData;
 using System;
 using System.ComponentModel;
 using UnityEngine;
@@ -16,6 +17,7 @@ namespace Installers
         [field: SerializeField] public EnemySpawnerSettings SpawnerSettings { get; private set; }
         [field: SerializeField] public EnemySettings Enemy { get; private set; }
 
+        [field: SerializeField] public CharacterList CharacterList { get; private set; }
 
         [Serializable]
         public class PlayerSettings
@@ -50,6 +52,8 @@ namespace Installers
             Container.BindInstance(Player.Weapon).AsSingle();
             Container.BindInstance(Player.Move).AsSingle();
             Container.BindInstance(Player.Hits).AsSingle();
+
+            Container.BindInstance(CharacterList).AsSingle();
 
             Container.BindInstance(Projectile.Move).AsSingle();
 

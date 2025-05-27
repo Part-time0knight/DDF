@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5176546187174226226}
   - component: {fileID: 3957782039052195981}
   - component: {fileID: 7587860261451624214}
+  - component: {fileID: 886758254348827782}
   m_Layer: 0
   m_Name: Menu Pause Button
   m_TagString: Untagged
@@ -121,6 +122,23 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &886758254348827782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3810148013514505376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e30a03d83d92a8047b89a4772c57af1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _settings:
+    <BounceDuration>k__BackingField: 0.4
+    <BounceScale>k__BackingField: 0.1
+    <BounceVibrato>k__BackingField: 10
+    <BounceElasticity>k__BackingField: 1
 --- !u!1 &3977941912544693121
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,15 +247,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -269,6 +289,7 @@ GameObject:
   - component: {fileID: 3084395393636031083}
   - component: {fileID: 3438081542124552062}
   - component: {fileID: 6852367357524333792}
+  - component: {fileID: 5988844410250011027}
   m_Layer: 0
   m_Name: Gameplay Buttons canvas
   m_TagString: Untagged
@@ -386,12 +407,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnAnimationShow:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5988844410250011027}
+        m_TargetAssemblyTypeName: FadeWindow, Assembly-CSharp
+        m_MethodName: FadeOn
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnAnimationHide:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5988844410250011027}
+        m_TargetAssemblyTypeName: FadeWindow, Assembly-CSharp
+        m_MethodName: FadeOff
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _menuPauseButton: {fileID: 7587860261451624214}
   _TestingToolsButton: {fileID: 7386123516452943798}
+--- !u!114 &5988844410250011027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4538026819445177418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eed886ecae971c47a9db71c418fa754, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _settings:
+    <FadeDuration>k__BackingField: 0.2
+    <FadeOffDelay>k__BackingField: 0.2
 --- !u!1 &7898704223839594327
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,6 +464,7 @@ GameObject:
   - component: {fileID: 6952516824014922480}
   - component: {fileID: 8892278762802459748}
   - component: {fileID: 7386123516452943798}
+  - component: {fileID: 8166196294523034168}
   m_Layer: 0
   m_Name: Testing Tools Button
   m_TagString: Untagged
@@ -513,6 +574,23 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8166196294523034168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7898704223839594327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e30a03d83d92a8047b89a4772c57af1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _settings:
+    <BounceDuration>k__BackingField: 0.4
+    <BounceScale>k__BackingField: 0.1
+    <BounceVibrato>k__BackingField: 10
+    <BounceElasticity>k__BackingField: 1
 --- !u!1 &8210902684141282879
 GameObject:
   m_ObjectHideFlags: 0
@@ -621,15 +699,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0

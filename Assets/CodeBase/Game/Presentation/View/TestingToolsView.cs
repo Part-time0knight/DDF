@@ -21,7 +21,7 @@ namespace Game.Presentation.View
             _backButton.onClick.AddListener(_viewModel.InvokeClose);
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
             _makeDamageButton.onClick.RemoveListener(_viewModel.MakeDamage);
             _healDamageButton.onClick.RemoveListener(_viewModel.HealDamage);
