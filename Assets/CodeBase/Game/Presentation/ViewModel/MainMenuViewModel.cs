@@ -36,7 +36,7 @@ namespace Game.Presentation.ViewModel
 
         public void InvokeSettings()
         {
-
+            _windowFsm.OpenWindow(typeof(SettingsView), true);
         }
 
         public void InvokeStartPlay()

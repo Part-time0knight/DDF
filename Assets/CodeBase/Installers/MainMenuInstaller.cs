@@ -53,6 +53,10 @@ public class MainMenuInstaller : MonoInstaller
             .BindInterfacesAndSelfTo<LoadViewModel>()
             .AsSingle()
             .NonLazy();
+        Container
+            .BindInterfacesAndSelfTo<SettingsViewModel>()
+            .AsSingle()
+            .NonLazy();
 
     }
 

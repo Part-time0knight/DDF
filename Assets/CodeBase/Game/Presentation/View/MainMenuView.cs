@@ -20,6 +20,7 @@ namespace Game.Presentation.View
             base.Construct(viewModel);
             _settings.ExitButton.onClick.AddListener(_viewModel.InvokeExit);
             _settings.PlayButton.onClick.AddListener(_viewModel.InvokeStartPlay);
+            _settings.SettingsButton.onClick.AddListener(_viewModel.InvokeSettings);
             _settings.CharacterButton.onClick.AddListener(_viewModel.InvokeChooseCharacter);
         }
 
@@ -27,6 +28,7 @@ namespace Game.Presentation.View
         {
             _settings.ExitButton.onClick.RemoveListener(_viewModel.InvokeExit);
             _settings.PlayButton.onClick.RemoveListener(_viewModel.InvokeStartPlay);
+            _settings.SettingsButton.onClick.RemoveListener(_viewModel.InvokeSettings);
             _settings.CharacterButton.onClick.RemoveListener(_viewModel.InvokeChooseCharacter);
             base.OnDestroy();
         }
