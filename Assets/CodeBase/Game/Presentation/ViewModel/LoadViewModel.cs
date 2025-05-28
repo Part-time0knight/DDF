@@ -12,14 +12,15 @@ namespace Game.Presentation.ViewModel
 
         public event Action<float> OnLoad;
 
-        private readonly SceneLoader _loadHandler;
+        //private readonly SceneLoader _loadHandler;
 
         protected override Type Window => typeof(LoadView);
 
-        public LoadViewModel(IWindowFsm windowFsm,
-            SceneLoader loadHandler) : base(windowFsm)
+        public LoadViewModel(IWindowFsm windowFsm
+            //SceneLoader loadHandler
+            ) : base(windowFsm)
         {
-            _loadHandler = loadHandler;
+            //_loadHandler = loadHandler;
         }
 
         public override void InvokeClose()
@@ -36,15 +37,15 @@ namespace Game.Presentation.ViewModel
         {
             base.HandleOpenedWindow(uiWindow);
             if (uiWindow != Window) return;
-            _loadHandler.OnLoad += UpdateLoad;
-            OnLoad.Invoke(0f);
+            //_loadHandler.OnLoad += UpdateLoad;
+            OnLoad.Invoke(0.5f);
         }
 
         protected override void HandleClosedWindow(Type uiWindow)
         {
             base.HandleClosedWindow(uiWindow);
             if (uiWindow != Window) return;
-            _loadHandler.OnLoad -= UpdateLoad;
+            //_loadHandler.OnLoad -= UpdateLoad;
         }
 
         private void UpdateLoad(float progress)
